@@ -18,7 +18,8 @@ jobs:
         uses: actions/setup-node@v4.0.2
         with:
           node-version: "20.11.1"
-
+      - name: Go to frontend dir
+        run: cd frontend
       - name: Install Dependencies
         run: npm ci
       - name: Run tests
