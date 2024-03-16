@@ -1,0 +1,32 @@
+name: Check Merge
+
+on:
+  pull_request:
+    branches:
+      - '*'
+
+jobs:
+  check_merge:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Check merge
+        run: |
+          current_branch=$(git rev-parse --abbrev-ref HEAD)
+          if [ "$current_branch" = "main" ] || [ "$current_branch" = "dev" ]; then
+            echo "Skipping check since it's main or dev branch"
+          else
+            merged_to_main=$(git log --merges --first-parent --format=%P main...$current_branch | grep -E '^[a-f0-9]{40} [a-f0-9]{40}$')
+            merged_to_dev=$(git log --merges --first-parent --format=%P dev...$current_branch | grep -E '^[a-f0-9]{40} [a-f0-9]{40}$')
+            merged_from_main=$(git log --merges --first-parent --format=%P $current_branch...main | grep -E '^[a-f0-9]{40} [a-f0-9]{40}$')
+            merged_from_dev=$(git log --merges --first-parent --format=%P $current_branch...dev | grep -E '^[a-f0-9]{40} [a-f0-9]{40}$')
+            if [ -n "$merged_to_main" ] || [ -n "$merged_to_dev" ] || [ -n "$merged_from_main" ] || [ -n "$merged_from_dev" ]; then
+              echo "Branch $current_branch is merged into or from dev or main"
+            else
+              echo "Branch $current_branch is not merged into or from dev or main"
+              exit 1
+            fi
+          fi
