@@ -19,7 +19,9 @@ jobs:
       - name: Verify branch name
         run: |
           branch_name="${{ steps.branch.outputs.branch_name }}"
-          if [[ ! "$branch_name" =~ ^(feature|test|fix)\/.* ]]; then
+          if [[ "$branch_name" == "dev" || "$branch_name" == "main" || "$branch_name" =~ .*patch.* ]]; then
+            echo "Ignoring branch: $branch_name"
+          elif [[ ! "$branch_name" =~ ^(feature|test|fix)\/.* ]]; then
             echo "Branch name should start with 'feature', 'test', or 'fix'."
             exit 1
           fi
