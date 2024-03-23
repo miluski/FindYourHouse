@@ -22,7 +22,7 @@ jobs:
           branch_name="${{ steps.branch.outputs.branch_name }}"
           if [[ "$branch_name" == "dev" || "$branch_name" == "main" || "$branch_name" =~ .*patch.* ]]; then
             echo "Ignoring branch: $branch_name"
-          elif [[ ! "$branch_name" =~ ^(feature|test|fix)\/.* ]]; then
-            echo "Branch name should start with 'feature', 'test', or 'fix'."
+          elif [[ ! "$branch_name" =~ ^(feature|test|fix|hotfix)\/.* ]]; then
+            echo "Branch name should start with 'feature', 'test', 'fix', or 'hotfix'."
             exit 1
           fi
