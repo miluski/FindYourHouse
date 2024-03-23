@@ -22,7 +22,7 @@ jobs:
           PR_BRANCH=${{ github.head_ref }}
           if [[ "$PR_BRANCH" == "dev" || "$PR_BRANCH" == "main" || "$PR_BRANCH" =~ .*patch.* ]]; then
             echo "Ignoring branch: $PR_BRANCH"
-          elif [[ "$PR_BRANCH" =~ ^(test|feature|fix)\/.* ]]; then
+          elif [[ ! "$PR_BRANCH" =~ ^(test|feature|fix)\/.* ]]; then
             echo "Branch name should start with 'feature', 'test', 'fix', or 'hotfix'."
             exit 1
           fi
