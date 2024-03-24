@@ -1,10 +1,10 @@
 import './App.css';
-import HeaderView from "./HeaderView";
+import FooterView from "./FooterView";
 
 function App() {
   return (
     <>
-      <HeaderView></HeaderView>
+      <FooterView></FooterView>
       
     </>
   )
