@@ -1,9 +1,10 @@
 name: Branch Name Check
 
 on:
-  push:
-    branches:
-      - '*'
+  pull_request:
+    branches: ['main', 'dev', 'feature/*', 'fix/*', 'test/*']
+
+  workflow_dispatch:
 
 jobs:
   branch-name-check:
@@ -18,8 +19,10 @@ jobs:
 
       - name: Verify branch name
         run: |
-          branch_name="${{ steps.branch.outputs.branch_name }}"
-          if [[ ! "$branch_name" =~ ^(feature|test|fix)\/.* ]]; then
-            echo "Branch name should start with 'feature', 'test', or 'fix'."
+          PR_BRANCH=${{ github.head_ref }}
+          if [[ "$PR_BRANCH" == "dev" || "$PR_BRANCH" == "main" || "$PR_BRANCH" =~ .*patch.* ]]; then
+            echo "Ignoring branch: $PR_BRANCH"
+          elif [[ ! "$PR_BRANCH" =~ ^(test|feature|fix)\/.* ]]; then
+            echo "Branch name should start with 'feature', 'test', 'fix', or 'hotfix'."
             exit 1
           fi
