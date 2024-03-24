@@ -11,13 +11,14 @@
     "test": "jest"
   },
   "dependencies": {
+    "bootstrap": "^5.3.3",
+    "@testing-library/jest-dom": "^6.4.2",
     "@babel/preset-env": "^7.24.0",
     "@babel/preset-react": "^7.23.3",
     "@emotion/react": "^11.11.4",
     "@emotion/styled": "^11.11.0",
-    "@mui/material": "^5.15.13",
-    "@testing-library/jest-dom": "^6.4.2",
     "react": "^18.2.0",
+    "react-bootstrap": "^2.10.2",
     "react-dom": "^18.2.0"
   },
   "devDependencies": {
