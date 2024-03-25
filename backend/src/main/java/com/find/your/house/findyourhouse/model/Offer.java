@@ -18,6 +18,12 @@ public class Offer {
     private Long price;
     private Long pricePerQuadraMeter;
     private String photoLocation;
+    public Long getId() {
+        return id;
+    }
+    public void setId(Long id) {
+        this.id = id;
+    }
     public void setOfferHeader(String offerHeader) {
         this.offerHeader = offerHeader;
     }

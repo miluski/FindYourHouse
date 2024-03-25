@@ -1,5 +1,7 @@
 package com.find.your.house.findyourhouse.controller;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -7,31 +9,35 @@ import org.springframework.web.bind.annotation.*;
 import com.find.your.house.findyourhouse.model.Offer;
 
 @RestController
+@RequestMapping("/offers")
+@CrossOrigin(origins = "*", methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT, RequestMethod.DELETE})
 public class OfferController {
     @Autowired
     private OfferRepository offerRepository;
-    @GetMapping("/offers")
+
+    @GetMapping
     private Iterable<Offer> getAllOffers() {
         return offerRepository.findAll();
     }
-    @GetMapping("/offers/id/{id}")
-    private Offer getOfferById(@PathVariable long id) {
+    @SuppressWarnings("null")
+    @GetMapping("/id/{id}")
+    private Optional<Offer> getOfferById(@PathVariable Long id) {
         return offerRepository.findById(id);
     }
     @SuppressWarnings("null")
-    @PostMapping("/offers")
+    @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     private Offer createOffer(@RequestBody Offer offer) {
         offerRepository.save(offer);
         return offer;
     }
     @SuppressWarnings("null")
-    @DeleteMapping("/offers/id/{id}")
+    @DeleteMapping("/id/{id}")
     private void deleteOffer(@PathVariable Long id) {
         offerRepository.deleteById(id);
     }
     @SuppressWarnings("null")
-    @PatchMapping("/offers/id/{id}")
+    @PatchMapping("/id/{id}")
     private Offer editOffer(@PathVariable Long id, @RequestBody Offer offer) {
         Offer offerToEdit = offerRepository.findById(id).get();
         if(offer.getOfferHeader() != null) {

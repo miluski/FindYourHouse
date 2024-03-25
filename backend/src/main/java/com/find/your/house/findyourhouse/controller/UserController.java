@@ -8,41 +8,43 @@ import com.find.your.house.findyourhouse.model.User;
 import org.springframework.http.HttpStatus;
 
 @RestController
+@RequestMapping("/users")
+@CrossOrigin(origins = "*", methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT, RequestMethod.DELETE})
 public class UserController {
     @Autowired
     private UserRepository userRepository;
 
-    @GetMapping("/users")
+    @GetMapping
     public Iterable<User> getUsers() {
         return userRepository.findAll();
     }
 
-    @GetMapping("/users/email/{email}")
+    @GetMapping("/email/{email}")
     public User getUserByEmail(@PathVariable String email) {
         return userRepository.findByEmail(email);
     }
 
     @SuppressWarnings("null")
-    @GetMapping("/users/id/{id}")
+    @GetMapping("/id/{id}")
     public Optional<User> getUserById(@PathVariable Long id) {
         return userRepository.findById(id);
     }
 
     @SuppressWarnings("null")
-    @PostMapping("/users")
+    @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public User createUser(@RequestBody User user) {
         return userRepository.save(user);
     }
 
     @SuppressWarnings("null")
-    @DeleteMapping("/users/{id}")
+    @DeleteMapping("/{id}")
     public void deleteUser(@PathVariable Long id) {
         userRepository.deleteById(id);
     }
 
     @SuppressWarnings("null")
-    @PatchMapping("/users/{id}")
+    @PatchMapping("/{id}")
     public void editUser(@PathVariable Long id, @RequestBody User user) {
         User userToEdit = userRepository.findById(id).get();
         if (user.getFirstName() != null) {
