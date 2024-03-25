@@ -1,13 +1,19 @@
-import './App.css';
-import FooterView from "./FooterView";
+import "./App.css";
+import { Login } from "./Login";
+import { Register } from "./Register";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
 function App() {
   return (
-    <>
-      <FooterView></FooterView>
-      
-    </>
-  )
+    <Router>
+      <Routes>
+        <Route path="/" element={<Login/>} />
+        <Route path="/register" element={<Register/>} />
+      </Routes>
+    </Router>
+  );
 }
+
+
 
 export default App;
