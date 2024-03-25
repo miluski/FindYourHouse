@@ -1,0 +1,28 @@
+name: Branch Name Check
+
+on:
+  pull_request:
+    branches: ['main', 'dev', 'feature/*', 'fix/*', 'test/*']
+
+  workflow_dispatch:
+
+jobs:
+  branch-name-check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v2
+
+      - name: Get branch name
+        id: branch
+        run: echo "::set-output name=branch_name::$(echo ${GITHUB_REF#refs/heads/})"
+
+      - name: Verify branch name
+        run: |
+          PR_BRANCH=${{ github.head_ref }}
+          if [[ "$PR_BRANCH" == "dev" || "$PR_BRANCH" == "main" || "$PR_BRANCH" =~ .*patch.* ]]; then
+            echo "Ignoring branch: $PR_BRANCH"
+          elif [[ ! "$PR_BRANCH" =~ ^(test|feature|fix)\/.* ]]; then
+            echo "Branch name should start with 'feature', 'test', 'fix', or 'hotfix'."
+            exit 1
+          fi

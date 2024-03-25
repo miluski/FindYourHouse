@@ -1,0 +1,24 @@
+name: PR branch check
+
+on:
+    pull_request:
+      branches: ['main', 'dev', 'feature/*', 'fix/*', 'test/*']
+  
+    workflow_dispatch:
+
+jobs:
+    check-branch:
+        runs-on: ubuntu-latest
+    
+        steps:
+            - name: Check PR branch name 
+              run: |
+                    PR_BRANCH=${{ github.head_ref }}
+                    BASE_BRANCH=${{ github.base_ref }}
+                    if [[ "$BASE_BRANCH" == "main" && "$PR_BRANCH" != "dev" ]]; then
+                        echo "Error: Pull requests to 'main' must come from 'dev' branch."
+                        exit 1
+                    elif [[ "$BASE_BRANCH" == "dev" && ! "$PR_BRANCH" =~ ^(test|feature|fix)\/.* ]]; then
+                        echo "Error: Pull requests to 'dev' must come from 'test/*', 'feature/*', or 'fix/*' branches."
+                        exit 1
+                    fi
