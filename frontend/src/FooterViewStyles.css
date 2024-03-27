@@ -32,11 +32,17 @@
 
 .miniContactIcons{
     padding-right: 15px;
-    height: 27px;
 }
 
 .writeEmailStyle{
     text-decoration: underline;
     color: black;
     font-weight: normal;
+}
+
+.singleContactSection{
+    display: flex;
+    align-items: center;
+    padding-top: 3px;
+    text-align: center;
 }
