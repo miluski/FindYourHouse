@@ -10,6 +10,7 @@
     display: flex;
     align-items: center;
     justify-content: space-around;
+    background-image: url("../../assets/headerStripe.png");
 }
 
 .BuyingMenu{

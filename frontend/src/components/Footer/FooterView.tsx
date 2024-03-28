@@ -1,10 +1,10 @@
 import './FooterViewStyles.css';
-import facebookLogo from './assets/facebook.svg'
-import instagramLogo from './assets/instagram.svg';
-import linkedinLogo from './assets/linkedin.svg';
-import phoneLogo from './assets/phone-flip.svg';
-import pinLogo from './assets/pin-location.svg';
-import emailLogo from './assets/email-open.svg';
+import facebookLogo from '../../assets/facebook.svg'
+import instagramLogo from '../../assets/instagram.svg';
+import linkedinLogo from '../../assets/linkedin.svg';
+import phoneLogo from '../../assets/phone-flip.svg';
+import pinLogo from '../../assets/pin-location.svg';
+import emailLogo from '../../assets/email-open.svg';
 import 'bootstrap/dist/css/bootstrap.css'; 
 
 export default function FooterView() {

@@ -1,12 +1,12 @@
 import './HeaderViewStyles.css';
-import houseLogo from './assets/FindMyHouse_Logo.svg'
-import profileLogo from './assets/profile.svg';
+import houseLogo from '../../assets/FindMyHouse_Logo.svg'
+import profileLogo from '../../assets/profile.svg'
 import Dropdown from 'react-bootstrap/Dropdown';
 import 'bootstrap/dist/css/bootstrap.css'; 
 
 export default function HeaderView() {
   return (
-    <header className="header">
+    <header className="header mb-5">
         <div className='LeftButtonsGroup'>
             <div className='BuyingMenu'>
                 <Dropdown className='MenuDropdowns'> 
