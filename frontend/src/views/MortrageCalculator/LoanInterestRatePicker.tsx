@@ -35,8 +35,7 @@ export const LoanInterestRatePicker = () => {
 						5 %
 					</span>
 					<span
-						className='position-absolute top-50 translate-middle-y my-4'
-						style={{ right: "40%" }}>
+						className='position-absolute top-50 translate-middle-y my-4'>
 						40 %
 					</span>
 					<span className='fw-semibold fs-5 pickerCredentialText'>
