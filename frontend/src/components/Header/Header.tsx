@@ -1,12 +1,10 @@
 import { useState } from "react";
-
 import Container from "react-bootstrap/Container";
 import Navbar from "react-bootstrap/Navbar";
-import MobileNavbar from "../MobileNavbar/MobileNavbar.tsx";
-import LoginRegisterModal from "../LoginRegisterModal/LoginRegisterModal.tsx";
-import DesktopNavbar from "../DesktopNavbar/DesktopNavbar.tsx";
-
 import houseLogo from "../../assets/FindMyHouse_Logo.svg";
+import DesktopNavbar from "./DesktopNavbar";
+import MobileNavbar from "./MobileNavbar";
+import LoginRegisterModal from "./LoginRegisterModal";
 
 function Header() {
   const [showOffcanvas, setShowOffcanvas] = useState(false);
