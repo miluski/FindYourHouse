@@ -4,7 +4,5 @@ export interface UserState {
 	phoneNumber: string;
 	email: string;
 	password: string;
-	token: string;
-	googleToken: string;
 	isDataValid: boolean;
 }

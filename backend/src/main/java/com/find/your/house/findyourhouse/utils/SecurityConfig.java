@@ -13,17 +13,20 @@ import org.springframework.security.web.SecurityFilterChain;
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
+
     @Autowired
     private UserDetailsServiceImpl userDetailsService;
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.csrf((csrf) -> csrf.disable()).authorizeHttpRequests(
-                (auth) -> auth
-                        .requestMatchers("/api/users/auth/register").permitAll()
-                        .requestMatchers("/api/users/auth/login").permitAll()
-                        .requestMatchers("/api/users/email/**").permitAll()
-                        .anyRequest().authenticated());
+            (auth) -> auth
+                .requestMatchers("/api/users/auth/register").permitAll()
+                .requestMatchers("/api/users/auth/login").permitAll()
+                .requestMatchers("/api/users/email/**").permitAll()
+                .requestMatchers("/api/users/auth/google/login").permitAll()
+                .requestMatchers("/api/users/auth/google/register").permitAll()
+                .anyRequest().authenticated());
         return http.build();
     }
 
@@ -39,4 +42,5 @@ public class SecurityConfig {
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
+
 }

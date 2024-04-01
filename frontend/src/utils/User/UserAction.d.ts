@@ -5,7 +5,5 @@ export type UserAction = {
 	newPhoneNumber: string;
 	newEmail: string;
 	newPassword: string;
-	newToken: string;
-	newGoogleToken: string;
 	newIsDataValid: boolean;
 };

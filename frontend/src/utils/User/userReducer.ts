@@ -5,8 +5,6 @@ import {
 	CHANGE_PHONE_NUMBER,
 	CHANGE_EMAIL,
 	CHANGE_PASSWORD,
-	CHANGE_TOKEN,
-	CHANGE_GOOGLE_TOKEN,
 	CHANGE_IS_DATA_VALID,
 } from "./UserActionTypes";
 
@@ -17,7 +15,6 @@ const initialState = {
 	email: "",
 	password: "",
 	token: "",
-	googleToken: "",
 	isDataValid: true,
 };
 
@@ -47,16 +44,6 @@ export function userReducer(state = initialState, action: UserAction) {
 			return {
 				...state,
 				password: action.newPassword,
-			};
-		case CHANGE_TOKEN:
-			return {
-				...state,
-				token: action.newToken,
-			};
-		case CHANGE_GOOGLE_TOKEN:
-			return {
-				...state,
-				googleToken: action.newGoogleToken,
 			};
 		case CHANGE_IS_DATA_VALID:
 			return {

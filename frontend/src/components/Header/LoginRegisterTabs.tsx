@@ -2,25 +2,27 @@ import Tab from "react-bootstrap/Tab";
 import Nav from "react-bootstrap/Nav";
 import LoginForm from "../../views/LoginView/LoginForm.tsx";
 import RegisterForm from "../../views/RegisterView/RegisterForm.tsx";
-import { useState } from "react";
-import { Provider } from "react-redux";
+import { Provider, useDispatch, useSelector } from "react-redux";
 import { legacy_createStore } from "redux";
 import { userReducer } from "../../utils/User/userReducer.ts";
+import { OperationState } from "../../utils/Operation/OperationState.ts";
+import { CHANGE_OPERATION } from "../../utils/Operation/OperationActionTypes.ts";
 
-function UncontrolledExample() {
-	const [activeTab, setActiveTab] = useState("login");
+export default function LoginRegisterTabs() {
+	const dispatch = useDispatch();
+	const { operation } = useSelector(
+		(state: OperationState) => state
+	);
 	const loginFormStore = legacy_createStore(userReducer);
 	const registerFormStore = legacy_createStore(userReducer);
-	const handleTabChange = (tab: string | null) => {
-		if (tab) {
-			setActiveTab(tab);
-		}
+	const handleTabChange = (tabName: string | null) => {
+		localStorage.setItem("operation", tabName ?? "login");
+		tabName ? dispatch({ type: CHANGE_OPERATION, newOperation: tabName }) : null;
 	};
-
 	return (
 		<Tab.Container
 			defaultActiveKey='login'
-			activeKey={activeTab}
+			activeKey={operation}
 			onSelect={handleTabChange}>
 			<Nav
 				className={
@@ -29,7 +31,7 @@ function UncontrolledExample() {
 				<Nav.Item
 					className={
 						"shadow-none border-0 border-bottom rounded-0 border-4  " +
-						(activeTab === "login"
+						(operation === "login"
 							? "text-primary border-primary  "
 							: " border-white")
 					}>
@@ -40,7 +42,7 @@ function UncontrolledExample() {
 				<Nav.Item
 					className={
 						" shadow-none border-0 border-bottom  rounded-0  border-4 " +
-						(activeTab === "register"
+						(operation === "register"
 							? " text-primary border-primary  "
 							: " border-white")
 					}>
@@ -64,5 +66,3 @@ function UncontrolledExample() {
 		</Tab.Container>
 	);
 }
-
-export default UncontrolledExample;

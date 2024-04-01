@@ -13,7 +13,7 @@ import { RegisterWithGoogleButton } from "./RegisterWithGoogleButton";
 import { UsageTerms } from "./UsageTerms";
 import "./styles/RegisterForm.css";
 
-export const RegisterForm = () => {
+export default function RegisterForm () {
 	const dispatch = useDispatch();
 	const user = useSelector((state: UserState) => state);
 	return (
@@ -24,12 +24,12 @@ export const RegisterForm = () => {
 				}
 				noValidate
 				onSubmit={async (event) => {
+					event.preventDefault();
 					const form = event.currentTarget;
 					form.checkValidity() === false
 						? (event.stopPropagation(),
 						  dispatch({ type: CHANGE_IS_DATA_VALID, newIsDataValid: false }))
 						: await handleRegisterButtonClick(dispatch, user);
-					event.preventDefault();
 				}}
 				validated={user.isDataValid}>
 				<NameInput />

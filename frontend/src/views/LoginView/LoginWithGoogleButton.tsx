@@ -12,7 +12,7 @@ export const LoginWithGoogleButton = () => {
 				variant='outline-dark'
 				className='align-self-center w-100 mt-3 '
 				onClick={() => {
-					window.location.href = `https://accounts.google.com/o/oauth2/v2/auth?${googleUrlParams.toString()}`;
+					 window.location.href = `https://accounts.google.com/o/oauth2/v2/auth?${googleUrlParams.toString()}`;
 				}}>
 				<i className='bi bi-google text-lg-start me-2 '></i>
 				Zaloguj się poprzez Google

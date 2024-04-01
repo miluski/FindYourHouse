@@ -10,12 +10,11 @@ import { UserState } from "../../utils/User/UserState";
 import { CHANGE_IS_DATA_VALID } from "../../utils/User/UserActionTypes";
 import "./styles/LoginForm.css";
 
-export const LoginForm = () => {
+export default function LoginForm() {
 	const dispatch = useDispatch();
-	const { isDataValid, email, password, token } = useSelector(
+	const { isDataValid, email, password } = useSelector(
 		(state: UserState) => state
 	);
-	console.log(token);
 	return (
 		<>
 			<Form
@@ -29,10 +28,10 @@ export const LoginForm = () => {
 					event.currentTarget.checkValidity() === false
 						? (event.stopPropagation(),
 						  dispatch({ type: CHANGE_IS_DATA_VALID, newIsDataValid: false }))
-						: (await handleLoginButtonClick(dispatch, {
+						: await handleLoginButtonClick({
 								email: email,
 								password: password,
-						  }));
+						  });
 				}}>
 				<EmailInput />
 				<PasswordInput />

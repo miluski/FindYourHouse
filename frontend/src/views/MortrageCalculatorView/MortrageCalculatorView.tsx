@@ -8,6 +8,7 @@ import { CalculatedCredentialsView } from "./CalculatedCredentialsView";
 
 export const MortrageCalculatorView = () => {
 	const calculatorStore = legacy_createStore(calculatorReducer);
+	localStorage.removeItem("token");
 	return (
 		<Provider store={calculatorStore}>
 			<div className='d-flex flex-column min-vh-100 justify-content-center'>

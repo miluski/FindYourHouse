@@ -17,7 +17,9 @@ export async function registerUser(userObject: User) {
 					body: JSON.stringify(userObject),
 				}
 			);
-			response.ok ? alert("Pomyślnie zarejestrowano!") : alert("Błąd!");
+			response.ok
+				? (alert("Pomyślnie zarejestrowano!"), (window.location.href = "/"))
+				: alert("Błąd!");
 		}
 	} catch (error) {
 		console.log(error);
