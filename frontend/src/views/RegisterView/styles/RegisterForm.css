@@ -1,0 +1,9 @@
+.fs-7 {
+	font-size: 0.8rem !important;
+}
+
+@media screen and (min-width: 768px) {
+	.w-md-80 {
+		width: 80% !important;
+	}
+}
