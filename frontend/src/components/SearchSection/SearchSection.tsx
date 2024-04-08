@@ -94,7 +94,7 @@ function SearchSection() {
                     </Col>
                     <Col xs={12} lg={4} className="p-0 ps-lg-1">
                       <Button
-                        variant="primary"
+                        variant="warning"
                         type="submit"
                         className="rounded-1 fw-bold w-100"
                       >

@@ -31,7 +31,7 @@ function LoginRegisterModal({ show, handleClose }: LoginRegisterModalProps) {
           />
         </Modal.Header>
         <Modal.Body className="d-flex flex-column pt-0 mt-4 mt-lg-0 form-container align-self-md-center align-self-lg-auto px-lg-4">
-          <h4 className="align-self-center">Witaj w otodom</h4>
+          <h4 className="align-self-center">Witaj w Znajdź Swój Dach</h4>
           <LoginRegisterTabs />
         </Modal.Body>
       </Modal>

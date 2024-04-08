@@ -11,27 +11,41 @@ function RegisterForm() {
   const [phoneNumber, setPhoneNumber] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [userExists, setUserExists] = useState(false);
 
   useEffect(() => {}, [validated]);
 
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     const form = event.currentTarget;
     if (!form.checkValidity()) {
       event.stopPropagation();
-    } else {
-      (async () => {
-        await registerUser({
-          firstName: name,
-          lastName: surname,
-          phoneNumber: phoneNumber,
-          email: email,
-          password: password,
-        });
+      event.preventDefault();
+      return;
+    }
+
+    event.preventDefault();
+
+    try {
+      const isUserExists = await getIsUserExists(email);
+      if (isUserExists) {
+        setUserExists(true);
+      } else {
+        await registerUser(
+          {
+            firstName: name,
+            lastName: surname,
+            phoneNumber: phoneNumber,
+            email: email,
+            password: password,
+          },
+          setUserExists,
+        );
         setValidated(false);
         window.location.reload();
-      })();
+      }
+    } catch (error) {
+      console.log(error);
     }
-    event.preventDefault();
 
     setValidated(true);
   };
@@ -113,13 +127,18 @@ function RegisterForm() {
             Wprowadź poprawny numer telefonu.
           </Form.Control.Feedback>
         </Form.Group>
-        <Button className="fw-bold mb-2 mt-2" type="submit">
+        <Button variant="warning" className="fw-bold mb-2 mt-2" type="submit">
           Zarejestruj się
         </Button>
+        {userExists && (
+          <p className="text-danger text-center">
+            Użytkownik o podanym adresie email już istnieje.
+          </p>
+        )}
         <p className="mt-3 mb-2 mb-0 align-self-center fs-7 ">
           Rejestrując się akceptujesz{" "}
           <a
-            className="text-primary link-offset-2 link-offset-3-hover text-decoration-underline link-underline link-underline-opacity-0 link-underline-opacity-75-hover fw-normal"
+            className="text-black link-offset-3 text-decoration-underline link-underline-warning link-underline-opacity-0 link-underline-opacity-100-hover fw-bold"
             href=""
           >
             warunki użytkowania
@@ -143,14 +162,12 @@ function RegisterForm() {
   );
 }
 
-async function registerUser(userObject: User) {
+async function registerUser(userObject: User, setUserExists) {
   try {
     const isUserExists = await getIsUserExists(userObject.email);
     if (isUserExists) {
-      console.log("tu jestem");
-      alert("Taki użytkownik już istnieje!");
+      setUserExists(true);
     } else {
-      console.log("tu jestem else");
       const response = await fetch("http://localhost:8080/users", {
         method: "POST",
         headers: {

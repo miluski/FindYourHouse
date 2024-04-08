@@ -50,12 +50,12 @@ function LoginForm() {
             Wprowadź poprawne hasło.
           </Form.Control.Feedback>
         </Form.Group>
-        <Button className="fw-bold mb-2 mt-2" type="submit">
+        <Button variant={"warning"} className="fw-bold mb-2 mt-2" type="submit">
           Zaloguj się
         </Button>
         <a
           className={
-            "align-self-center text-primary mt-1 mb-1 fw-normal text-decoration-underline  link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover"
+            "align-self-center text-black mt-1 mb-1 fw-normal text-decoration-underline  link-offset-2 link-offset-3-hover link-underline-warning link-underline-opacity-0 link-underline-opacity-75-hover"
           }
           href="#"
         >

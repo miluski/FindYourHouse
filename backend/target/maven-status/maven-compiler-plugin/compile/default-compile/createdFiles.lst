@@ -1,1 +1,7 @@
+com\find\your\house\findyourhouse\controller\UserRepository.class
+com\find\your\house\findyourhouse\model\Offer.class
 com\find\your\house\findyourhouse\FindyourhouseApplication.class
+com\find\your\house\findyourhouse\model\User.class
+com\find\your\house\findyourhouse\controller\OfferController.class
+com\find\your\house\findyourhouse\controller\UserController.class
+com\find\your\house\findyourhouse\controller\OfferRepository.class

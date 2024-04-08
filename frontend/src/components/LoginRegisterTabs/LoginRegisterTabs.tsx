@@ -28,20 +28,21 @@ function UncontrolledExample() {
           className={
             "shadow-none border-0 border-bottom rounded-0 border-4  " +
             (activeTab === "login"
-              ? "text-primary border-primary  "
+              ? "text-primary border-warning  "
               : " border-white")
           }
         >
-          <Nav.Link className={"px-3 pb-3 no-transition"} eventKey="login">
+          <Nav.Link
+            className={"px-3 pb-3 no-transition text-black"}
+            eventKey="login"
+          >
             Zaloguj się
           </Nav.Link>
         </Nav.Item>
         <Nav.Item
           className={
             " shadow-none border-0 border-bottom  rounded-0  border-4 " +
-            (activeTab === "register"
-              ? " text-primary border-primary  "
-              : " border-white")
+            (activeTab === "register" ? "  border-warning  " : " border-white")
           }
         >
           <Nav.Link className={"px-3  pb-3 no-transition"} eventKey="register">
