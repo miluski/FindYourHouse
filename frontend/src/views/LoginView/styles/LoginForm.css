@@ -1,5 +1,10 @@
 @media screen and (min-width: 768px) {
-	.w-md-80 {
-		width: 80% !important;
-	}
+  .w-md-80 {
+    width: 80% !important;
+  }
+}
+
+.form-control:focus {
+  border-color: var(--bs-warning) !important;
+  box-shadow: 0 0 0 0.25rem var(--bs-warning-border-subtle);
 }
