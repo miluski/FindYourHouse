@@ -4,6 +4,7 @@ import { MortrageCalculatorView } from "./views/MortrageCalculatorView/MortrageC
 import { legacy_createStore } from "redux";
 import { operationReducer } from "./utils/Operation/operationReducer.ts";
 import { Provider } from "react-redux";
+import ReportOfferView from "./views/ReportOfferView/ReportOfferView.tsx";
 
 function App() {
 	const operationStore = legacy_createStore(operationReducer);
@@ -13,6 +14,7 @@ function App() {
 				<Routes>
 					<Route path='/' element={<HomeView />} />
 					<Route path='/calculator' element={<MortrageCalculatorView />} />
+          <Route path='/report' element={<ReportOfferView />} />
 				</Routes>
 			</Router>
 		</Provider>
