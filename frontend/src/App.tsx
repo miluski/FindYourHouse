@@ -1,19 +1,24 @@
-import "./App.css";
-import { Login } from "./Login";
-import { Register } from "./Register";
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import { Routes, Route, BrowserRouter as Router } from "react-router-dom";
+import HomeView from "./views/HomeView/HomeView.tsx";
+import { MortrageCalculatorView } from "./views/MortrageCalculatorView/MortrageCalculatorView.tsx";
+import { legacy_createStore } from "redux";
+import { operationReducer } from "./utils/Operation/operationReducer.ts";
+import { Provider } from "react-redux";
+import ReportOfferView from "./views/ReportOfferView/ReportOfferView.tsx";
 
 function App() {
-  return (
-    <Router>
-      <Routes>
-        <Route path="/" element={<Login/>} />
-        <Route path="/register" element={<Register/>} />
-      </Routes>
-    </Router>
-  );
+	const operationStore = legacy_createStore(operationReducer);
+	return (
+		<Provider store={operationStore}>
+			<Router>
+				<Routes>
+					<Route path='/' element={<HomeView />} />
+					<Route path='/calculator' element={<MortrageCalculatorView />} />
+          <Route path='/report' element={<ReportOfferView />} />
+				</Routes>
+			</Router>
+		</Provider>
+	);
 }
-
-
 
 export default App;
