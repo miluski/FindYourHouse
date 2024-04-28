@@ -5,20 +5,20 @@
 	font-family: "Inter";
 }
 
-.bg-gray {
-	background-color: gray;
-}
-
 .ff-kreon {
 	font-family: "Kreon";
 }
 
-.text-lightgreen {
-	color: #2aff17;
-}
-
 .fs-7 {
 	font-size: 12px;
+}
+
+.bg-gray {
+	background-color: gray;
+}
+
+.text-lightgreen {
+	color: #2aff17;
 }
 
 .cursor-pointer {
@@ -26,5 +26,19 @@
 }
 
 .vh-75 {
-	height: 75vh;
+	height: 75dvh;
+}
+
+.w-15 {
+	width: 15%;
+}
+
+.h-55 {
+	height: 55%;
+}
+
+@media (max-width: 992px) {
+	.align-items-lg-center {
+		align-content: center !important;
+	}
 }

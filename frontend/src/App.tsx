@@ -5,6 +5,7 @@ import { legacy_createStore } from "redux";
 import { operationReducer } from "./utils/Operation/operationReducer.ts";
 import { Provider } from "react-redux";
 import ReportOfferView from "./views/ReportOfferView/ReportOfferView.tsx";
+import AdminView from "./views/AdminView/AdminView.tsx";
 
 function App() {
 	const operationStore = legacy_createStore(operationReducer);
@@ -15,6 +16,7 @@ function App() {
 					<Route path='/' element={<HomeView />} />
 					<Route path='/calculator' element={<MortrageCalculatorView />} />
 					<Route path='/report' element={<ReportOfferView />} />
+					<Route path='/admin' element={<AdminView />} />
 				</Routes>
 			</Router>
 		</Provider>
