@@ -7,6 +7,7 @@
     url("../../../assets/searchSectionBacground.webp");
   background-position: center;
   background-size: cover;
+  height: 75vh;
 }
 
 @media screen and (min-width: 768px) {

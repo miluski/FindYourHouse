@@ -1,0 +1,14 @@
+.pickerRange::-webkit-slider-thumb {
+	background: #ffe604 !important;
+	cursor: pointer;
+}
+
+.pickerRange::-moz-range-thumb {
+	background: #ffe604 !important;
+	cursor: pointer;
+}
+
+.pickerRange::-ms-thumb {
+	background: #ffe604 !important;
+	cursor: pointer;
+}

@@ -14,7 +14,7 @@ function App() {
 				<Routes>
 					<Route path='/' element={<HomeView />} />
 					<Route path='/calculator' element={<MortrageCalculatorView />} />
-          <Route path='/report' element={<ReportOfferView />} />
+					<Route path='/report' element={<ReportOfferView />} />
 				</Routes>
 			</Router>
 		</Provider>
