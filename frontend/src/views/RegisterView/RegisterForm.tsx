@@ -12,7 +12,7 @@ import { PhoneNumberInput } from "./PhoneNumberInput";
 import { RegisterWithGoogleButton } from "./RegisterWithGoogleButton";
 import { UsageTerms } from "./UsageTerms";
 import "./styles/RegisterForm.css";
-import React, { useState } from "react";
+import { useState } from "react";
 
 export default function RegisterForm() {
   const [userExists, setUserExists] = useState(false);

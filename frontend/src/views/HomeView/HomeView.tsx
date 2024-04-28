@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import FooterView from "../../components/Footer/FooterView.tsx";
-import Header from "../../components/Header/Header.tsx";
+import HeaderView from "../../components/Header/HeaderView.tsx";
 import SearchSection from "./SearchSection.tsx";
 import { useDispatch } from "react-redux";
 import { authGoogleUser } from "./authGoogleUser.ts";
@@ -21,7 +21,7 @@ export default function HomeView() {
 	}, []);
 	return (
 		<>
-			<Header />
+			<HeaderView />
 			<main>
 				<SearchSection />
 			</main>

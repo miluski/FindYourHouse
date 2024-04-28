@@ -1,7 +1,6 @@
 import { Form } from "react-bootstrap";
 import { useDispatch } from "react-redux";
 import { CHANGE_SURNAME } from "../../utils/User/UserActionTypes";
-import "../../utils/utils.css";
 
 export const SurnameInput = () => {
   const dispatch = useDispatch();

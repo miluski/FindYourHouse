@@ -28,22 +28,22 @@ export function calculatorReducer(state = initialState, action: CalculatorAction
 		case CHANGE_PROPERTY_PRICE:
 			return {
 				...state,
-				propertyPrice: action.newPropertyPrice,
+				propertyPrice: action.newSelectedValue,
 			};
 		case CHANGE_OWN_CONTRIBUTION:
 			return {
 				...state,
-				ownContribution: action.newOwnContribution,
+				ownContribution: action.newSelectedValue,
 			};
 		case CHANGE_LOAN_PERIOD:
 			return {
 				...state,
-				loanPeriod: action.newLoanPeriod,
+				loanPeriod: action.newSelectedValue,
 			};
 		case CHANGE_LOAN_INTEREST_RATE:
 			return {
 				...state,
-				loanInterestRate: action.newLoanInterestRate,
+				loanInterestRate: action.newSelectedValue,
 			};
 		case CHANGE_CALCULATED_CREDENTIALS:
 			return {
