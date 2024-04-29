@@ -33,12 +33,30 @@
 	width: 15%;
 }
 
+.w-10 {
+	width: 10%;
+}
+
+.w-full {
+	width: 100%;
+	margin: 0;
+	padding: 0;
+}
+
 .h-55 {
 	height: 55%;
+}
+
+.text-overflow {
+	word-wrap: break-word;
+	overflow-wrap: break-word;
 }
 
 @media (max-width: 992px) {
 	.align-items-lg-center {
 		align-content: center !important;
+	}
+	.w-lg-15 {
+		width: 30%;
 	}
 }
