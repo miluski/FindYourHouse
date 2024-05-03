@@ -38,7 +38,6 @@ public class UserController {
         return userRepository.findByEmail(email) != null ? true : false;
     }
 
-    @SuppressWarnings("null")
     @GetMapping("/id/{id}")
     public Boolean getUserById(@PathVariable Long id) {
         return userRepository.findById(id) != null ? true : false;
@@ -85,13 +84,11 @@ public class UserController {
         }
     }
 
-    @SuppressWarnings("null")
     @DeleteMapping("/delete/{id}")
     public void deleteUser(@PathVariable Long id) {
         userRepository.deleteById(id);
     }
 
-    @SuppressWarnings("null")
     @PatchMapping("/edit/{id}")
     public void editUser(@PathVariable Long id, @RequestBody User user) {
         User userToEdit = userRepository.findById(id).get();

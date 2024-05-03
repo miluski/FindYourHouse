@@ -9,16 +9,19 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 import org.springframework.web.filter.OncePerRequestFilter;
 
-import jakarta.servlet.FilterChain;
-import jakarta.servlet.ServletException;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.*;
+import jakarta.servlet.http.*;
 
 public class JwtRequestFilter extends OncePerRequestFilter {
+
+    private final JwtTokenUtil jwtTokenUtil;
+    private final UserDetailsServiceImpl userDetailsServiceImpl;
+
     @Autowired
-    private JwtTokenUtil jwtTokenUtil;
-    @Autowired
-    private UserDetailsServiceImpl userDetailsServiceImpl;
+    public JwtRequestFilter(JwtTokenUtil jwtTokenUtil, UserDetailsServiceImpl userDetailsServiceImpl) {
+        this.jwtTokenUtil = jwtTokenUtil;
+        this.userDetailsServiceImpl = userDetailsServiceImpl;
+    }
 
     @SuppressWarnings("null")
     @Override
