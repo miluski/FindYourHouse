@@ -6,14 +6,13 @@ import { PasswordInput } from "../../components/PasswordInput";
 import { NotRememberPasswordButton } from "./NotRememberPasswordButton";
 import { LoginWithGoogleButton } from "./LoginWithGoogleButton";
 import { handleLoginButtonClick } from "./handleLoginButtonClick";
-import { UserState } from "../../utils/User/UserState";
-import { CHANGE_IS_DATA_VALID } from "../../utils/User/UserActionTypes";
-import "./styles/LoginForm.css";
+import { CHANGE_IS_DATA_VALID } from "../../utils/ActionTypes";
+import { UserState } from "../../utils/types/State";
 
 export default function LoginForm() {
   const dispatch = useDispatch();
   const { isDataValid, email, password } = useSelector(
-    (state: UserState) => state,
+    (state: UserState) => state.userReducer,
   );
   return (
     <>

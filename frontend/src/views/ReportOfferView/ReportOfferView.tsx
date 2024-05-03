@@ -3,11 +3,14 @@ import "./styles/ReportOfferViewStyles.css";
 import HeaderView from "../../components/Header/HeaderView";
 import FooterView from "../../components/Footer/FooterView";
 import { useSelector } from "react-redux";
-import { OperationState } from "../../utils/Operation/OperationState";
 import AccessBlockedView from "../ErrorViews/AccessBlockedView";
+import { OperationState } from "../../utils/types/State";
 
 function ReportOfferView() {
-	const { token } = useSelector((state: OperationState) => state);
+	let { token } = useSelector(
+		(state: OperationState) => state.operationReducer
+	);
+	token = token ? token : localStorage.getItem("token");
 	const [email, setEmail] = useState("");
 	const [reason, setReason] = useState("");
 	const [emailError, setEmailError] = useState("");
@@ -91,7 +94,7 @@ function ReportOfferView() {
 	return (
 		<>
 			<HeaderView />
-			{token !== null && token !== "" ? (
+			{token !== null && token !== "" && token !== undefined ? (
 				<div className='mainReportView'>
 					<div>
 						<h5>Znalazłeś fałszywą ofertę?</h5>

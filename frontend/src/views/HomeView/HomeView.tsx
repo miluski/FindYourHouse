@@ -4,7 +4,7 @@ import HeaderView from "../../components/Header/HeaderView.tsx";
 import SearchSection from "./SearchSection.tsx";
 import { useDispatch } from "react-redux";
 import { authGoogleUser } from "./authGoogleUser.ts";
-import { CHANGE_TOKEN } from "../../utils/Operation/OperationActionTypes.ts";
+import { CHANGE_TOKEN } from "../../utils/ActionTypes.ts";
 
 export default function HomeView() {
 	const dispatch = useDispatch();
@@ -25,10 +25,7 @@ export default function HomeView() {
 					localStorage.setItem("operation", "login");
 				})();
 			}
-		} else {
-			localStorage.removeItem("token");
-			dispatch({ type: CHANGE_TOKEN, newToken: userToken });
-		}
+		} else dispatch({ type: CHANGE_TOKEN, newToken: userToken });
 	}, [window.location]);
 	return (
 		<>

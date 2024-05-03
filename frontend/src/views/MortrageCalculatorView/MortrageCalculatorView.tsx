@@ -1,22 +1,21 @@
-import { Provider, useSelector } from "react-redux";
-import { legacy_createStore } from "redux";
 import HeaderView from "../../components/Header/HeaderView";
 import FooterView from "../../components/Footer/FooterView";
-import { calculatorReducer } from "./calculatorReducer";
 import { CredentialsPickerView } from "./CredentialsPickerView";
 import { CalculatedCredentialsView } from "./CalculatedCredentialsView";
 import { Col, Container, Row } from "react-bootstrap";
 import AccessBlockedView from "../ErrorViews/AccessBlockedView";
-import { OperationState } from "../../utils/Operation/OperationState";
+import { useSelector } from "react-redux";
+import { OperationState } from "../../utils/types/State";
 
 export const MortrageCalculatorView = () => {
-	const calculatorStore = legacy_createStore(calculatorReducer);
-	const { token } = useSelector((state: OperationState) => state);
-	console.log("token jebany ", token)
+	let { token } = useSelector(
+		(state: OperationState) => state.operationReducer
+	);
+	token = token ? token : localStorage.getItem("token");
 	return (
-		<Provider store={calculatorStore}>
+		<>
 			<HeaderView />
-			{token !== null && token !== "" ? (
+			{token !== null && token !== "" && token !== undefined ? (
 				<>
 					<Container
 						fluid
@@ -36,6 +35,6 @@ export const MortrageCalculatorView = () => {
 				<AccessBlockedView />
 			)}
 			<FooterView />
-		</Provider>
+		</>
 	);
 };

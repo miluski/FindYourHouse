@@ -2,20 +2,18 @@ import "./styles/Picker.css";
 import { useDispatch } from "react-redux";
 import { PickerProps } from "./PickerProps";
 import { Col, Container, Form, Row } from "react-bootstrap";
-import { CHANGE_CALCULATED_CREDENTIALS } from "../../views/MortrageCalculatorView/CalculatorActionTypes";
+import { CHANGE_CALCULATED_CREDENTIALS } from "../../utils/ActionTypes";
 
 export const Picker = (props: PickerProps) => {
 	const dispatch = useDispatch();
 	return (
 		<Container>
-			<Form.Label className='fw-bold fs-5 ff-inter'>
-				{props.formLabel}
-			</Form.Label>
-			<Container>
-				<Row>
+			<text className='fw-bold fs-5 ff-inter text-wrap'>{props.formLabel}</text>
+			<Container fluid>
+				<Row fluid>
 					<Col xs={12} md={8}>
 						<Form.Range
-							className='pickerRange'
+							className='pickerRange d-flex'
 							min={props.minRange}
 							step={props.stepRange}
 							max={props.maxRange}

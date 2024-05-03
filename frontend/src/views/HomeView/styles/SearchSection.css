@@ -10,11 +10,6 @@
   height: 75vh;
 }
 
-@media screen and (min-width: 768px) {
-  .w-md-80 {
-    width: 80% !important;
-  }
-}
 .no-spin-button {
   -webkit-appearance: none;
   appearance: none;
