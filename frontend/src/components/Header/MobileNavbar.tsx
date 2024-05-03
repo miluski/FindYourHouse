@@ -9,7 +9,7 @@ import HelpAndContactList from "./HelpAndContactList.tsx";
 import AccordionPopularCities from "./AccordionPopularCities.tsx";
 import AccordionPropertyType from "./AccordionPropertyType.tsx";
 import { useSelector } from "react-redux";
-import { OperationState } from "../../utils/Operation/OperationState.ts";
+import { OperationState } from "../../utils/types/State";
 
 interface MobileNavbarProps {
 	showOffcanvas: boolean;
@@ -22,7 +22,7 @@ function MobileNavbar({
 	handleCloseOffcanvas,
 	handleShowModal,
 }: MobileNavbarProps) {
-	const stateToken = useSelector((state: OperationState) => state?.token);
+	const stateToken = useSelector((state: OperationState) => state.operationReducer.token);
 	const token = stateToken !== "" ? stateToken : localStorage.getItem("token");
 	console.log("JWT token ", token);
 	return (

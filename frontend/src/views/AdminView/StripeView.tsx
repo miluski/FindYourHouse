@@ -10,7 +10,7 @@ export default function StripeView() {
 			</Col>
 			<Button
 				variant='warning'
-				className='border border-black rounded-3 float-right'>
+				className='border border-black rounded-3 float-right h-25 align-self-center'>
 				Wyloguj się
 			</Button>
 		</Container>

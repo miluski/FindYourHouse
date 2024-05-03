@@ -1,6 +1,7 @@
 import { Dispatch } from "react";
 import { UnknownAction } from "redux";
-import { CHANGE_TOKEN } from "../../utils/Operation/OperationActionTypes";
+import { CHANGE_TOKEN } from "../../utils/ActionTypes";
+
 
 export function handleGoogleLoginResponse(
 	token: string,

@@ -1,15 +1,17 @@
 import Button from "react-bootstrap/Button";
 import { useSelector } from "react-redux";
-import { OperationState } from "../../utils/Operation/OperationState";
+import { OperationState } from "../../utils/types/State";
 
 interface DesktopNavbarProps {
 	handleShowModal: () => void;
 }
 
 function DesktopNavbar({ handleShowModal }: DesktopNavbarProps) {
-	const stateToken = useSelector((state: OperationState) => state?.token);
+	const stateToken = useSelector(
+		(state: OperationState) => state.operationReducer.token
+	);
 	const token = stateToken !== "" ? stateToken : localStorage.getItem("token");
-  console.log("JWT token ", token);
+	console.log("JWT token ", token);
 	return (
 		<>
 			<ul className='d-none d-xl-flex list-unstyled m-0 w-25 justify-content-between'>
@@ -41,7 +43,7 @@ function DesktopNavbar({ handleShowModal }: DesktopNavbarProps) {
 					className='text-decoration-none text-black d-flex align-items-center me-4 fw-normal'
 					onClick={() => {
 						token !== "" && token !== null
-							? (window.location.href="/calculator")
+							? (window.location.href = "/calculator")
 							: handleShowModal();
 					}}>
 					<i className='bi bi-person fs-2 me-2 fw'></i>

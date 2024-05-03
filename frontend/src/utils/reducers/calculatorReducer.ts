@@ -1,11 +1,11 @@
-import { CalculatorAction } from "./CalculatorAction";
+import { Action } from "../types/Action";
 import {
-	CHANGE_PROPERTY_PRICE,
-	CHANGE_OWN_CONTRIBUTION,
-	CHANGE_LOAN_PERIOD,
-	CHANGE_LOAN_INTEREST_RATE,
 	CHANGE_CALCULATED_CREDENTIALS,
-} from "./CalculatorActionTypes";
+	CHANGE_LOAN_INTEREST_RATE,
+	CHANGE_LOAN_PERIOD,
+	CHANGE_OWN_CONTRIBUTION,
+	CHANGE_PROPERTY_PRICE,
+} from "../ActionTypes";
 
 const initialState = {
 	propertyPrice: 100000,
@@ -17,7 +17,7 @@ const initialState = {
 	interest: 0,
 };
 
-export function calculatorReducer(state = initialState, action: CalculatorAction) {
+export function calculatorReducer(state = initialState, action: Action) {
 	let monthlyInstallment = Math.round(
 		((state.propertyPrice -
 			state.propertyPrice * (state.ownContribution / 100)) *

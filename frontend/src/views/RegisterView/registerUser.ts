@@ -1,4 +1,4 @@
-import { User } from "../../utils/User/User";
+import { User } from "../../utils/types/User";
 import { getIsUserExists } from "./getIsUserExists";
 
 export async function registerUser(userObject: User, setUserExists: Function) {
