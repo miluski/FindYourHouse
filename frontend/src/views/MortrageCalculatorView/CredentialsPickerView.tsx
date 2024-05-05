@@ -1,19 +1,19 @@
 import { Picker } from "../../components/Picker/Picker";
 import { Container } from "react-bootstrap";
 import { useSelector } from "react-redux";
-import { CalculatorState } from "./CalculatorState";
 import {
 	CHANGE_PROPERTY_PRICE,
 	CHANGE_OWN_CONTRIBUTION,
 	CHANGE_LOAN_PERIOD,
 	CHANGE_LOAN_INTEREST_RATE,
-} from "./CalculatorActionTypes";
+} from "../../utils/ActionTypes";
+import { CalculatorState } from "../../utils/types/State";
 
 export const CredentialsPickerView = () => {
 	const { propertyPrice, ownContribution, loanPeriod, loanInterestRate } =
-		useSelector((state: CalculatorState) => state);
+		useSelector((state: CalculatorState) => state.calculatorReducer);
 	return (
-		<Container fluid className='my-5 p-5'>
+		<Container fluid className='my-5 p-0 text-overflow'>
 			<Picker
 				formLabel={"Cena nieruchomości"}
 				minRange={100000}

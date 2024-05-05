@@ -1,4 +1,4 @@
-import { Col, Container, Row } from "react-bootstrap";
+import { Col, Container } from "react-bootstrap";
 import {
 	EnvelopeOpen,
 	Facebook,
@@ -7,22 +7,24 @@ import {
 	Linkedin,
 	TelephoneFill,
 } from "react-bootstrap-icons";
+import { startCheckout } from "../../views/AddOfferView/startCheckout";
 
 export default function FooterView() {
 	return (
 		<footer className='footer bg-gray fixed-bottom p-2'>
 			<Container fluid className='d-flex flex-row'>
-				<Container className='d-flex flex-column justify-content-center'>
-					<Container>
+				<Container className='d-flex flex-column justify-content-center align-content-center w-sm-60 w-md-65 flex-xs-wrap'>
+					<Col>
 						<text className='ff-kreon fs-3 fw-regular'>Znajdź swój dach!</text>
-					</Container>
-					<Container>
+					</Col>
+					<Col>
 						<text className='ff-kreon fs-5 fw-regular'>Dołącz do nas</text>
 						<Instagram
 							className='cursor-pointer mx-2'
 							size={32}
-							onClick={() => {
-								window.location.href = "https://instagram.com";
+							onClick={async () => {
+								// window.location.href = "https://instagram.com";
+								await startCheckout();
 							}}
 						/>
 						<Facebook
@@ -39,20 +41,34 @@ export default function FooterView() {
 								window.location.href = "https://linkedin.com";
 							}}
 						/>
-					</Container>
+					</Col>
 				</Container>
-				<Container className='w-25 d-flex flex-column ml-5 d-none d-lg-block'>
-					<Col sm={12} md={10}>
+				<Container className='w-sm-40 w-xxl-35 d-flex flex-column ml-5 d-none d-lg-flex'>
+					<Col md={12}>
 						<TelephoneFill className='my-2 mx-5' size={32} />
-						<text className='text-nowrap'>+48 456 654 789</text>
+						<a
+							href='tel:+48456654789'
+							className='text-nowrap cursor-pointer no-style-link'>
+							+48 456 654 789
+						</a>
 					</Col>
-					<Col sm={12} md={10}>
+					<Col md={12}>
 						<EnvelopeOpen className='my-2 mx-5' size={32} />
-						<text className='text-nowrap'>znajdzswojdach@tu.kielce.pl</text>
+						<a
+							href='mailto:znajdzswojdach@tu.kielce.pl'
+							className='text-nowrap cursor-pointer no-style-link'>
+							znajdzswojdach@tu.kielce.pl
+						</a>
 					</Col>
-					<Col sm={12} md={10}>
+					<Col md={12}>
 						<GeoAlt className='my-2 mx-5' size={32} />
-						<text className='text-nowrap'>plac Wolności 2, 25-367 Kielce</text>
+						<a
+							href='https://www.google.com/maps/search/?api=1&query=plac+Wolności+2,+25-367+Kielce'
+							className='text-nowrap cursor-pointer no-style-link'
+							target='_blank'
+							rel='noopener noreferrer'>
+							plac Wolności 2, 25-367 Kielce
+						</a>
 					</Col>
 				</Container>
 			</Container>

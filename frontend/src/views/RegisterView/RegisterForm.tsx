@@ -4,21 +4,20 @@ import { EmailInput } from "../../components/EmailInput";
 import { PasswordInput } from "../../components/PasswordInput";
 import { handleRegisterButtonClick } from "./handleRegisterButtonClick";
 import { useDispatch, useSelector } from "react-redux";
-import { UserState } from "../../utils/User/UserState";
-import { CHANGE_IS_DATA_VALID } from "../../utils/User/UserActionTypes";
 import { NameInput } from "./NameInput";
 import { SurnameInput } from "./SurnameInput";
 import { PhoneNumberInput } from "./PhoneNumberInput";
 import { RegisterWithGoogleButton } from "./RegisterWithGoogleButton";
 import { UsageTerms } from "./UsageTerms";
-import "./styles/RegisterForm.css";
 import { useState } from "react";
+import { CHANGE_IS_DATA_VALID } from "../../utils/ActionTypes";
+import { UserState } from "../../utils/types/State";
 
 export default function RegisterForm() {
   const [userExists, setUserExists] = useState(false);
-
   const dispatch = useDispatch();
-  const user = useSelector((state: UserState) => state);
+  const user = useSelector((state: UserState) => state.userReducer);
+  
   return (
     <>
       <Form
