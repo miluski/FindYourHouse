@@ -22,8 +22,7 @@ function MobileNavbar({
 	handleCloseOffcanvas,
 	handleShowModal,
 }: MobileNavbarProps) {
-	const stateToken = useSelector((state: OperationState) => state?.token);
-	const token = stateToken !== "" ? stateToken : localStorage.getItem("token");
+	const token = useSelector((state: OperationState) => state?.token);
 	console.log("JWT token ", token);
 	return (
 		<Navbar.Offcanvas
@@ -83,7 +82,7 @@ function MobileNavbar({
 									? (window.location.href = "/calculator")
 									: handleShowModal();
 							}}>
-							<i className='bi bi-person fs-2 me-2'></i>Moje konto
+							<i className='bi bi-person fs-2 me-2'/>Moje konto
 						</button>
 					</h2>
 				</div>

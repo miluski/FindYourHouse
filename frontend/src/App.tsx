@@ -7,8 +7,9 @@ import { Provider } from "react-redux";
 import ReportOfferView from "./views/ReportOfferView/ReportOfferView.tsx";
 import ApprovedPaymentView from "./views/AddOfferView/ApprovedPaymentView.tsx";
 import CancelledPaymentView from "./views/AddOfferView/CancelledPaymentView.tsx";
+import NotFoundView from "./views/ErrorViews/NotFoundView.tsx";
 
-function App() {
+export default function App() {
 	const operationStore = legacy_createStore(operationReducer);
 	return (
 		<Provider store={operationStore}>
@@ -25,10 +26,9 @@ function App() {
 						path='/add-offer/cancelledPayment'
 						element={<CancelledPaymentView />}
 					/>
+					<Route path='*' element={<NotFoundView />} />
 				</Routes>
 			</Router>
 		</Provider>
 	);
 }
-
-export default App;

@@ -1,4 +1,4 @@
-import { Col, Container, Row } from "react-bootstrap";
+import { Col, Container } from "react-bootstrap";
 import {
 	EnvelopeOpen,
 	Facebook,
@@ -7,6 +7,7 @@ import {
 	Linkedin,
 	TelephoneFill,
 } from "react-bootstrap-icons";
+import { startCheckout } from "../../views/AddOfferView/startCheckout";
 
 export default function FooterView() {
 	return (
@@ -21,8 +22,9 @@ export default function FooterView() {
 						<Instagram
 							className='cursor-pointer mx-2'
 							size={32}
-							onClick={() => {
-								window.location.href = "https://instagram.com";
+							onClick={async () => {
+								// window.location.href = "https://instagram.com";
+								await startCheckout();
 							}}
 						/>
 						<Facebook

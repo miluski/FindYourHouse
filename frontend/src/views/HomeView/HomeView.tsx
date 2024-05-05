@@ -4,21 +4,32 @@ import HeaderView from "../../components/Header/HeaderView.tsx";
 import SearchSection from "./SearchSection.tsx";
 import { useDispatch } from "react-redux";
 import { authGoogleUser } from "./authGoogleUser.ts";
+import { CHANGE_TOKEN } from "../../utils/Operation/OperationActionTypes.ts";
 
 export default function HomeView() {
 	const dispatch = useDispatch();
 	useEffect(() => {
-		const hash = window.location.hash;
-		const params = new URLSearchParams(hash.substring(1));
-		const accessToken = params.get("access_token");
-		if (accessToken !== null) {
-			window.history.replaceState({}, document.title, window.location.pathname);
-			(async () => {
-				await authGoogleUser(accessToken, dispatch);
-				localStorage.setItem("operation", "login");
-			})();
+		const userToken = localStorage.getItem("token");
+		if (userToken === null) {
+			const hash = window.location.hash;
+			const params = new URLSearchParams(hash.substring(1));
+			const accessToken = params.get("access_token");
+			if (accessToken !== null) {
+				window.history.replaceState(
+					{},
+					document.title,
+					window.location.pathname
+				);
+				(async () => {
+					await authGoogleUser(accessToken, dispatch);
+					localStorage.setItem("operation", "login");
+				})();
+			}
+		} else {
+			localStorage.removeItem("token");
+			dispatch({ type: CHANGE_TOKEN, newToken: userToken });
 		}
-	}, []);
+	}, [window.location]);
 	return (
 		<>
 			<HeaderView />
@@ -29,4 +40,3 @@ export default function HomeView() {
 		</>
 	);
 }
-

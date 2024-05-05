@@ -1,6 +1,7 @@
 package com.find.your.house.findyourhouse.controller;
 
 import java.util.Map;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -35,17 +36,18 @@ public class UserController {
 
     @GetMapping("/email/{email}")
     public Boolean getUserByEmail(@PathVariable String email) {
-        return userRepository.findByEmail(email) != null ? true : false;
+        return userRepository.findByEmail(email) != null;
     }
 
     @GetMapping("/id/{id}")
     public Boolean getUserById(@PathVariable Long id) {
-        return userRepository.findById(id) != null ? true : false;
+        Optional<User> user = userRepository.findById(id);
+        return user.isPresent();
     }
 
     @PostMapping("/auth/google/login")
     public ResponseEntity<Token> proxyLoginGoogleApi(@RequestBody String accessToken) {
-        Map<String, Object> body = getUserData(accessToken);
+        Map<String, Object> body = getUserData(accessToken); 
         boolean isAuthenticated = isAuthenticated((String) body.get("email"), "");
         if (isAuthenticated) {
             return ResponseEntity.ok(getToken((String) body.get("email"), ""));
@@ -85,8 +87,13 @@ public class UserController {
     }
 
     @DeleteMapping("/delete/{id}")
-    public void deleteUser(@PathVariable Long id) {
-        userRepository.deleteById(id);
+    public Boolean deleteUser(@PathVariable Long id) {
+        Optional<User> user = userRepository.findById(id);
+        if (user.isPresent()) {
+            userRepository.deleteById(id);
+            return true;
+        } else
+            return false;
     }
 
     @PatchMapping("/edit/{id}")
