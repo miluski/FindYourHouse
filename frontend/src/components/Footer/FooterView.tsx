@@ -26,8 +26,8 @@ export default function FooterView({ fixedBottom }: { fixedBottom?: boolean }) {
             <Instagram
               className="cursor-pointer mx-2"
               size={32}
-              onClick={() => {
-                window.location.href = "https://instagram.com";
+              onClick={async () => {
+                startCheckout();
               }}
             />
             <Facebook

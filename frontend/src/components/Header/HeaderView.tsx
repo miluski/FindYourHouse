@@ -38,31 +38,8 @@ export default function HeaderView() {
 					/>
 					<DesktopNavbar handleShowModal={handleShowModal} />
 				</Container>
-				<LoginRegisterModal show={showModal} handleClose={handleCloseModal} />
+				<AuthenticationView show={showModal} handleClose={handleCloseModal} />
 			</Navbar>
 		</header>
 	);
-  return (
-    <header>
-      <Navbar expand="xl" className="py-2 px-2">
-        <Container fluid={"xl"} className="d-xl-flex align-items-center py-2 ">
-          <Navbar.Brand href="/" className="fs-2 p-0 m-0 w-25">
-            <img width="153" src={houseLogo} alt="" />
-          </Navbar.Brand>
-          <Navbar.Toggle
-            onClick={handleShowOffcanvas}
-            aria-controls="basic-navbar-nav"
-            className="border-0 shadow-none p-0 fs-2"
-          />
-          <MobileNavbar
-            showOffcanvas={showOffcanvas}
-            handleCloseOffcanvas={handleCloseOffcanvas}
-            handleShowModal={handleShowModal}
-          />
-          <DesktopNavbar handleShowModal={handleShowModal} />
-        </Container>
-        <AuthenticationView show={showModal} handleClose={handleCloseModal} />
-      </Navbar>
-    </header>
-  );
 }

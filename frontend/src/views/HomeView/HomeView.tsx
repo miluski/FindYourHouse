@@ -4,6 +4,7 @@ import SearchSection from "./SearchSection/SearchSection.tsx";
 import { useDispatch } from "react-redux";
 import { authGoogleUser } from "./authGoogleUser.ts";
 import { CHANGE_TOKEN } from "../../utils/ActionTypes.ts";
+import FooterView from "../../components/Footer/FooterView.tsx";
 
 export default function HomeView() {
 	const dispatch = useDispatch();

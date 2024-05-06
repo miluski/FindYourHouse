@@ -3,13 +3,13 @@ import { CloseButton } from "react-bootstrap";
 import Nav from "react-bootstrap/Nav";
 import Tab from "react-bootstrap/Tab";
 import { useDispatch, useSelector } from "react-redux";
-import { OperationState } from "../../utils/Operation/OperationState.ts";
-import { CHANGE_OPERATION } from "../../utils/Operation/OperationActionTypes.ts";
 import { MouseEventHandler } from "react";
 import "./AuthenticationView.css";
 import LoginView from "./LoginView/LoginView.tsx";
 import RegisterView from "./RegisterView/RegisterView.tsx";
 import ForgotPasswordView from "./ForgotPasswordView/ForgotPasswordView.tsx";
+import { OperationState } from "../../utils/types/State";
+import { CHANGE_OPERATION } from "../../utils/ActionTypes.ts";
 
 export default function AuthenticationView({
   show,
@@ -19,7 +19,7 @@ export default function AuthenticationView({
   handleClose: () => void | MouseEventHandler;
 }) {
   const dispatch = useDispatch();
-  const { operation } = useSelector((state: OperationState) => state);
+  const { operation } = useSelector((state: OperationState) => state.operationReducer);
   const handleTabChange = (tabName: string | null) => {
     localStorage.setItem("operation", tabName ?? "login");
     tabName
