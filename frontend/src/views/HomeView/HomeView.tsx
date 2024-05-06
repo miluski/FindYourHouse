@@ -1,10 +1,10 @@
 import { useEffect } from "react";
-import FooterView from "../../components/Footer/FooterView.tsx";
 import HeaderView from "../../components/Header/HeaderView.tsx";
-import SearchSection from "./SearchSection.tsx";
+import SearchSection from "./SearchSection/SearchSection.tsx";
 import { useDispatch } from "react-redux";
 import { authGoogleUser } from "./authGoogleUser.ts";
 import { CHANGE_TOKEN } from "../../utils/ActionTypes.ts";
+import FooterView from "../../components/Footer/FooterView.tsx";
 
 export default function HomeView() {
 	const dispatch = useDispatch();

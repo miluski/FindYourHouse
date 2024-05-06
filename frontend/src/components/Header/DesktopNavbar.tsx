@@ -5,7 +5,7 @@ import { CHANGE_TOKEN } from "../../utils/ActionTypes";
 import { useNavigate } from "react-router-dom";
 
 interface DesktopNavbarProps {
-	handleShowModal: () => void;
+  handleShowModal: () => void;
 }
 
 function DesktopNavbar({ handleShowModal }: DesktopNavbarProps) {
