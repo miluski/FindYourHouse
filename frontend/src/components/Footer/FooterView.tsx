@@ -7,6 +7,7 @@ import {
   Linkedin,
   TelephoneFill,
 } from "react-bootstrap-icons";
+import { startCheckout } from "../../views/AddOfferView/startCheckout";
 
 export default function FooterView({ fixedBottom }: { fixedBottom?: boolean }) {
   return (
