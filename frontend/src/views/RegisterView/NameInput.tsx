@@ -1,7 +1,6 @@
 import { Form } from "react-bootstrap";
 import { useDispatch } from "react-redux";
-import { CHANGE_NAME } from "../../utils/User/UserActionTypes";
-import "../../utils/utils.css";
+import { CHANGE_NAME } from "../../utils/ActionTypes";
 
 export const NameInput = () => {
   const dispatch = useDispatch();

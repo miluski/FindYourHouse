@@ -1,7 +1,6 @@
 import { Form } from "react-bootstrap";
-import { CHANGE_PHONE_NUMBER } from "../../utils/User/UserActionTypes";
 import { useDispatch } from "react-redux";
-import "../../utils/utils.css";
+import { CHANGE_PHONE_NUMBER } from "../../utils/ActionTypes";
 
 export const PhoneNumberInput = () => {
   const dispatch = useDispatch();
