@@ -1,8 +1,11 @@
+import { Offer } from "./Offer";
+
 export type Payment = {
-	id: string;
-	payer: {
-		payer_id: string;
-		email_address: string;
-	};
-	status: string;
+	id?: string;
+	category: string;
+	client_name: string;
+	date: string;
+	topic: string;
+	offerObject: Offer;
+	status?: string;
 };

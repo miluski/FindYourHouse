@@ -15,7 +15,9 @@ function DesktopNavbar({ handleShowModal }: DesktopNavbarProps) {
 		(state: OperationState) => state.operationReducer
 	);
 	token = token ? token : localStorage.getItem("token");
+	const refreshToken = localStorage.getItem("refreshToken");
 	console.log("JWT token ", token);
+	console.log("Refresh JWT token ", refreshToken);
 	return (
 		<>
 			<ul className='d-none d-xl-flex list-unstyled m-0 w-25 justify-content-between'>
@@ -65,6 +67,7 @@ function DesktopNavbar({ handleShowModal }: DesktopNavbarProps) {
 						onClick={() => {
 							dispatch({ type: CHANGE_TOKEN, newToken: "" });
 							localStorage.removeItem("token");
+							localStorage.removeItem("refreshToken");
 							navigate("/");
 						}}>
 						Wyloguj się

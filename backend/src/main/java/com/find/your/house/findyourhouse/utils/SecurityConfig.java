@@ -35,6 +35,7 @@ public class SecurityConfig {
                         .requestMatchers("/api/users/email/**").permitAll()
                         .requestMatchers("/api/users/auth/google/login").permitAll()
                         .requestMatchers("/api/users/auth/google/register").permitAll()
+                        .requestMatchers("/api/tokens/auth/refresh").permitAll()
                         .anyRequest().authenticated())
                 .addFilterBefore(new JwtRequestFilter(jwtTokenUtil, userDetailsServiceImpl),
                         UsernamePasswordAuthenticationFilter.class);

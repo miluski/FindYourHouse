@@ -21,7 +21,7 @@ export default function HomeView() {
 					window.location.pathname
 				);
 				(async () => {
-					await authGoogleUser(accessToken, dispatch);
+					await authGoogleUser(accessToken);
 					localStorage.setItem("operation", "login");
 				})();
 			}

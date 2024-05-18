@@ -1,66 +1,98 @@
 import { Col, Container } from "react-bootstrap";
 import {
-  EnvelopeOpen,
-  Facebook,
-  GeoAlt,
-  Instagram,
-  Linkedin,
-  TelephoneFill,
+	EnvelopeOpen,
+	Facebook,
+	GeoAlt,
+	Instagram,
+	Linkedin,
+	TelephoneFill,
 } from "react-bootstrap-icons";
 import { startCheckout } from "../../views/AddOfferView/startCheckout";
+import { sendRefreshTokensRequest } from "../../utils/sendRefreshTokensRequest";
 
 export default function FooterView({ fixedBottom }: { fixedBottom?: boolean }) {
-  return (
-    <footer
-      className={
-        "footer bg-dark-subtle p-2" + (fixedBottom ? " fixed-bottom" : "")
-      }
-    >
-      <Container fluid className="d-flex flex-row">
-        <Container className="d-flex flex-column justify-content-center">
-          <Container>
-            <text className="ff-kreon fs-3 fw-regular">Znajdź swój dach!</text>
-          </Container>
-          <Container>
-            <text className="ff-kreon fs-5 fw-regular">Dołącz do nas</text>
-            <Instagram
-              className="cursor-pointer mx-2"
-              size={32}
-              onClick={async () => {
-                startCheckout();
-              }}
-            />
-            <Facebook
-              className="cursor-pointer mx-2"
-              size={32}
-              onClick={() => {
-                window.location.href = "https://facebook.com";
-              }}
-            />
-            <Linkedin
-              className="cursor-pointer mx-2"
-              size={32}
-              onClick={() => {
-                window.location.href = "https://linkedin.com";
-              }}
-            />
-          </Container>
-        </Container>
-        <Container className="w-25 d-flex flex-column ml-5 d-none d-lg-block">
-          <Col sm={12} md={10}>
-            <TelephoneFill className="my-2 mx-5" size={32} />
-            <text className="text-nowrap">+48 456 654 789</text>
-          </Col>
-          <Col sm={12} md={10}>
-            <EnvelopeOpen className="my-2 mx-5" size={32} />
-            <text className="text-nowrap">znajdzswojdach@tu.kielce.pl</text>
-          </Col>
-          <Col sm={12} md={10}>
-            <GeoAlt className="my-2 mx-5" size={32} />
-            <text className="text-nowrap">plac Wolności 2, 25-367 Kielce</text>
-          </Col>
-        </Container>
-      </Container>
-    </footer>
-  );
+	return (
+		<footer
+			className={
+				"footer bg-dark-subtle p-2" + (fixedBottom ? " fixed-bottom" : "")
+			}>
+			<Container fluid className='d-flex flex-row'>
+				<Container className='d-flex flex-column justify-content-center'>
+					<Container>
+						<text className='ff-kreon fs-3 fw-regular'>Znajdź swój dach!</text>
+					</Container>
+					<Container>
+						<text className='ff-kreon fs-5 fw-regular'>Dołącz do nas</text>
+						<Instagram
+							className='cursor-pointer mx-2'
+							size={32}
+							onClick={async () => {
+								const isStarted = await startCheckout({
+									offerType: "",
+									propertyType: "",
+									title: "",
+									price: 0,
+									rent: 0,
+									caution: 0,
+									area: 0,
+									roomCount: 0,
+									photos: [""],
+									city: "",
+									houseNumber: 0,
+									street: "",
+									apartmentNumber: 0,
+								});
+								isStarted === 403
+									? (await sendRefreshTokensRequest(),
+									  await startCheckout({
+											offerType: "",
+											propertyType: "",
+											title: "",
+											price: 0,
+											rent: 0,
+											caution: 0,
+											area: 0,
+											roomCount: 0,
+											photos: [""],
+											city: "",
+											houseNumber: 0,
+											street: "",
+											apartmentNumber: 0,
+									  }))
+									: null;
+							}}
+						/>
+						<Facebook
+							className='cursor-pointer mx-2'
+							size={32}
+							onClick={() => {
+								window.location.href = "https://facebook.com";
+							}}
+						/>
+						<Linkedin
+							className='cursor-pointer mx-2'
+							size={32}
+							onClick={() => {
+								window.location.href = "https://linkedin.com";
+							}}
+						/>
+					</Container>
+				</Container>
+				<Container className='w-25 d-flex flex-column ml-5 d-none d-lg-block'>
+					<Col sm={12} md={10}>
+						<TelephoneFill className='my-2 mx-5' size={32} />
+						<text className='text-nowrap'>+48 456 654 789</text>
+					</Col>
+					<Col sm={12} md={10}>
+						<EnvelopeOpen className='my-2 mx-5' size={32} />
+						<text className='text-nowrap'>znajdzswojdach@tu.kielce.pl</text>
+					</Col>
+					<Col sm={12} md={10}>
+						<GeoAlt className='my-2 mx-5' size={32} />
+						<text className='text-nowrap'>plac Wolności 2, 25-367 Kielce</text>
+					</Col>
+				</Container>
+			</Container>
+		</footer>
+	);
 }
