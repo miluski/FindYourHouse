@@ -1,9 +1,11 @@
 import { Payment } from "./Payment";
 
-export async function registerOfflineTransaction(payment: Payment) {
+export async function registerOfflineTransaction(
+	payment: Payment
+): Promise<number> {
 	const token = localStorage.getItem("token");
 	const endpoint = "http://localhost:8080/api/messages/admin/create";
-	await fetch(endpoint, {
+	const response = await fetch(endpoint, {
 		method: "POST",
 		headers: {
 			"Content-Type": "application/json",
@@ -11,4 +13,5 @@ export async function registerOfflineTransaction(payment: Payment) {
 		},
 		body: JSON.stringify(payment),
 	});
+	return response.status;
 }
