@@ -1,15 +1,21 @@
 import Button from "react-bootstrap/Button";
-import { useSelector } from "react-redux";
-import { OperationState } from "../../utils/Operation/OperationState";
+import { useDispatch, useSelector } from "react-redux";
+import { OperationState } from "../../utils/types/State";
+import { CHANGE_TOKEN } from "../../utils/ActionTypes";
+import { useNavigate } from "react-router-dom";
 
 interface DesktopNavbarProps {
-	handleShowModal: () => void;
+  handleShowModal: () => void;
 }
 
 function DesktopNavbar({ handleShowModal }: DesktopNavbarProps) {
-	const stateToken = useSelector((state: OperationState) => state?.token);
-	const token = stateToken !== "" ? stateToken : localStorage.getItem("token");
-  console.log("JWT token ", token);
+	const dispatch = useDispatch();
+	const navigate = useNavigate();
+	let { token } = useSelector(
+		(state: OperationState) => state.operationReducer
+	);
+	token = token ? token : localStorage.getItem("token");
+	console.log("JWT token ", token);
 	return (
 		<>
 			<ul className='d-none d-xl-flex list-unstyled m-0 w-25 justify-content-between'>
@@ -40,8 +46,8 @@ function DesktopNavbar({ handleShowModal }: DesktopNavbarProps) {
 					type='button'
 					className='text-decoration-none text-black d-flex align-items-center me-4 fw-normal'
 					onClick={() => {
-						token !== "" && token !== null
-							? (window.location.href="/calculator")
+						token !== "" && token !== null && token !== undefined
+							? (navigate("/calculator"))
 							: handleShowModal();
 					}}>
 					<i className='bi bi-person fs-2 me-2 fw'></i>
@@ -49,9 +55,23 @@ function DesktopNavbar({ handleShowModal }: DesktopNavbarProps) {
 				</a>
 				<Button
 					variant='outline-dark'
-					className='align-self-center fw-bold px-3 py-2  border-2'>
+					className='align-self-center fw-bold px-3 py-2 border-2'>
 					Dodaj Ogłoszenie
 				</Button>
+				{token !== null && token !== "" && token !== undefined ? (
+					<Button
+						variant='outline-dark'
+						className='align-self-center fw-bold px-3 py-2 border-2'
+						onClick={() => {
+							dispatch({ type: CHANGE_TOKEN, newToken: "" });
+							localStorage.removeItem("token");
+							navigate("/");
+						}}>
+						Wyloguj się
+					</Button>
+				) : (
+					<></>
+				)}
 			</div>
 		</>
 	);

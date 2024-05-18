@@ -1,6 +1,6 @@
 import { Form } from "react-bootstrap";
 import { useDispatch } from "react-redux";
-import { CHANGE_PASSWORD } from "../utils/User/UserActionTypes";
+import { CHANGE_PASSWORD } from "../utils/ActionTypes";
 
 export const PasswordInput = () => {
   const dispatch = useDispatch();

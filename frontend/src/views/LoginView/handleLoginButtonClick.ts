@@ -1,4 +1,4 @@
-import { User } from "../../utils/User/User";
+import { User } from "../../utils/types/User";
 import { loginUser } from "./loginUser";
 
 export const handleLoginButtonClick = async (user: User) => {

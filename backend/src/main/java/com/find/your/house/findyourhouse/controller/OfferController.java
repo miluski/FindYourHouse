@@ -21,13 +21,11 @@ public class OfferController {
         return offerRepository.findAll();
     }
 
-    @SuppressWarnings("null")
     @GetMapping("/id/{id}")
     private Optional<Offer> getOfferById(@PathVariable Long id) {
         return offerRepository.findById(id);
     }
 
-    @SuppressWarnings("null")
     @PostMapping("/create")
     @ResponseStatus(HttpStatus.CREATED)
     private Offer createOffer(@RequestBody Offer offer) {
@@ -35,13 +33,11 @@ public class OfferController {
         return offer;
     }
 
-    @SuppressWarnings("null")
     @DeleteMapping("/delete/{id}")
     private void deleteOffer(@PathVariable Long id) {
         offerRepository.deleteById(id);
     }
 
-    @SuppressWarnings("null")
     @PatchMapping("/edit/{id}")
     private Offer editOffer(@PathVariable Long id, @RequestBody Offer offer) {
         Offer offerToEdit = offerRepository.findById(id).get();
