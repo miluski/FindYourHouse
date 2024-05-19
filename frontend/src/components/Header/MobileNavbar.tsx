@@ -30,7 +30,9 @@ function MobileNavbar({
 		(state: OperationState) => state.operationReducer
 	);
 	token = token ? token : localStorage.getItem("token");
+	const refreshToken = localStorage.getItem("refreshToken");
 	console.log("JWT token ", token);
+	console.log("Refresh JWT token ", refreshToken);
 	return (
 		<Navbar.Offcanvas
 			show={showOffcanvas}
@@ -117,6 +119,7 @@ function MobileNavbar({
 						onClick={() => {
 							dispatch({ type: CHANGE_TOKEN, newToken: "" });
 							localStorage.removeItem("token");
+							localStorage.removeItem("refreshToken");
 							navigate("/");
 						}}>
 						Wyloguj się

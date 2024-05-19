@@ -34,14 +34,33 @@ public class PaymentController {
 
     @PostMapping("/complete")
     public ResponseEntity<String> completePayment(@RequestBody Payment payment) {
-        String endpoint = "https://api-m.sandbox.paypal.com/v2/checkout/orders/" + payment.getOrderID() + "/capture";
-        HttpHeaders httpHeaders = new HttpHeaders();
-        RestTemplate restTemplate = new RestTemplate();
-        httpHeaders.add("Content-Type", "application/json");
-        httpHeaders.add("Authorization", "Bearer " + accessToken);
-        HttpEntity<String> entity = new HttpEntity<>(httpHeaders);
-        String response = restTemplate.exchange(endpoint, HttpMethod.POST, entity, String.class).getBody();
-        return ResponseEntity.ok(response);
+        try {
+            String endpoint = "https://api-m.sandbox.paypal.com/v2/checkout/orders/" + payment.getOrderID()
+                    + "/capture";
+            HttpHeaders httpHeaders = new HttpHeaders();
+            RestTemplate restTemplate = new RestTemplate();
+            httpHeaders.add("Content-Type", "application/json");
+            httpHeaders.add("Authorization", "Bearer " + accessToken);
+            HttpEntity<String> entity = new HttpEntity<>(httpHeaders);
+            ResponseEntity<String> responseEntity = restTemplate.exchange(endpoint, HttpMethod.POST, entity,
+                    String.class);
+            return responseEntity.getStatusCode() == HttpStatus.OK ? ResponseEntity.ok(responseEntity.getBody())
+                    : ResponseEntity.status(401).body("Error: " + responseEntity.getBody());
+        } catch (Exception e) {
+            return ResponseEntity.status(500).body(null);
+        }
+    }
+
+    @PostMapping("/check-gateway")
+    public ResponseEntity<String> checkGateway(@RequestBody String url) {
+        try {
+            RestTemplate restTemplate = new RestTemplate();
+            ResponseEntity<String> response = restTemplate.getForEntity(url, String.class);
+            return response.getStatusCode() == HttpStatus.OK ? ResponseEntity.ok("PayPal gateway is available")
+                    : ResponseEntity.status(HttpStatus.SERVICE_UNAVAILABLE).body("PayPal gateway is not available");
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error occurred: " + e.getMessage());
+        }
     }
 
     private Boolean generateToken() throws JsonMappingException, JsonProcessingException {

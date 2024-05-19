@@ -1,3 +1,8 @@
 export type Token = {
-	token: String;
+	accessToken: {
+		token: String;
+	};
+	refreshToken: {
+		token: String;
+	};
 };

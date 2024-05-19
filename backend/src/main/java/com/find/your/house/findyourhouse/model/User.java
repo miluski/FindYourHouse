@@ -14,6 +14,7 @@ public class User {
     private String phoneNumber;
     private String password;
     private String role;
+    private String refreshToken;
 
     public Long getId() {
         return id;
@@ -71,4 +72,11 @@ public class User {
         this.role = role;
     }
 
+    public String getRefreshToken() {
+        return this.refreshToken;
+    }
+
+    public void setRefreshToken(String refreshToken) {
+        this.refreshToken = refreshToken;
+    }
 }

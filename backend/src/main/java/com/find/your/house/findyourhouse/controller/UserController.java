@@ -1,15 +1,13 @@
 package com.find.your.house.findyourhouse.controller;
 
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.http.*;
 import com.find.your.house.findyourhouse.model.*;
-import com.find.your.house.findyourhouse.utils.*;
+
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.security.authentication.*;
@@ -24,10 +22,10 @@ public class UserController {
     private UserRepository userRepository;
 
     @Autowired
-    private JwtTokenUtil jwtTokenUtil;
+    private AuthenticationManager authenticationManager;
 
     @Autowired
-    private AuthenticationManager authenticationManager;
+    private TokenController tokenController;
 
     @GetMapping
     public Iterable<User> getUsers() {
@@ -46,17 +44,30 @@ public class UserController {
     }
 
     @PostMapping("/auth/google/login")
-    public ResponseEntity<Token> proxyLoginGoogleApi(@RequestBody String accessToken) {
-        Map<String, Object> body = getUserData(accessToken); 
+    public ResponseEntity<Map<String, Token>> proxyLoginGoogleApi(@RequestBody String accessToken) {
+        Map<String, Object> body = getUserData(accessToken);
         boolean isAuthenticated = isAuthenticated((String) body.get("email"), "");
         if (isAuthenticated) {
-            return ResponseEntity.ok(getToken((String) body.get("email"), ""));
+            Map<String, Token> tokens = this.saveToken(body);
+            return ResponseEntity.ok(tokens);
         } else {
             saveUser(body);
             isAuthenticated = isAuthenticated((String) body.get("email"), "");
-            return isAuthenticated == true ? ResponseEntity.ok(getToken((String) body.get("email"), ""))
-                    : ResponseEntity.status(HttpStatus.ACCEPTED).body(new Token((String) body.get("email")));
+            Map<String, Token> tokens = this.saveToken(body);
+            return isAuthenticated ? ResponseEntity.ok(tokens)
+                    : ResponseEntity.status(HttpStatus.ACCEPTED).body(tokens);
         }
+    }
+
+    private Map<String, Token> saveToken(Map<String, Object> body) {
+        Map<String, Token> tokens = new HashMap<>();
+        Token refreshToken = tokenController.getRefreshToken((String) body.get("email"), "");
+        tokens.put("accessToken", tokenController.getToken((String) body.get("email"), ""));
+        tokens.put("refreshToken", refreshToken);
+        User userToEdit = userRepository.findByEmail((String) body.get("email"));
+        userToEdit.setRefreshToken(refreshToken.getToken());
+        userRepository.save(userToEdit);
+        return tokens;
     }
 
     @PostMapping("/auth/google/register")
@@ -70,19 +81,31 @@ public class UserController {
     public boolean registerUser(@RequestBody User user) {
         user.setPassword(new BCryptPasswordEncoder().encode(user.getPassword()));
         user.setRole("USER");
+        user.setRefreshToken("");
         return userRepository.save(user) != null ? true : false;
     }
 
     @PostMapping("/auth/login")
-    public ResponseEntity<Token> loginUser(@RequestBody User user)
+    public ResponseEntity<Map<String, Token>> loginUser(@RequestBody User user)
             throws Exception {
         try {
-            boolean isAuthenticated = isAuthenticated(user.getEmail(), user.getPassword())
-                    && user.getRole() != "GOOGLE_USER";
-            return isAuthenticated == true ? ResponseEntity.ok(getToken(user.getEmail(), user.getPassword()))
-                    : ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(null);
+            Map<String, Token> tokens = new HashMap<>();
+            boolean isAuthenticated = isAuthenticated(user.getEmail(), user.getPassword());
+            if (isAuthenticated) {
+                Token refreshToken = tokenController.getRefreshToken(user.getEmail(), user.getPassword());
+                tokens.put("accessToken", tokenController.getToken(user.getEmail(), user.getPassword()));
+                tokens.put("refreshToken", refreshToken);
+                User userToEdit = userRepository.findByEmail(user.getEmail());
+                userToEdit.setRefreshToken(refreshToken.getToken());
+                userRepository.save(userToEdit);
+                return ResponseEntity.ok(tokens);
+            } else {
+                return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(null);
+            }
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(null);
+            Map<String, Token> tokens = new HashMap<>();
+            tokens.put(e.getMessage(), null);
+            return ResponseEntity.status(HttpStatus.SERVICE_UNAVAILABLE).body(tokens);
         }
     }
 
@@ -136,14 +159,6 @@ public class UserController {
         }
     }
 
-    private Token getToken(String email, String password) {
-        final UserDetails userDetails = org.springframework.security.core.userdetails.User
-                .withUsername(email)
-                .password(password).authorities("USER").build();
-        final String token = jwtTokenUtil.generateToken(userDetails.getUsername());
-        return new Token(token);
-    }
-
     private User saveUser(Map<String, Object> body) {
         User user = new User();
         user.setEmail((String) body.get("email"));
@@ -151,6 +166,7 @@ public class UserController {
         user.setLastName((String) body.get("family_name"));
         user.setPassword(new BCryptPasswordEncoder().encode(""));
         user.setRole("GOOGLE_USER");
+        user.setRefreshToken("");
         user.setPhoneNumber("");
         return userRepository.save(user);
     }
