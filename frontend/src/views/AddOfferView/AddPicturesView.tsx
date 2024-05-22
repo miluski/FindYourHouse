@@ -5,14 +5,14 @@ import "./Index.css";
 
 export const AddPicturesView = () => {
   const addPictureView: string[] = [];
-  const handleClick = (value: string) => {
+  const handleClick = (value: number) => {
     console.log(`Clicked on ${value}`);
   };
 
   const cameraArray = Array.from({ length: 10 }, (_, index) => index + 1);
 
   return (
-    <>
+    <Container fluid>
       <Container
         fluid
         className="d-flex align-items-center fs-5 flex-row mb-3 "
@@ -38,6 +38,6 @@ export const AddPicturesView = () => {
           ))}
         </Row>
       </Container>
-    </>
+    </Container>
   );
 };

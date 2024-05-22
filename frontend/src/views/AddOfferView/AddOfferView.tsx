@@ -24,47 +24,33 @@ export const AddOfferView = () => {
   };
 
   return (
-    
-    <Container>
-    
+    <Container fluid>
+      <HeaderView />
       {actualSiteNumber === 1 ? (
-        <Container fluid>
-          <HeaderView />
-          <Container className="d-flex align-items-center flex-column">
-            <text className="fw-bold fs-6">Wybierz typ oferty </text>
-            <ChooseOfferTypeView />
-            <text className="fw-bold fs-6">Wybierz rodzaj nieruchomości</text>
-            <ChooseApartmentType />
-            <AddOfferActionButton />
-          </Container>
-          <FooterView/> 
+        <Container fluid className="d-flex align-items-center flex-column">
+          <text className="fw-bold fs-6">Wybierz typ oferty </text>
+          <ChooseOfferTypeView />
+          <text className="fw-bold fs-6">Wybierz rodzaj nieruchomości</text>
+          <ChooseApartmentType />
+          <AddOfferActionButton />
         </Container>
       ) : (
         actualSiteNumber === 2 && (
           <Container fluid className="overflow-auto mb-5">
-            <HeaderView />
-            <Container className="overflow-auto mb-5">
-              <AddOfferTittleView />
-              <AddTechnicalInformatin />
-              <AddPicturesView />
-              <AddLocationView />
-              <Container
-                fluid
-                className="align-items-center d-flex flex-column mb-5"
-              >
-                <AddOfferActionButton />
+            <AddOfferTittleView />
+            <AddTechnicalInformatin />
+            <AddPicturesView />
+            <AddLocationView />
+            <Container
+              fluid
+              className="align-items-center d-flex flex-column mb-5"
+            >
+              <AddOfferActionButton />
             </Container>
-            </Container>
-          <FooterView/> 
           </Container>
-          
-          
-
         )
       )}
-       
-      </Container>
-      
-     
+      {actualSiteNumber === 1 ? <FooterView fixedBottom /> : <FooterView />}
+    </Container>
   );
 };

@@ -1,4 +1,3 @@
-
 enum addOfferActionTypes {
   CHANGE_SELECTED_TILE_NAME = "CHANGE_SELECTED_TILE_NAME",
 }

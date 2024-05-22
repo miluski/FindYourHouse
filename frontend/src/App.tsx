@@ -27,8 +27,8 @@ export default function App() {
 				<Routes>
 					<Route errorElement='' path='/' element={<HomeView />} />
 					<Route path='/calculator' element={<MortrageCalculatorView />} />
-          <Route path='/report' element={<ReportOfferView />} />
-		      <Route path='/add-offer' element={<AddOfferView/>} />
+          			<Route path='/report' element={<ReportOfferView />} />
+		      		<Route path='/add-offer' element={<AddOfferView/>} />
 					<Route path='/report' element={<ReportOfferView />} />
 					<Route
 						path='/add-offer/approvedPayment'

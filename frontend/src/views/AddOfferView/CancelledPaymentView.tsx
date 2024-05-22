@@ -14,7 +14,7 @@ export default function CancelledPaymentView() {
 		<Container>
 			<Col>
 				<Image src='https://img.freepik.com/premium-wektory/usun-ikone-bez-znaku-zamknij-wektor-symbolu-anuluj-zle-i-odrzuc-ilustracje_790965-579.jpg?w=826' />
-				<text>Transakcja została anulowana!</text>
+				<text>Transakcja została odrzucona!</text>
 			</Col>
 		</Container>
 	);

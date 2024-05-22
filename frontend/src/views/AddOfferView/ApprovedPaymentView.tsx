@@ -1,12 +1,13 @@
 import { useEffect, useRef, useState } from "react";
 import { Container, Col, Image } from "react-bootstrap";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigation } from "react-router-dom";
 import { finalizePayment } from "./finalizePayment";
 import { registerOfflineTransaction } from "./registerOfflineTransaction";
 import { sendRefreshTokensRequest } from "../../utils/sendRefreshTokensRequest";
 
 export default function ApprovedPaymentView() {
 	const location = useLocation();
+	const navigate = useNavigation();
 	const offerObject = {
 		offerType: "",
 		propertyType: "",
@@ -50,7 +51,7 @@ export default function ApprovedPaymentView() {
 						: null;
 				} else {
 					setPaymentStatus(paymentObject.status || null);
-					paymentStatus !== "COMPLETED"
+					paymentStatus !== "COMPLETED" && paymentStatus !== "DENIED"
 						? await registerOfflineTransaction({
 								status: "UNCOMPLETED",
 								offerObject: offerObject,
@@ -63,7 +64,7 @@ export default function ApprovedPaymentView() {
 								}),
 								topic: "Akceptacja Transakcji",
 						  })
-						: null;
+						: paymentStatus === "DENIED" ? navigate("/add-offer/cancelledPayment") : null;
 				}
 			})();
 		}
