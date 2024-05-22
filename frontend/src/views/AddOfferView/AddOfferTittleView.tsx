@@ -1,9 +1,12 @@
 import { Container,Form } from "react-bootstrap"
+import { SeparateLine } from "./SeparateLine"
 
 export const AddOfferTittleView = () => {
 
     return (
-        <><Container fluid className="d-flex align-items-center fs-5 flex-column mt-6 mb-1">
+        <>
+        <SeparateLine/>
+        <Container fluid className="d-flex align-items-center fs-5 flex-column mt-6 mb-1">
             <text>
                 Wprowadź tytuł ogłoszenia
             </text>

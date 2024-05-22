@@ -3,7 +3,7 @@ import { Form } from 'react-bootstrap';
 
 export const ChooseRoomQuantity = () => {
   return (
-      <Form className='w-25 mb-5 mt-2'>
+      <Form className='w-27 mb-2'>
       <Form.Select >
         <option value="one"> 1</option>
         <option value="two">2</option>

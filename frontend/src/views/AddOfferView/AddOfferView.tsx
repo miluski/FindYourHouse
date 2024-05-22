@@ -24,7 +24,9 @@ export const AddOfferView = () => {
   };
 
   return (
+    
     <Container>
+    
       {actualSiteNumber === 1 ? (
         <Container fluid>
           <HeaderView />
@@ -35,23 +37,34 @@ export const AddOfferView = () => {
             <ChooseApartmentType />
             <AddOfferActionButton />
           </Container>
-          <FooterView />
+          <FooterView/> 
         </Container>
       ) : (
         actualSiteNumber === 2 && (
-          <Container fluid>
+          <Container fluid className="overflow-auto mb-5">
             <HeaderView />
-            <AddOfferTittleView />
-            <AddTechnicalInformatin />
-            <AddPicturesView />
-            <AddLocationView />
-            <Container fluid className="align-items-center d-flex flex-column">
-              <AddOfferActionButton />
+            <Container className="overflow-auto mb-5">
+              <AddOfferTittleView />
+              <AddTechnicalInformatin />
+              <AddPicturesView />
+              <AddLocationView />
+              <Container
+                fluid
+                className="align-items-center d-flex flex-column mb-5"
+              >
+                <AddOfferActionButton />
             </Container>
-            <FooterView />
+            </Container>
+          <FooterView/> 
           </Container>
+          
+          
+
         )
       )}
-    </Container>
+       
+      </Container>
+      
+     
   );
 };
