@@ -4,10 +4,12 @@ import { useLocation, useNavigation } from "react-router-dom";
 import { finalizePayment } from "./finalizePayment";
 import { registerOfflineTransaction } from "./registerOfflineTransaction";
 import { sendRefreshTokensRequest } from "../../utils/sendRefreshTokensRequest";
+import HeaderView from "../../components/Header/HeaderView";
+import FooterView from "../../components/Footer/FooterView";
 
 export default function ApprovedPaymentView() {
 	const location = useLocation();
-	const navigate = useNavigation();
+	//const navigate = useNavigation();
 	const offerObject = {
 		offerType: "",
 		propertyType: "",
@@ -36,7 +38,7 @@ export default function ApprovedPaymentView() {
 					paymentObject === 403
 						? (await sendRefreshTokensRequest(), await finalizePayment(orderID))
 						: paymentObject === 401 || 500
-						? await registerOfflineTransaction({
+							? await registerOfflineTransaction({
 								status: "UNCOMPLETED",
 								offerObject: offerObject,
 								category: "Akceptacja Transakcji",
@@ -47,47 +49,52 @@ export default function ApprovedPaymentView() {
 									year: "numeric",
 								}),
 								topic: "Akceptacja Transakcji",
-						  })
-						: null;
+							})
+							: null;
 				} else {
 					setPaymentStatus(paymentObject.status || null);
 					paymentStatus !== "COMPLETED" && paymentStatus !== "DENIED"
 						? await registerOfflineTransaction({
-								status: "UNCOMPLETED",
-								offerObject: offerObject,
-								category: "Akceptacja Transakcji",
-								client_name: localStorage.getItem("email") ?? "",
-								date: new Date().toLocaleDateString("en-GB", {
-									day: "2-digit",
-									month: "2-digit",
-									year: "numeric",
-								}),
-								topic: "Akceptacja Transakcji",
-						  })
-						: paymentStatus === "DENIED" ? navigate("/add-offer/cancelledPayment") : null;
+							status: "UNCOMPLETED",
+							offerObject: offerObject,
+							category: "Akceptacja Transakcji",
+							client_name: localStorage.getItem("email") ?? "",
+							date: new Date().toLocaleDateString("en-GB", {
+								day: "2-digit",
+								month: "2-digit",
+								year: "numeric",
+							}),
+							topic: "Akceptacja Transakcji",
+						})
+						: paymentStatus === "DENIED" ? null : null;
 				}
 			})();
 		}
 	}, [location]);
 	return (
-		<Container className="d-flex flex-column justify-content-center align-items-center mt-5 ">
-			<Col className="text-center ">
-				{paymentStatus === "COMPLETED" ? (
-					<>
-					
-						<Image src='../../src/assets/delete.png' />
-						<Container className="fs-1 d-flex flex-column justify-content-center align-items-center fw-bold" >
-						<p className="mt-4 ">Transakcja została pomyślnie zrealizowana!</p>
-						</Container>
-					</>
-				) : paymentStatus !== null ? (
-					<a className="mt-4 ">
-						Płatność została odrzucona i zarejestrowana jako płatność offline.
-					</a>
-				) : (
-					<></>
-				)}
-			</Col>
-		</Container>
+		<>
+			<HeaderView />
+			<Container className="d-flex flex-column justify-content-center align-items-center mt-5 ">
+				<Col className="text-center ">
+					{paymentStatus === "COMPLETED" ? (
+						<>
+
+							<Image src='../../src/assets/accept.png' />
+							<Container className="fs-1 d-flex flex-column justify-content-center align-items-center fw-bold" >
+								<p className="mt-4 ">Transakcja została pomyślnie zrealizowana!</p>
+							</Container>
+						</>
+					) : paymentStatus !== null ? (
+						<a className="mt-4 ">
+							Płatność została odrzucona i zarejestrowana jako płatność offline.
+						</a>
+					) : (
+						<></>
+					)}
+				</Col>
+			</Container>
+			<FooterView fixedBottom/>
+		</>
 	);
+
 }
