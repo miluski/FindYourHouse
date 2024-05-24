@@ -7,15 +7,18 @@ export default function CancelledPaymentView() {
 	useEffect(() => {
 		const timeoutId = setTimeout(() => {
 			navigate("/");
-		}, 2000);
+		}, 10000);
 		return () => clearTimeout(timeoutId);
 	}, []);
 	return (
-		<Container>
-			<Col>
-				<Image src='https://img.freepik.com/premium-wektory/usun-ikone-bez-znaku-zamknij-wektor-symbolu-anuluj-zle-i-odrzuc-ilustracje_790965-579.jpg?w=826' />
-				<text>Transakcja została odrzucona!</text>
-			</Col>
+		<Container className="d-flex flex-column justify-content-center align-items-center mt-5 ">
+		<Col className="text-center ">
+			<Image src='../../src/assets/delete.png' />
+			
+		</Col>
+		<Container className="fs-1 d-flex flex-column justify-content-center align-items-center fw-bold">
+		<p className="mt-4 ">Transakcja została odrzucona!</p>
 		</Container>
+	</Container>
 	);
 }

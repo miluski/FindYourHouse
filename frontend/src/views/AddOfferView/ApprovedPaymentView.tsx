@@ -70,17 +70,20 @@ export default function ApprovedPaymentView() {
 		}
 	}, [location]);
 	return (
-		<Container>
-			<Col>
+		<Container className="d-flex flex-column justify-content-center align-items-center mt-5 ">
+			<Col className="text-center ">
 				{paymentStatus === "COMPLETED" ? (
 					<>
-						<Image src='https://media.istockphoto.com/id/1305827140/pl/wektor/ikona-znacznika-zaznaczenia-ikona-znacznika-tik.jpg?s=1024x1024&w=is&k=20&c=gyZjWvJoeLeSqe5MriSP9U8UhbAR_-xu70dUcgrId5w=' />
-						<text>Transakcja została pomyślnie zrealizowana!</text>
+					
+						<Image src='../../src/assets/delete.png' />
+						<Container className="fs-1 d-flex flex-column justify-content-center align-items-center fw-bold" >
+						<p className="mt-4 ">Transakcja została pomyślnie zrealizowana!</p>
+						</Container>
 					</>
 				) : paymentStatus !== null ? (
-					<text>
+					<a className="mt-4 ">
 						Płatność została odrzucona i zarejestrowana jako płatność offline.
-					</text>
+					</a>
 				) : (
 					<></>
 				)}
