@@ -3,7 +3,6 @@ import Header from '../../components/Header/HeaderView';
 import Footer from '../../components/Footer/FooterView';
 import { Container } from 'react-bootstrap';
 import { Offers } from './Offers';
-import FilterDropdown from './FilterDropdown';
 
 const FlatListView: React.FC = () => {
   const [offers, setOffers] = useState<Offers[]>([]);
@@ -112,9 +111,6 @@ const FlatListView: React.FC = () => {
               <option value="Powierzchnia najmniejsza">Powierzchnia: od najmniejszej</option>
               <option value="Powierzchnia największa">Powierzchnia: od największej</option>
             </select>
-          </div>
-          <div>
-            <FilterDropdown/>
           </div>
         </div>
       </Container>
