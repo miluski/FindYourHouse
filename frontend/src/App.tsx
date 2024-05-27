@@ -5,6 +5,7 @@ import { combineReducers, legacy_createStore } from "redux";
 import { operationReducer } from "./utils/reducers/operationReducer.ts";
 import { Provider } from "react-redux";
 import ReportOfferView from "./views/ReportOfferView/ReportOfferView.tsx";
+import { AddOfferView } from "./views/AddOfferView/AddOfferView.tsx";
 import { userReducer } from "./utils/reducers/userReducer.ts";
 import { calculatorReducer } from "./utils/reducers/calculatorReducer.ts";
 import { adminReducer } from "./utils/reducers/adminReducer.ts";
@@ -26,6 +27,8 @@ export default function App() {
 				<Routes>
 					<Route errorElement='' path='/' element={<HomeView />} />
 					<Route path='/calculator' element={<MortrageCalculatorView />} />
+          			<Route path='/report' element={<ReportOfferView />} />
+		      		<Route path='/add-offer' element={<AddOfferView/>} />
 					<Route path='/report' element={<ReportOfferView />} />
 					<Route
 						path='/add-offer/approvedPayment'
