@@ -11,6 +11,7 @@ import { adminReducer } from "./utils/reducers/adminReducer.ts";
 import ApprovedPaymentView from "./views/AddOfferView/ApprovedPaymentView.tsx";
 import CancelledPaymentView from "./views/AddOfferView/CancelledPaymentView.tsx";
 import NotFoundView from "./views/ErrorViews/NotFoundView.tsx";
+import { ProfileSettings } from "./views/ProfileSettings/ProfileSettings.tsx";
 
 export default function App() {
 	const appReducer = combineReducers({
@@ -27,6 +28,7 @@ export default function App() {
 					<Route errorElement='' path='/' element={<HomeView />} />
 					<Route path='/calculator' element={<MortrageCalculatorView />} />
 					<Route path='/report' element={<ReportOfferView />} />
+					<Route path='/settings' element ={<ProfileSettings/>} />
 					<Route
 						path='/add-offer/approvedPayment'
 						element={<ApprovedPaymentView />}
