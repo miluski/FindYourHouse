@@ -1,9 +1,8 @@
 import { Action } from "../types/Action";
-import { CHANGE_OPERATION, CHANGE_TOKEN } from "../ActionTypes";
+import { CHANGE_OPERATION } from "../ActionTypes";
 
 const initialState = {
-	operation: "login",
-	token: "",
+	operation: "login"
 };
 
 export function operationReducer(state = initialState, action: Action) {
@@ -12,12 +11,6 @@ export function operationReducer(state = initialState, action: Action) {
 			return {
 				...state,
 				operation: action.newOperation,
-			};
-		}
-		case CHANGE_TOKEN: {
-			return {
-				...state,
-				token: action.newToken,
 			};
 		}
 		default:

@@ -1,44 +1,34 @@
 import Button from "react-bootstrap/Button";
-import { useDispatch, useSelector } from "react-redux";
-import { OperationState } from "../../utils/types/State";
-import { CHANGE_TOKEN } from "../../utils/ActionTypes";
 import { useNavigate } from "react-router-dom";
 
 interface DesktopNavbarProps {
-  handleShowModal: () => void;
+	handleShowModal: () => void;
 }
 
 function DesktopNavbar({ handleShowModal }: DesktopNavbarProps) {
-	const dispatch = useDispatch();
 	const navigate = useNavigate();
-	let { token } = useSelector(
-		(state: OperationState) => state.operationReducer
-	);
-	token = token ? token : localStorage.getItem("token");
-	const refreshToken = localStorage.getItem("refreshToken");
-	console.log("JWT token ", token);
-	console.log("Refresh JWT token ", refreshToken);
+	const token = localStorage.getItem("token");
 	return (
 		<>
 			<ul className='d-none d-xl-flex list-unstyled m-0 w-25 justify-content-between'>
 				<li>
 					<a
 						className='text-black fw-normal link-offset-2 link-offset-3-hover text-decoration-underline link-underline-dark link-underline-opacity-0 link-underline-opacity-75-hover'
-						href=''>
+						href='/flats?filter=buying'>
 						Kupuję
 					</a>
 				</li>
 				<li>
 					<a
 						className='text-black fw-normal link-offset-2 link-offset-3-hover text-decoration-underline link-underline-dark link-underline-opacity-0 link-underline-opacity-75-hover'
-						href=''>
+						href='/flats?filter=renting'>
 						Wynajmuję
 					</a>
 				</li>
 				<li>
 					<a
 						className='text-black fw-normal link-offset-2 link-offset-3-hover text-decoration-underline link-underline-dark link-underline-opacity-0 link-underline-opacity-75-hover'
-						href=''>
+						href='/calculator'>
 						Kredyty
 					</a>
 				</li>
@@ -48,8 +38,8 @@ function DesktopNavbar({ handleShowModal }: DesktopNavbarProps) {
 					type='button'
 					className='text-decoration-none text-black d-flex align-items-center me-4 fw-normal'
 					onClick={() => {
-						token !== "" && token !== null && token !== undefined
-							? (navigate("/calculator"))
+						token !== "" && token !== null
+							? navigate("/user-panel")
 							: handleShowModal();
 					}}>
 					<i className='bi bi-person fs-2 me-2 fw'></i>
@@ -57,24 +47,10 @@ function DesktopNavbar({ handleShowModal }: DesktopNavbarProps) {
 				</a>
 				<Button
 					variant='outline-dark'
-					className='align-self-center fw-bold px-3 py-2 border-2'>
+					className='align-self-center fw-bold px-3 py-2 border-2'
+					onClick={() => navigate("/add-offer")}>
 					Dodaj Ogłoszenie
 				</Button>
-				{token !== null && token !== "" && token !== undefined ? (
-					<Button
-						variant='outline-dark'
-						className='align-self-center fw-bold px-3 py-2 border-2'
-						onClick={() => {
-							dispatch({ type: CHANGE_TOKEN, newToken: "" });
-							localStorage.removeItem("token");
-							localStorage.removeItem("refreshToken");
-							navigate("/");
-						}}>
-						Wyloguj się
-					</Button>
-				) : (
-					<></>
-				)}
 			</div>
 		</>
 	);

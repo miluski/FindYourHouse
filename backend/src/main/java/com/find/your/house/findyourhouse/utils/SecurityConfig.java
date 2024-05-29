@@ -11,6 +11,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
+import jakarta.servlet.http.HttpServletResponse;
+
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
@@ -37,6 +39,9 @@ public class SecurityConfig {
                         .requestMatchers("/api/users/auth/google/register").permitAll()
                         .requestMatchers("/api/tokens/auth/refresh").permitAll()
                         .anyRequest().authenticated())
+                .exceptionHandling((exceptionHandling) -> exceptionHandling
+                        .authenticationEntryPoint((request, response, authException) -> response
+                                .sendError(HttpServletResponse.SC_UNAUTHORIZED)))
                 .addFilterBefore(new JwtRequestFilter(jwtTokenUtil, userDetailsServiceImpl),
                         UsernamePasswordAuthenticationFilter.class);
         return http.build();

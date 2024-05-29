@@ -1,4 +1,4 @@
-import { Routes, Route, BrowserRouter as Router } from "react-router-dom";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import HomeView from "./views/HomeView/HomeView.tsx";
 import { MortrageCalculatorView } from "./views/MortrageCalculatorView/MortrageCalculatorView.tsx";
 import { combineReducers, legacy_createStore } from "redux";
@@ -16,6 +16,96 @@ import { ProfileSettings } from "./views/ProfileSettings/ProfileSettings.tsx";
 import { UserPanel } from "./views/UserPanelView/UserPanelView.tsx";
 import FlatListView from "./views/FlatListView/FlatListView.tsx";
 import AdminView from "./views/AdminView/AdminView.tsx";
+import GuardView from "./views/ErrorViews/GuardView.tsx";
+
+const browserRouter = createBrowserRouter([
+	{
+		path: "*",
+		element: <NotFoundView />,
+	},
+	{
+		path: "/",
+		element: <HomeView />,
+	},
+	{
+		path: "calculator",
+		element: <MortrageCalculatorView />,
+	},
+	{
+		path: "user-panel",
+		element: (
+			<GuardView>
+				<UserPanel />
+			</GuardView>
+		),
+	},
+	{
+		path: "messages",
+		element: (
+			<GuardView>
+				<>
+					<text>Not implemented yet</text>
+				</>
+			</GuardView>
+		),
+	},
+	{
+		path: "settings",
+		element: (
+			<GuardView>
+				<ProfileSettings />
+			</GuardView>
+		),
+	},
+	{
+		path: "admin-panel",
+		element: (
+			<GuardView>
+				<AdminView />
+			</GuardView>
+		),
+	},
+	{
+		path: "add-offer",
+		element: (
+			<GuardView>
+				<AddOfferView />
+			</GuardView>
+		),
+	},
+	{
+		path: "approved-payment",
+		element: (
+			<GuardView>
+				<ApprovedPaymentView />
+			</GuardView>
+		),
+	},
+	{
+		path: "cancelled-payment",
+		element: (
+			<GuardView>
+				<CancelledPaymentView />
+			</GuardView>
+		),
+	},
+	{
+		path: "report",
+		element: (
+			<GuardView>
+				<ReportOfferView />
+			</GuardView>
+		),
+	},
+	{
+		path: "flats",
+		element: (
+			<GuardView>
+				<FlatListView />
+			</GuardView>
+		),
+	},
+]);
 
 export default function App() {
 	const appReducer = combineReducers({
@@ -27,28 +117,7 @@ export default function App() {
 	const store = legacy_createStore(appReducer);
 	return (
 		<Provider store={store}>
-			<Router>
-				<Routes>
-					<Route errorElement='' path='/' element={<HomeView />} />
-					<Route path='/calculator' element={<MortrageCalculatorView />} />
-          			<Route path='/report' element={<ReportOfferView />} />
-		      		<Route path='/add-offer' element={<AddOfferView/>} />
-					<Route path='/report' element={<ReportOfferView />} />
-					<Route path='/admin' element={<AdminView />} />
-					<Route path='/settings' element ={<ProfileSettings/>} />
-					<Route path="/user-panel" element={<UserPanel/>} />
-					<Route
-						path='/add-offer/approvedPayment'
-						element={<ApprovedPaymentView />}
-					/>
-					<Route
-						path='/add-offer/cancelledPayment'
-						element={<CancelledPaymentView />}
-					/>
-					<Route path='*' element={<NotFoundView />} />
-					<Route path='/flats' element={<FlatListView />} />
-				</Routes>
-			</Router>
+			<RouterProvider router={browserRouter} />
 		</Provider>
 	);
 }

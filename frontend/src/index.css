@@ -272,3 +272,16 @@
 		width: 35%;
 	}
 }
+
+.button:hover {
+	background-color: whitesmoke;
+	opacity: 0.9;
+}
+
+.icons-position {
+	display: flex;
+	flex-direction: column;
+	width: 12vw;
+	align-items: center;
+}
+

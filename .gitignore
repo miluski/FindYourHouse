@@ -4,3 +4,4 @@ node_modules
 target
 application.properties
 google.ts
+.DS_Store

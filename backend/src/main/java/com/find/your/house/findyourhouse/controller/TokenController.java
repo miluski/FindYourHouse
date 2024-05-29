@@ -28,6 +28,7 @@ public class TokenController {
             throws Exception {
         try {
             User user = userRepository.findByEmail(jwtTokenUtil.getEmail(refreshToken));
+            refreshToken = refreshToken.substring(0, refreshToken.length() - 1);
             if (user != null && refreshToken.equals(user.getRefreshToken())) {
                 Map<String, Token> newTokens = new HashMap<>();
                 newTokens.put("accessToken", getToken(user.getEmail(), user.getPassword()));
@@ -37,11 +38,10 @@ public class TokenController {
                 userRepository.save(user);
                 return ResponseEntity.ok(newTokens);
             } else {
-                return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(null);
+                return ResponseEntity.status(HttpStatus.FORBIDDEN).body(null);
             }
-
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(null);
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).body(null);
         }
     }
 
