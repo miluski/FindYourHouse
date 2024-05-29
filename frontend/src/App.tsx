@@ -15,6 +15,7 @@ import NotFoundView from "./views/ErrorViews/NotFoundView.tsx";
 import { ProfileSettings } from "./views/ProfileSettings/ProfileSettings.tsx";
 import { UserPanel } from "./views/UserPanelView/UserPanelView.tsx";
 import FlatListView from "./views/FlatListView/FlatListView.tsx";
+import AdminView from "./views/AdminView/AdminView.tsx";
 
 export default function App() {
 	const appReducer = combineReducers({
@@ -33,6 +34,7 @@ export default function App() {
           			<Route path='/report' element={<ReportOfferView />} />
 		      		<Route path='/add-offer' element={<AddOfferView/>} />
 					<Route path='/report' element={<ReportOfferView />} />
+					<Route path='/admin' element={<AdminView />} />
 					<Route path='/settings' element ={<ProfileSettings/>} />
 					<Route path="/user-panel" element={<UserPanel/>} />
 					<Route
