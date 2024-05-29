@@ -4,6 +4,7 @@ import Navbar from "react-bootstrap/Navbar";
 import houseLogo from "../../assets/FindMyHouse_Logo.svg";
 import DesktopNavbar from "./DesktopNavbar";
 import MobileNavbar from "./MobileNavbar";
+
 import AuthenticationView from "../../views/AuthenticationView/AuthenticationView.tsx";
 import { useNavigate } from "react-router-dom";
 
@@ -43,3 +44,4 @@ export default function HeaderView() {
 		</header>
 	);
 }
+

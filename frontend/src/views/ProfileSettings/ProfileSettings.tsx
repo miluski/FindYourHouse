@@ -13,20 +13,7 @@ export const ProfileSettings = () => {
       <SettingsView />
       <Row>
         <Col>
-          <AccountOptionsView
-            user={{
-              avatar: "",
-              name: "",
-              surname: "",
-              email: "",
-            }}
-            deleteUserAccount={function (): void {
-              throw new Error("Function not implemented.");
-            }}
-            logoutUser={function (): void {
-              throw new Error("Function not implemented.");
-            }}
-          />
+          <AccountOptionsView />
         </Col>
         <Col>
           <EditingAccountFormView />
