@@ -7,7 +7,6 @@ export type Action = {
 	newPassword: string;
 	newIsDataValid: boolean;
 	newOperation: string;
-	newToken: string;
 	newSelectedValue: number;
 	newStartDate: Date;
 	newSelectedTitle: string;

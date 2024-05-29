@@ -1,19 +1,11 @@
+import { axiosInstance } from "../../../utils/axiosInstance";
 import { User } from "../../../utils/types/User";
 
 export async function registerUser(userObject: User) {
-  try {
-    const response = await fetch(
-      "http://localhost:8080/api/users/auth/register",
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(userObject),
-      },
-    );
-    response.ok ? (window.location.href = "/") : alert("Błąd!");
-  } catch (error) {
-    console.log(error);
-  }
+	try {
+		const response = await axiosInstance.post("/api/users/auth/register", userObject);
+		response.status === 200 ? (window.location.href = "/") : alert("Błąd!");
+	} catch (error) {
+		console.log(error);
+	}
 }

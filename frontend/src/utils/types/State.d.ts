@@ -1,7 +1,6 @@
 export type OperationState = {
 	operationReducer: Reducer<OperationState, Action>;
 	operation: string;
-	token: string;
 };
 
 export type UserState = {

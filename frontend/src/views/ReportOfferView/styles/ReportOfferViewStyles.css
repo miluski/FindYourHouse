@@ -1,21 +1,21 @@
-.mainReportView{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+.mainReportView {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
 
-.emailInputDiv{
-    padding-top: 20px;
-    padding-bottom: 20px;
+.emailInputDiv {
+	padding-top: 20px;
+	padding-bottom: 20px;
 }
 
-.emailBox{
-    border-radius: 10px;
-    padding: 5px;
+.emailBox {
+	border-radius: 10px;
+	padding: 5px;
 }
 
-.errorMessage{
-    color: red;
+.errorMessage {
+	color: red;
 }

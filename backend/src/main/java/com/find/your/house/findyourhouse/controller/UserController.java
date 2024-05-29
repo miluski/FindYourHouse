@@ -1,5 +1,6 @@
 package com.find.your.house.findyourhouse.controller;
 
+import java.io.IOException;
 import java.util.*;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,7 +45,7 @@ public class UserController {
     }
 
     @PostMapping("/auth/google/login")
-    public ResponseEntity<Map<String, Token>> proxyLoginGoogleApi(@RequestBody String accessToken) {
+    public ResponseEntity<Map<String, Token>> proxyLoginGoogleApi(@RequestBody String accessToken) throws IOException {
         Map<String, Object> body = getUserData(accessToken);
         boolean isAuthenticated = isAuthenticated((String) body.get("email"), "");
         if (isAuthenticated) {
@@ -100,7 +101,7 @@ public class UserController {
                 userRepository.save(userToEdit);
                 return ResponseEntity.ok(tokens);
             } else {
-                return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(null);
+                return ResponseEntity.status(HttpStatus.FORBIDDEN).body(null);
             }
         } catch (Exception e) {
             Map<String, Token> tokens = new HashMap<>();

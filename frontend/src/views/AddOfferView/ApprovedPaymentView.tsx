@@ -1,15 +1,15 @@
 import { useEffect, useRef, useState } from "react";
 import { Container, Col, Image } from "react-bootstrap";
-import { useLocation, useNavigation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { finalizePayment } from "./finalizePayment";
-import { registerOfflineTransaction } from "./registerOfflineTransaction";
-import { sendRefreshTokensRequest } from "../../utils/sendRefreshTokensRequest";
 import HeaderView from "../../components/Header/HeaderView";
 import FooterView from "../../components/Footer/FooterView";
+import { Payment } from "./Payment";
+import { registerOfflineTransaction } from "./registerOfflineTransaction";
 
 export default function ApprovedPaymentView() {
 	const location = useLocation();
-	//const navigate = useNavigation();
+	const navigate = useNavigate();
 	const offerObject = {
 		offerType: "",
 		propertyType: "",
@@ -33,40 +33,22 @@ export default function ApprovedPaymentView() {
 		if (orderID && orderID !== lastOrderIDRef.current) {
 			(async () => {
 				lastOrderIDRef.current = orderID;
-				const paymentObject = await finalizePayment(orderID);
-				if (typeof paymentObject === "number") {
-					paymentObject === 403
-						? (await sendRefreshTokensRequest(), await finalizePayment(orderID))
-						: paymentObject === 401 || 500
-							? await registerOfflineTransaction({
-								status: "UNCOMPLETED",
-								offerObject: offerObject,
-								category: "Akceptacja Transakcji",
-								client_name: localStorage.getItem("email") ?? "",
-								date: new Date().toLocaleDateString("en-GB", {
-									day: "2-digit",
-									month: "2-digit",
-									year: "numeric",
-								}),
-								topic: "Akceptacja Transakcji",
-							})
-							: null;
-				} else {
-					setPaymentStatus(paymentObject.status || null);
-					paymentStatus !== "COMPLETED" && paymentStatus !== "DENIED"
-						? await registerOfflineTransaction({
-							status: "UNCOMPLETED",
-							offerObject: offerObject,
-							category: "Akceptacja Transakcji",
-							client_name: localStorage.getItem("email") ?? "",
-							date: new Date().toLocaleDateString("en-GB", {
-								day: "2-digit",
-								month: "2-digit",
-								year: "numeric",
-							}),
-							topic: "Akceptacja Transakcji",
-						})
-						: paymentStatus === "DENIED" ? null : null;
+				const paymentObject: Number | Payment = await finalizePayment(orderID);
+				!(paymentObject instanceof Number) && paymentObject
+					? setPaymentStatus(paymentObject.status || null)
+					: null;
+				if (
+					!(paymentObject instanceof Number) &&
+					paymentObject &&
+					paymentObject.status === "DENIED"
+				) {
+					navigate("/cancelled-payment");
+				} else if (
+					!(paymentObject instanceof Number) &&
+					paymentObject &&
+					paymentObject.status === null
+				) {
+					registerOfflineTransaction(paymentObject);
 				}
 			})();
 		}
@@ -74,18 +56,19 @@ export default function ApprovedPaymentView() {
 	return (
 		<>
 			<HeaderView />
-			<Container className="d-flex flex-column justify-content-center align-items-center mt-5 ">
-				<Col className="text-center ">
+			<Container className='d-flex flex-column justify-content-center align-items-center mt-5 '>
+				<Col className='text-center '>
 					{paymentStatus === "COMPLETED" ? (
 						<>
-
 							<Image src='../../src/assets/accept.png' />
-							<Container className="fs-1 d-flex flex-column justify-content-center align-items-center fw-bold" >
-								<p className="mt-4 ">Transakcja została pomyślnie zrealizowana!</p>
+							<Container className='fs-1 d-flex flex-column justify-content-center align-items-center fw-bold'>
+								<p className='mt-4 '>
+									Transakcja została pomyślnie zrealizowana!
+								</p>
 							</Container>
 						</>
-					) : paymentStatus !== null ? (
-						<a className="mt-4 ">
+					) : paymentStatus === null ? (
+						<a className='mt-4 '>
 							Płatność została odrzucona i zarejestrowana jako płatność offline.
 						</a>
 					) : (
@@ -93,8 +76,7 @@ export default function ApprovedPaymentView() {
 					)}
 				</Col>
 			</Container>
-			<FooterView fixedBottom/>
+			<FooterView fixedBottom />
 		</>
 	);
-
 }

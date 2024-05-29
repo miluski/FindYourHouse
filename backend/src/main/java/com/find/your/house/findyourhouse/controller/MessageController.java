@@ -3,6 +3,7 @@ package com.find.your.house.findyourhouse.controller;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.ResponseEntity.BodyBuilder;
 import org.springframework.web.bind.annotation.*;
@@ -23,7 +24,7 @@ public class MessageController {
                         messageRepository.save(message);
                         return ResponseEntity.ok().body(null);
                 } catch (Exception e) {
-                        return ResponseEntity.status(500).body(e.getMessage());
+                        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
                 }
         }
 
@@ -33,11 +34,11 @@ public class MessageController {
                         Optional<Message> message = messageRepository.findById(id);
                         if (message.isPresent()) {
                                 messageRepository.deleteById(id);
-                                return ResponseEntity.status(200);
+                                return ResponseEntity.status(HttpStatus.OK);
                         } else
-                                return ResponseEntity.status(404);
+                                return ResponseEntity.status(HttpStatus.NOT_FOUND);
                 } catch (Exception e) {
-                        return ResponseEntity.status(500);
+                        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR);
                 }
         }
 }

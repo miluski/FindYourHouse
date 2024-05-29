@@ -6,21 +6,21 @@ import { EditingAccountFormView } from "./EditingAccountFormView";
 import { SettingsView } from "./SettingsView";
 
 export const ProfileSettings = () => {
-  return (
-    <>
-    <Container>
-      <HeaderView />
-      <SettingsView />
-      <Row>
-        <Col>
-          <AccountOptionsView />
-        </Col>
-        <Col>
-          <EditingAccountFormView />
-        </Col>
-      </Row>
-    </Container>
-    <FooterView />
-    </>
-  );
+	return (
+		<>
+			<Container>
+				<HeaderView />
+				<SettingsView />
+				<Row>
+					<Col>
+						<AccountOptionsView />
+					</Col>
+					<Col>
+						<EditingAccountFormView />
+					</Col>
+				</Row>
+			</Container>
+			<FooterView fixedBottom />
+		</>
+	);
 };
