@@ -13,6 +13,7 @@ import ApprovedPaymentView from "./views/AddOfferView/ApprovedPaymentView.tsx";
 import CancelledPaymentView from "./views/AddOfferView/CancelledPaymentView.tsx";
 import NotFoundView from "./views/ErrorViews/NotFoundView.tsx";
 import { UserPanel } from "./views/UserPanelView/UserPanelView.tsx";
+import FlatListView from "./views/FlatListView/FlatListView.tsx";
 
 export default function App() {
 	const appReducer = combineReducers({
@@ -41,6 +42,7 @@ export default function App() {
 						element={<CancelledPaymentView />}
 					/>
 					<Route path='*' element={<NotFoundView />} />
+					<Route path='/flats' element={<FlatListView />} />
 				</Routes>
 			</Router>
 		</Provider>
