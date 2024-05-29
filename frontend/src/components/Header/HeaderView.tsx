@@ -4,22 +4,27 @@ import Navbar from "react-bootstrap/Navbar";
 import houseLogo from "../../assets/FindMyHouse_Logo.svg";
 import DesktopNavbar from "./DesktopNavbar";
 import MobileNavbar from "./MobileNavbar";
-import LoginRegisterModal from "./LoginRegisterModal";
+
+import AuthenticationView from "../../views/AuthenticationView/AuthenticationView.tsx";
+import { useNavigate } from "react-router-dom";
 
 export default function HeaderView() {
-	const [showOffcanvas, setShowOffcanvas] = useState(false);
-	const [showModal, setShowModal] = useState(false);
+  const [showOffcanvas, setShowOffcanvas] = useState(false);
+  const [showModal, setShowModal] = useState(false);
 
-	const handleCloseOffcanvas = () => setShowOffcanvas(false);
-	const handleShowOffcanvas = () => setShowOffcanvas(true);
-	const handleCloseModal = () => setShowModal(false);
-	const handleShowModal = () => setShowModal(true);
+  const handleCloseOffcanvas = () => setShowOffcanvas(false);
+  const handleShowOffcanvas = () => setShowOffcanvas(true);
+  const handleCloseModal = () => setShowModal(false);
+  const handleShowModal = () => setShowModal(true);
+	const navigate = useNavigate();
 
 	return (
 		<header>
 			<Navbar expand='xl' className='py-2 px-2'>
 				<Container fluid={"xl"} className='d-xl-flex align-items-center py-2 '>
-					<Navbar.Brand href='/' className='fs-2 p-0 m-0 w-25'>
+					<Navbar.Brand
+						className='fs-2 p-0 m-0 w-25 cursor-pointer'
+						onClick={() => navigate("/")}>
 						<img width='153' src={houseLogo} alt='' />
 					</Navbar.Brand>
 					<Navbar.Toggle
@@ -34,8 +39,9 @@ export default function HeaderView() {
 					/>
 					<DesktopNavbar handleShowModal={handleShowModal} />
 				</Container>
-				<LoginRegisterModal show={showModal} handleClose={handleCloseModal} />
+				<AuthenticationView show={showModal} handleClose={handleCloseModal} />
 			</Navbar>
 		</header>
 	);
 }
+

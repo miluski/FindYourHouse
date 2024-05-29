@@ -1,11 +1,8 @@
-import { Dispatch } from "react";
-import { UnknownAction } from "redux";
 import { handleGoogleLoginResponse } from "./handleGoogleLoginResponse";
 import { handleGoogleRegisterResponse } from "./handleGoogleRegisterResponse";
 
 export async function authGoogleUser(
-	accessToken: string,
-	dispatch: Dispatch<UnknownAction>
+	accessToken: string
 ): Promise<void> {
 	const operation = localStorage.getItem("operation");
 	const endpoint =
@@ -21,6 +18,6 @@ export async function authGoogleUser(
 	});
 	const data = await response.json();
 	operation === "login"
-		? handleGoogleLoginResponse(data.token, dispatch)
+		? handleGoogleLoginResponse(data)
 		: handleGoogleRegisterResponse(data);
 }

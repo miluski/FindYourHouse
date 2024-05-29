@@ -1,14 +1,11 @@
-import { Dispatch } from "react";
-import { UnknownAction } from "redux";
-import { CHANGE_TOKEN } from "../../utils/ActionTypes";
-
-
-export function handleGoogleLoginResponse(
-	token: string,
-	dispatch: Dispatch<UnknownAction>
-): void {
-	token !== null
-		? (dispatch({ type: CHANGE_TOKEN, newToken: token }),
-		  alert("Pomyślnie zalogowano!"))
+export function handleGoogleLoginResponse(data: any): void {
+	data.accessToken !== null && data.refreshToken !== null
+		? (alert("Zalogowano pomyślnie!"),
+		  localStorage.setItem("token", data.accessToken.token as string),
+		  localStorage.setItem(
+				"refreshToken",
+				data.refreshToken.token as string
+		  ),
+		  (window.location.href = "/"))
 		: alert("Błąd logowania!");
 }

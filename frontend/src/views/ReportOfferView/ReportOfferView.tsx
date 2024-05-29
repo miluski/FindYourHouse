@@ -2,10 +2,15 @@ import React, { useState } from "react";
 import "./styles/ReportOfferViewStyles.css";
 import HeaderView from "../../components/Header/HeaderView";
 import FooterView from "../../components/Footer/FooterView";
-import "bootstrap/dist/css/bootstrap.css";
-import { Button, Col, Container } from "react-bootstrap";
+import { useSelector } from "react-redux";
+import AccessBlockedView from "../ErrorViews/AccessBlockedView";
+import { OperationState } from "../../utils/types/State";
 
 function ReportOfferView() {
+	let { token } = useSelector(
+		(state: OperationState) => state.operationReducer
+	);
+	token = token ? token : localStorage.getItem("token");
 	const [email, setEmail] = useState("");
 	const [reason, setReason] = useState("");
 	const [emailError, setEmailError] = useState("");
@@ -89,45 +94,49 @@ function ReportOfferView() {
 	return (
 		<>
 			<HeaderView />
-			<div className='mainReportView m-5'>
-				<div>
-					<h5>Znalazłeś fałszywą ofertę?</h5>
-				</div>
-				<div>
-					Zgłoś ją tutaj. Wprowadź poniżej swój adres email, oraz podaj powód
-					naruszenia zasad.
-				</div>
-				<div className='emailInputDiv'>
-					<div>Email:</div>
+			{token !== null && token !== "" && token !== undefined ? (
+				<div className='mainReportView'>
 					<div>
-						<input
-							className='emailBox'
-							type='text'
-							placeholder={"example@gmail.com"}
-							value={email}
-							onChange={handleEmailChange}
-						/>
-						{emailError && <div className='errorMessage'>{emailError}</div>}
+						<h5>Znalazłeś fałszywą ofertę?</h5>
+					</div>
+					<div>
+						Zgłoś ją tutaj. Wprowadź poniżej swój adres email, oraz podaj powód
+						naruszenia zasad.
+					</div>
+					<div className='emailInputDiv'>
+						<div>Email:</div>
+						<div>
+							<input
+								className='emailBox'
+								type='text'
+								placeholder={"example@gmail.com"}
+								value={email}
+								onChange={handleEmailChange}
+							/>
+							{emailError && <div className='errorMessage'>{emailError}</div>}
+						</div>
+					</div>
+					<div className='reasonInputDiv'>
+						<div>Powód zgłoszenia</div>
+						<div>
+							<textarea
+								className='reasonBox'
+								placeholder={"Opisz swój powód tutaj"}
+								value={reason}
+								onChange={handleReasonChange}></textarea>
+							{reasonError && <div className='errorMessage'>{reasonError}</div>}
+						</div>
+					</div>
+					<div>
+						<button className='reportButton' onClick={handleSubmit}>
+							Zgłoś
+						</button>
 					</div>
 				</div>
-				<Container className='d-flex flex-column justify-content-center align-items-center'>
-					<text>Powód zgłoszenia:</text>
-					<Col>
-						<textarea
-							className='p-md-5 p-xs-3'
-							placeholder={"Opisz swój powód tutaj"}
-							value={reason}
-							onChange={handleReasonChange}></textarea>
-						{reasonError && <div className='errorMessage'>{reasonError}</div>}
-					</Col>
-					<Button
-						variant='danger'
-						className='px-5 m-2 py-1 rounded border border-black shadow-md'
-						onClick={handleSubmit}>
-						Zgłoś
-					</Button>
-				</Container>
-			</div>
+			) : (
+				<AccessBlockedView />
+			)}
+
 			<FooterView />
 		</>
 	);

@@ -5,12 +5,19 @@ import { combineReducers, legacy_createStore } from "redux";
 import { operationReducer } from "./utils/reducers/operationReducer.ts";
 import { Provider } from "react-redux";
 import ReportOfferView from "./views/ReportOfferView/ReportOfferView.tsx";
-import AdminView from "./views/AdminView/AdminView.tsx";
+import { AddOfferView } from "./views/AddOfferView/AddOfferView.tsx";
 import { userReducer } from "./utils/reducers/userReducer.ts";
 import { calculatorReducer } from "./utils/reducers/calculatorReducer.ts";
 import { adminReducer } from "./utils/reducers/adminReducer.ts";
+import ApprovedPaymentView from "./views/AddOfferView/ApprovedPaymentView.tsx";
+import CancelledPaymentView from "./views/AddOfferView/CancelledPaymentView.tsx";
+import NotFoundView from "./views/ErrorViews/NotFoundView.tsx";
+import { ProfileSettings } from "./views/ProfileSettings/ProfileSettings.tsx";
+import { UserPanel } from "./views/UserPanelView/UserPanelView.tsx";
+import FlatListView from "./views/FlatListView/FlatListView.tsx";
+import AdminView from "./views/AdminView/AdminView.tsx";
 
-function App() {
+export default function App() {
 	const appReducer = combineReducers({
 		operationReducer,
 		userReducer,
@@ -24,12 +31,24 @@ function App() {
 				<Routes>
 					<Route errorElement='' path='/' element={<HomeView />} />
 					<Route path='/calculator' element={<MortrageCalculatorView />} />
+          			<Route path='/report' element={<ReportOfferView />} />
+		      		<Route path='/add-offer' element={<AddOfferView/>} />
 					<Route path='/report' element={<ReportOfferView />} />
 					<Route path='/admin' element={<AdminView />} />
+					<Route path='/settings' element ={<ProfileSettings/>} />
+					<Route path="/user-panel" element={<UserPanel/>} />
+					<Route
+						path='/add-offer/approvedPayment'
+						element={<ApprovedPaymentView />}
+					/>
+					<Route
+						path='/add-offer/cancelledPayment'
+						element={<CancelledPaymentView />}
+					/>
+					<Route path='*' element={<NotFoundView />} />
+					<Route path='/flats' element={<FlatListView />} />
 				</Routes>
 			</Router>
 		</Provider>
 	);
 }
-
-export default App;

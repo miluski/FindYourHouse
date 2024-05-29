@@ -1,0 +1,16 @@
+
+.tabContainer{
+    max-width: 500px;
+    min-width: 280px;
+
+}
+
+.modal-content{
+    min-width: 280px;
+}
+
+.disable-scrollabr {
+    ::-webkit-scrollbar {
+        display: none;
+    }
+}

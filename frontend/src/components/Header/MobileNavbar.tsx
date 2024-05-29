@@ -8,8 +8,10 @@ import AccordionLink from "./AccordionLink.tsx";
 import HelpAndContactList from "./HelpAndContactList.tsx";
 import AccordionPopularCities from "./AccordionPopularCities.tsx";
 import AccordionPropertyType from "./AccordionPropertyType.tsx";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { OperationState } from "../../utils/types/State";
+import { CHANGE_TOKEN } from "../../utils/ActionTypes.ts";
+import { useNavigate } from "react-router-dom";
 
 interface MobileNavbarProps {
 	showOffcanvas: boolean;
@@ -22,9 +24,15 @@ function MobileNavbar({
 	handleCloseOffcanvas,
 	handleShowModal,
 }: MobileNavbarProps) {
-	const stateToken = useSelector((state: OperationState) => state.operationReducer.token);
-	const token = stateToken !== "" ? stateToken : localStorage.getItem("token");
+	const dispatch = useDispatch();
+	const navigate = useNavigate();
+	let { token } = useSelector(
+		(state: OperationState) => state.operationReducer
+	);
+	token = token ? token : localStorage.getItem("token");
+	const refreshToken = localStorage.getItem("refreshToken");
 	console.log("JWT token ", token);
+	console.log("Refresh JWT token ", refreshToken);
 	return (
 		<Navbar.Offcanvas
 			show={showOffcanvas}
@@ -83,7 +91,8 @@ function MobileNavbar({
 									? (window.location.href = "/calculator")
 									: handleShowModal();
 							}}>
-							<i className='bi bi-person fs-2 me-2'></i>Moje konto
+							<i className='bi bi-person fs-2 me-2' />
+							Moje konto
 						</button>
 					</h2>
 				</div>
@@ -103,6 +112,21 @@ function MobileNavbar({
 					className='mt-5 align-self-center fw-bold px-3 py-2 w-100 border-2'>
 					Dodaj Ogłoszenie
 				</Button>
+				{token !== null && token !== "" && token !== undefined ? (
+					<Button
+						variant='outline-dark'
+						className='align-self-center fw-bold px-3 py-2 border-2'
+						onClick={() => {
+							dispatch({ type: CHANGE_TOKEN, newToken: "" });
+							localStorage.removeItem("token");
+							localStorage.removeItem("refreshToken");
+							navigate("/");
+						}}>
+						Wyloguj się
+					</Button>
+				) : (
+					<></>
+				)}
 			</Offcanvas.Body>
 		</Navbar.Offcanvas>
 	);

@@ -1,0 +1,35 @@
+.formInput{
+  border: 1px solid  var(--bs-secondary-border-subtle)  ;
+}
+
+.formInput:focus {
+  box-shadow: 0 0 0 0.25rem var(--bs-warning-border-subtle);
+}
+
+.formInput:hover{
+  border-color: var(--bs-warning)
+}
+
+.noIcon {
+  background-image: none !important;
+}
+
+.errorMessage {
+  color: var(--bs-danger);
+  white-space: pre-wrap;
+}
+
+:global(.form-control.is-invalid) {
+  border-color: var(--bs-form-invalid-border-color) !important;
+}
+
+:global(.form-control.is-valid) {
+  border-color: var(--bs-form-valid-border-color) !important;
+}
+
+.formInput::-webkit-outer-spin-button,
+.formInput::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+

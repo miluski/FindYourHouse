@@ -7,10 +7,15 @@ import {
 	Linkedin,
 	TelephoneFill,
 } from "react-bootstrap-icons";
+import { startCheckout } from "../../views/AddOfferView/startCheckout";
+import { sendRefreshTokensRequest } from "../../utils/sendRefreshTokensRequest";
 
-export default function FooterView() {
+export default function FooterView({ fixedBottom }: { fixedBottom?: boolean }) {
 	return (
-		<footer className='footer bg-gray fixed-bottom p-2'>
+		<footer
+			className={
+				"footer bg-dark-subtle p-2" + (fixedBottom ? " fixed-bottom" : "")
+			}>
 			<Container fluid className='d-flex flex-row'>
 				<Container className='d-flex flex-column justify-content-center align-content-center w-sm-60 w-md-65 flex-xs-wrap'>
 					<Col>
@@ -21,8 +26,40 @@ export default function FooterView() {
 						<Instagram
 							className='cursor-pointer mx-2'
 							size={32}
-							onClick={() => {
-								window.location.href = "https://instagram.com";
+							onClick={async () => {
+								const isStarted = await startCheckout({
+									offerType: "",
+									propertyType: "",
+									title: "",
+									price: 0,
+									rent: 0,
+									caution: 0,
+									area: 0,
+									roomCount: 0,
+									photos: [""],
+									city: "",
+									houseNumber: 0,
+									street: "",
+									apartmentNumber: 0,
+								});
+								isStarted === 403
+									? (await sendRefreshTokensRequest(),
+									  await startCheckout({
+											offerType: "",
+											propertyType: "",
+											title: "",
+											price: 0,
+											rent: 0,
+											caution: 0,
+											area: 0,
+											roomCount: 0,
+											photos: [""],
+											city: "",
+											houseNumber: 0,
+											street: "",
+											apartmentNumber: 0,
+									  }))
+									: null;
 							}}
 						/>
 						<Facebook

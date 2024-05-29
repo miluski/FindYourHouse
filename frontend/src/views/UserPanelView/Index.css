@@ -1,0 +1,13 @@
+.cursor-pointer {
+	cursor: pointer;
+}
+.button:hover {
+	background-color: yellow;
+	opacity: 0.9;
+	}
+.icons-position {
+ display: flex;
+ flex-direction: column;
+ width: 12vw;
+ align-items: center;
+}
