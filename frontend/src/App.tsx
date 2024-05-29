@@ -12,6 +12,7 @@ import { adminReducer } from "./utils/reducers/adminReducer.ts";
 import ApprovedPaymentView from "./views/AddOfferView/ApprovedPaymentView.tsx";
 import CancelledPaymentView from "./views/AddOfferView/CancelledPaymentView.tsx";
 import NotFoundView from "./views/ErrorViews/NotFoundView.tsx";
+import { UserPanel } from "./views/UserPanelView/UserPanelView.tsx";
 import FlatListView from "./views/FlatListView/FlatListView.tsx";
 
 export default function App() {
@@ -31,6 +32,7 @@ export default function App() {
           			<Route path='/report' element={<ReportOfferView />} />
 		      		<Route path='/add-offer' element={<AddOfferView/>} />
 					<Route path='/report' element={<ReportOfferView />} />
+					<Route path="/user-panel" element={<UserPanel/>} />
 					<Route
 						path='/add-offer/approvedPayment'
 						element={<ApprovedPaymentView />}
