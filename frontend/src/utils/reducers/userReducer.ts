@@ -1,4 +1,4 @@
-import { Action } from "../types/Action";
+import { UserAction } from "../types/Action";
 import {
 	CHANGE_NAME,
 	CHANGE_SURNAME,
@@ -18,7 +18,7 @@ const initialState = {
 	isDataValid: false,
 };
 
-export function userReducer(state = initialState, action: Action) {
+export function userReducer(state = initialState, action: UserAction) {
 	switch (action.type) {
 		case CHANGE_NAME:
 			return {

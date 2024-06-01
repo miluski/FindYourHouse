@@ -1,19 +1,23 @@
-import { Form } from 'react-bootstrap';
-
+import { Form } from "react-bootstrap";
+import { useDispatch } from "react-redux";
+import { CHANGE_ROOM_COUNT } from "../../utils/ActionTypes";
 
 export const ChooseRoomQuantity = () => {
-  return (
-      <Form className='w-27 mb-2'>
-      <Form.Select >
-        <option value="one"> 1</option>
-        <option value="two">2</option>
-        <option value="three">3</option>
-        <option value="four">4</option>
-        <option value="five">5</option>
-        <option value="six">6</option>
-        <option value="more">more</option>
-      </Form.Select>
-      </Form>
-  );
+	const dispatch = useDispatch();
+	return (
+		<Form className='mb-2 mx-4 w-83 shadow'>
+			<Form.Select
+				className='border-black align-content-center'
+				onChange={(event) =>
+					dispatch({ type: CHANGE_ROOM_COUNT, newRoomCount: Number(event.target.value) })
+				}>
+				<option value='1'>1</option>
+				<option value='2'>2</option>
+				<option value='3'>3</option>
+				<option value='4'>4</option>
+				<option value='5'>5</option>
+				<option value='6'>6</option>
+			</Form.Select>
+		</Form>
+	);
 };
-

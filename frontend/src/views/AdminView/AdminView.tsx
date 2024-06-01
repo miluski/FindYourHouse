@@ -7,7 +7,7 @@ export default function AdminView() {
     <>
       <StripeView />
       <ContentView />
-      <FooterView />
+      <FooterView fixedBottom/>
     </>
   );
 }

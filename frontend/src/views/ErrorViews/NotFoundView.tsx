@@ -10,8 +10,8 @@ export default function NotFoundView() {
 				<Col
 					fluid
 					className='d-flex flex-column align-items-center justify-content-center vh-75'>
-					<h1>Error 404</h1>
-					<p>Page not found!</p>
+					<h1>404</h1>
+					<p>Strony nie znaleziono</p>
 				</Col>
 			</Container>
 			<FooterView fixedBottom />

@@ -4,32 +4,21 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { finalizePayment } from "./finalizePayment";
 import HeaderView from "../../components/Header/HeaderView";
 import FooterView from "../../components/Footer/FooterView";
-import { Payment } from "./Payment";
 import { registerOfflineTransaction } from "./registerOfflineTransaction";
+import { Payment } from "../../utils/types/Payment";
+import { addOffer } from "./addOffer";
 
 export default function ApprovedPaymentView() {
 	const location = useLocation();
 	const navigate = useNavigate();
-	const offerObject = {
-		offerType: "",
-		propertyType: "",
-		title: "",
-		price: 0,
-		rent: 0,
-		caution: 0,
-		area: 0,
-		roomCount: 0,
-		photos: [],
-		city: "",
-		houseNumber: 0,
-		street: "",
-		apartmentNumber: 0,
-	};
 	const lastOrderIDRef = useRef<string | null>(null);
 	const [paymentStatus, setPaymentStatus] = useState<String | null>(null);
 	useEffect(() => {
 		const params = new URLSearchParams(location.search);
 		const orderID = params.get("token");
+		setTimeout(() => {
+			navigate("/flats");
+		}, 3000);
 		if (orderID && orderID !== lastOrderIDRef.current) {
 			(async () => {
 				lastOrderIDRef.current = orderID;
@@ -42,13 +31,38 @@ export default function ApprovedPaymentView() {
 					paymentObject &&
 					paymentObject.status === "DENIED"
 				) {
+					localStorage.removeItem("offerCredentials");
 					navigate("/cancelled-payment");
 				} else if (
 					!(paymentObject instanceof Number) &&
 					paymentObject &&
 					paymentObject.status === null
 				) {
-					registerOfflineTransaction(paymentObject);
+					const offerObject = JSON.parse(
+						localStorage.getItem("offerCredentials") ?? ""
+					);
+					let name = localStorage.getItem("name");
+					let surname = localStorage.getItem("surname");
+					name !== "null" ? name : "";
+					surname !== "null" ? surname : "";
+					await registerOfflineTransaction({
+						status: "UNCOMPLETED",
+						offerObject: offerObject,
+						category: "Akceptacja Transakcji",
+						client_name: name + " " + surname,
+						date: new Date().toLocaleDateString("en-GB", {
+							day: "2-digit",
+							month: "2-digit",
+							year: "numeric",
+						}),
+						topic: "Akceptacja Transakcji",
+					});
+					localStorage.removeItem("offerCredentials");
+				} else {
+					const offerObject = JSON.parse(
+						localStorage.getItem("offerCredentials") ?? ""
+					);
+					await addOffer(offerObject);
 				}
 			})();
 		}

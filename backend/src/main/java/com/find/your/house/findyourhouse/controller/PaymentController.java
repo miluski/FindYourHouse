@@ -89,7 +89,7 @@ public class PaymentController {
         String endpoint = "https://api-m.sandbox.paypal.com/v2/checkout/orders";
         Map<String, Object> amountMap = new HashMap<>();
         amountMap.put("currency_code", "PLN");
-        amountMap.put("value", "5000.00");
+        amountMap.put("value", "10.00");
         Map<String, Object> purchaseUnitMap = new HashMap<>();
         purchaseUnitMap.put("amount", amountMap);
         List<Map<String, Object>> purchaseUnitsList = new ArrayList<>();

@@ -1,15 +1,23 @@
-import { Form } from 'react-bootstrap';
-
+import React from "react";
+import { Container, Form } from "react-bootstrap";
+import { useDispatch } from "react-redux";
+import { CHANGE_OFFER_TYPE } from "../../utils/ActionTypes";
 
 export const ChooseOfferTypeView = () => {
-  return (
-      <Form className='w-25 mb-5 mt-2'>
-      <Form.Select >
-        <option value="renting"> Wynajem</option>
-        <option value="selling">Sprzedaż</option>
-      </Form.Select>
-      </Form>
-  );
+	const dispatch = useDispatch();
+	return (
+		<Container className='w-25 mb-5 mt-2'>
+			<Form.Select
+				required
+				onChange={(event: React.ChangeEvent<HTMLSelectElement>) => {
+					dispatch({
+						type: CHANGE_OFFER_TYPE,
+						newOfferType: event.target.value,
+					});
+				}}>
+				<option value='Wynajem'>Wynajem</option>
+				<option value='Sprzedaż'>Sprzedaż</option>
+			</Form.Select>
+		</Container>
+	);
 };
-
-

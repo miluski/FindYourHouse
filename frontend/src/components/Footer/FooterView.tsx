@@ -7,7 +7,6 @@ import {
 	Linkedin,
 	TelephoneFill,
 } from "react-bootstrap-icons";
-import { startCheckout } from "../../views/AddOfferView/startCheckout";
 
 export default function FooterView({ fixedBottom }: { fixedBottom?: boolean }) {
 	return (
@@ -25,23 +24,8 @@ export default function FooterView({ fixedBottom }: { fixedBottom?: boolean }) {
 						<Instagram
 							className='cursor-pointer mx-2'
 							size={32}
-							onClick={async () => {
-								// window.location.href = "https://instagram.com";
-								await startCheckout({
-									offerType: "",
-									propertyType: "",
-									title: "",
-									price: 0,
-									rent: 0,
-									caution: 0,
-									area: 0,
-									roomCount: 0,
-									photos: [],
-									city: "",
-									houseNumber: 0,
-									street: "",
-									apartmentNumber: 0
-								});
+							onClick={() => {
+								window.location.href = "https://instagram.com";
 							}}
 						/>
 						<Facebook

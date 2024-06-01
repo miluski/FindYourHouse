@@ -1,11 +1,11 @@
 import { axiosInstance } from "../../../utils/axiosInstance";
-import { Token } from "./Token";
+import { UserData } from "../../../utils/types/UserData";
 
 export async function loginUser(
 	email: string,
 	password: string,
 	setIsUserInvalid: Function
-): Promise<Token | null> {
+): Promise<UserData | null> {
 	try {
 		const response = await axiosInstance.post("/api/users/auth/login", {
 			email: email,
