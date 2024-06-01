@@ -1,4 +1,5 @@
 import { Button, Container } from "react-bootstrap";
+import { Button, Container } from "react-bootstrap";
 import UserIcon from "../../assets/UserIcon.png";
 
 export const AccountOptionsView = () => {

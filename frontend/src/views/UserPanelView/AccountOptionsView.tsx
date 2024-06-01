@@ -1,4 +1,5 @@
 import { Button, Container } from "react-bootstrap";
+import { Button, Container } from "react-bootstrap";
 import UserIcon from "../../assets/UserIcon.png";
 import { useNavigate } from "react-router-dom";
 
@@ -38,3 +39,4 @@ export const AccountOptionsView = () => {
 		</Container>
 	);
 };
+

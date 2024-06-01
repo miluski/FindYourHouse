@@ -5,6 +5,7 @@ import FooterView from "../../components/Footer/FooterView";
 export default function NotFoundView() {
 	return (
 		<>
+		<>
 			<HeaderView />
 			<Container fluid>
 				<Col
