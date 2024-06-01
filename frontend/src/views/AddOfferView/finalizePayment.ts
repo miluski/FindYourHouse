@@ -6,6 +6,4 @@ export async function finalizePayment(
 ): Promise<Payment | number> {
 	const response = await axiosInstance.post("/api/payment/complete", {orderID: orderID});
 	return response.data ? response.data : response.status;
-	const response = await axiosInstance.post("/api/payment/complete", {orderID: orderID});
-	return response.data ? response.data : response.status;
 }

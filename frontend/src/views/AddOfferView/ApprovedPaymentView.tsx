@@ -1,7 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { Container, Col, Image } from "react-bootstrap";
 import { useLocation, useNavigate } from "react-router-dom";
-import { useLocation, useNavigate } from "react-router-dom";
 import { finalizePayment } from "./finalizePayment";
 import HeaderView from "../../components/Header/HeaderView";
 import FooterView from "../../components/Footer/FooterView";
@@ -73,8 +72,6 @@ export default function ApprovedPaymentView() {
 			<HeaderView />
 			<Container className='d-flex flex-column justify-content-center align-items-center mt-5 '>
 				<Col className='text-center '>
-			<Container className='d-flex flex-column justify-content-center align-items-center mt-5 '>
-				<Col className='text-center '>
 					{paymentStatus === "COMPLETED" ? (
 						<>
 							<Image src='../../src/assets/accept.png' />
@@ -82,14 +79,8 @@ export default function ApprovedPaymentView() {
 								<p className='mt-4 '>
 									Transakcja została pomyślnie zrealizowana!
 								</p>
-							<Container className='fs-1 d-flex flex-column justify-content-center align-items-center fw-bold'>
-								<p className='mt-4 '>
-									Transakcja została pomyślnie zrealizowana!
-								</p>
 							</Container>
 						</>
-					) : paymentStatus === null ? (
-						<a className='mt-4 '>
 					) : paymentStatus === null ? (
 						<a className='mt-4 '>
 							Płatność została odrzucona i zarejestrowana jako płatność offline.
@@ -99,7 +90,6 @@ export default function ApprovedPaymentView() {
 					)}
 				</Col>
 			</Container>
-			<FooterView fixedBottom />
 			<FooterView fixedBottom />
 		</>
 	);

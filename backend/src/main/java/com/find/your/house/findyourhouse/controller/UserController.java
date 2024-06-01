@@ -1,7 +1,6 @@
 package com.find.your.house.findyourhouse.controller;
 
 import java.io.IOException;
-import java.io.IOException;
 import java.util.*;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -120,7 +119,6 @@ public class UserController {
                 userRepository.save(userToEdit);
                 return ResponseEntity.ok(responseMap);
             } else {
-                return ResponseEntity.status(HttpStatus.FORBIDDEN).body(null);
                 return ResponseEntity.status(HttpStatus.FORBIDDEN).body(null);
             }
         } catch (Exception e) {
