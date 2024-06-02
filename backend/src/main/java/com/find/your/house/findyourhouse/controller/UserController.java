@@ -45,18 +45,30 @@ public class UserController {
     }
 
     @PostMapping("/auth/google/login")
-    public ResponseEntity<Map<String, Token>> proxyLoginGoogleApi(@RequestBody String accessToken) throws IOException {
+    public ResponseEntity<Map<String, Object>> proxyLoginGoogleApi(@RequestBody String accessToken) throws IOException {
         Map<String, Object> body = getUserData(accessToken);
+        Map<String, Object> responseMap = new HashMap<>();
         boolean isAuthenticated = isAuthenticated((String) body.get("email"), "");
         if (isAuthenticated) {
-            Map<String, Token> tokens = this.saveToken(body);
-            return ResponseEntity.ok(tokens);
+            User user = userRepository.findByEmail((String) body.get("email"));
+            responseMap.putAll(this.saveToken(body));
+            responseMap.put("email", user.getEmail());
+            responseMap.put("name", user.getFirstName());
+            responseMap.put("surname", user.getLastName());
+            responseMap.put("phoneNumber", user.getPhoneNumber());
+            responseMap.put("role", user.getRole());
+            return ResponseEntity.ok(responseMap);
         } else {
-            saveUser(body);
+            User user = saveUser(body);
             isAuthenticated = isAuthenticated((String) body.get("email"), "");
-            Map<String, Token> tokens = this.saveToken(body);
-            return isAuthenticated ? ResponseEntity.ok(tokens)
-                    : ResponseEntity.status(HttpStatus.ACCEPTED).body(tokens);
+            responseMap.putAll(this.saveToken(body));
+            responseMap.put("email", user.getEmail());
+            responseMap.put("name", user.getFirstName());
+            responseMap.put("surname", user.getLastName());
+            responseMap.put("phoneNumber", user.getPhoneNumber());
+            responseMap.put("role", user.getRole());
+            return isAuthenticated ? ResponseEntity.ok(responseMap)
+                    : ResponseEntity.status(HttpStatus.ACCEPTED).body(responseMap);
         }
     }
 
@@ -87,26 +99,31 @@ public class UserController {
     }
 
     @PostMapping("/auth/login")
-    public ResponseEntity<Map<String, Token>> loginUser(@RequestBody User user)
+    public ResponseEntity<Map<String, Object>> loginUser(@RequestBody User user)
             throws Exception {
+        Map<String, Object> responseMap = new HashMap<>();
         try {
-            Map<String, Token> tokens = new HashMap<>();
             boolean isAuthenticated = isAuthenticated(user.getEmail(), user.getPassword());
             if (isAuthenticated) {
                 Token refreshToken = tokenController.getRefreshToken(user.getEmail(), user.getPassword());
-                tokens.put("accessToken", tokenController.getToken(user.getEmail(), user.getPassword()));
-                tokens.put("refreshToken", refreshToken);
+                User foundedUser = userRepository.findByEmail(user.getEmail());
+                responseMap.put("accessToken", tokenController.getToken(user.getEmail(), user.getPassword()));
+                responseMap.put("refreshToken", refreshToken);
+                responseMap.put("email", foundedUser.getEmail());
+                responseMap.put("name", foundedUser.getFirstName());
+                responseMap.put("surname", foundedUser.getLastName());
+                responseMap.put("phoneNumber", foundedUser.getPhoneNumber());
+                responseMap.put("role", foundedUser.getRole());
                 User userToEdit = userRepository.findByEmail(user.getEmail());
                 userToEdit.setRefreshToken(refreshToken.getToken());
                 userRepository.save(userToEdit);
-                return ResponseEntity.ok(tokens);
+                return ResponseEntity.ok(responseMap);
             } else {
                 return ResponseEntity.status(HttpStatus.FORBIDDEN).body(null);
             }
         } catch (Exception e) {
-            Map<String, Token> tokens = new HashMap<>();
-            tokens.put(e.getMessage(), null);
-            return ResponseEntity.status(HttpStatus.SERVICE_UNAVAILABLE).body(tokens);
+            responseMap.put(e.getMessage(), null);
+            return ResponseEntity.status(HttpStatus.SERVICE_UNAVAILABLE).body(responseMap);
         }
     }
 

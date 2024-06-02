@@ -1,35 +1,28 @@
+import { NavigateFunction } from "react-router-dom";
 import { axiosInstance } from "../../utils/axiosInstance";
-import { Offer } from "./Offer";
+import { OfferState } from "../../utils/types/State";
 import { getPaymentGateLink } from "./getPaymentGateLink";
-import { registerOfflineTransaction } from "./registerOfflineTransaction";
 
 export async function startCheckout(
-	offerObject: Offer
-): Promise<void | number> {
-	try {
-		const paymentGateLink = await getPaymentGateLink();
-		if (paymentGateLink !== null) {
+	navigate: NavigateFunction,
+	offerObject: OfferState
+): Promise<void> {
+	const paymentGateLink = await getPaymentGateLink();
+	offerObject.pricePerQuadraMeter = Math.round(
+		Number(offerObject.price) / Number(offerObject.area)
+	);
+	localStorage.setItem("offerCredentials", JSON.stringify(offerObject));
+	if (paymentGateLink !== null) {
+		try {
 			const response = await axiosInstance.post(
 				"/api/payment/check-gateway",
 				paymentGateLink,
-				{ headers: { 'Content-Type': 'plain/text' } }
+				{ headers: { "Content-Type": "plain/text" } }
 			);
-			response.status === 200
-				? (window.location.href = paymentGateLink)
-				: await registerOfflineTransaction({
-						status: "UNCOMPLETED",
-						offerObject: offerObject,
-						category: "Akceptacja Transakcji",
-						client_name: localStorage.getItem("email") ?? "",
-						date: new Date().toLocaleDateString("en-GB", {
-							day: "2-digit",
-							month: "2-digit",
-							year: "numeric",
-						}),
-						topic: "Akceptacja Transakcji",
-				  });
+			response.status === 200 ? (window.location.href = paymentGateLink) : null;
+		} catch (error) {
+			localStorage.setItem("operation", "checkoutFailed");
+			navigate("/payment");
 		}
-	} catch (error) {
-		console.log(error);
 	}
 }

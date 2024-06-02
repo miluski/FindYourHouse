@@ -1,5 +1,5 @@
 import { axiosInstance } from "../../utils/axiosInstance";
-import { Payment } from "./Payment";
+import { Payment } from "../../utils/types/Payment";
 
 export async function registerOfflineTransaction(
     payment: Payment

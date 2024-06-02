@@ -1,7 +1,7 @@
 import { axiosInstance } from "../../../utils/axiosInstance";
-import { User } from "../../../utils/types/User";
+import { UserState } from "../../../utils/types/State";
 
-export async function registerUser(userObject: User) {
+export async function registerUser(userObject: UserState) {
 	try {
 		const response = await axiosInstance.post("/api/users/auth/register", userObject);
 		response.status === 200 ? (window.location.href = "/") : alert("Błąd!");

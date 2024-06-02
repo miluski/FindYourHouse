@@ -1,4 +1,4 @@
-import { Action } from "../types/Action";
+import { AdminAction } from "../types/Action";
 import { CHANGE_CURRENT_PAGE, CHANGE_MESSAGES_COUNT, CHANGE_SELECTED_TITLE, CHANGE_START_DATE } from "../ActionTypes";
 
 const initialState = {
@@ -8,7 +8,7 @@ const initialState = {
 	messagesCount: undefined
 };
 
-export function adminReducer(state = initialState, action: Action) {
+export function adminReducer(state = initialState, action: AdminAction) {
 	switch (action.type) {
 		case CHANGE_START_DATE:
 			return {

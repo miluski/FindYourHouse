@@ -1,10 +1,15 @@
-export type OperationState = {
-	operationReducer: Reducer<OperationState, Action>;
-	operation: string;
-};
+import { Reducer } from "redux";
+import {
+	OfferAction,
+	AdminAction,
+	CalculatorAction,
+	UserAction,
+} from "./Action";
+import { offerReducer } from "../reducers/offerReducer";
+import { Photo } from "./Photo";
 
 export type UserState = {
-	userReducer: Reducer<UserState, Action>;
+	userReducer: Reducer<UserState, UserAction>;
 	name: string;
 	surname: string;
 	phoneNumber: string;
@@ -14,7 +19,7 @@ export type UserState = {
 };
 
 export type CalculatorState = {
-	calculatorReducer: Reducer<CalculatorState, Action>;
+	calculatorReducer: Reducer<CalculatorState, CalculatorAction>;
 	propertyPrice: number;
 	ownContribution: number;
 	loanPeriod: number;
@@ -25,9 +30,34 @@ export type CalculatorState = {
 };
 
 export type AdminState = {
-	adminReducer: Reducer<AdminState, Action>;
+	adminReducer: Reducer<AdminState, AdminAction>;
 	startDate: Date | undefined;
 	selectedTitle: string;
 	currentPage: number;
 	messagesCount: number;
+};
+
+export type OfferState = {
+	offerReducer?: Reducer<OfferState, OfferAction>;
+	offerType: string;
+	propertyType: string;
+	title: string;
+	price: number;
+	rent: number;
+	caution: number;
+	area: number;
+	roomCount: number;
+	photos: Array<Photo>;
+	city: string;
+	houseNumber: number;
+	street: string;
+	apartmentNumber: number;
+	pricePerQuadraMeter: number;
+	description: string;
+	exhibitorName?: string;
+	exhibitorSurname?: string;
+	exhibitorPhoneNumber?: string;
+	exhibitorEmail?: string;
+	isDataValid: boolean;
+	canShow?: boolean;
 };

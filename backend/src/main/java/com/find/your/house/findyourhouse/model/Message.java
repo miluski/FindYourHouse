@@ -12,6 +12,9 @@ public class Message {
     private String clientName;
     private String category;
     private String date;
+    @OneToOne
+    @JoinColumn(name = "offer_id")
+    private Offer offer;
 
     public String getTopic() {
         return topic;
@@ -43,5 +46,13 @@ public class Message {
 
     public void setDate(String date) {
         this.date = date;
+    }
+
+    public void setOffer(Offer offer) {
+        this.offer = offer;
+    }
+
+    public Offer getOffer() {
+        return this.offer;
     }
 }

@@ -2,14 +2,13 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import HomeView from "./views/HomeView/HomeView.tsx";
 import { MortrageCalculatorView } from "./views/MortrageCalculatorView/MortrageCalculatorView.tsx";
 import { combineReducers, legacy_createStore } from "redux";
-import { operationReducer } from "./utils/reducers/operationReducer.ts";
 import { Provider } from "react-redux";
 import ReportOfferView from "./views/ReportOfferView/ReportOfferView.tsx";
 import { AddOfferView } from "./views/AddOfferView/AddOfferView.tsx";
 import { userReducer } from "./utils/reducers/userReducer.ts";
 import { calculatorReducer } from "./utils/reducers/calculatorReducer.ts";
 import { adminReducer } from "./utils/reducers/adminReducer.ts";
-import ApprovedPaymentView from "./views/AddOfferView/ApprovedPaymentView.tsx";
+import PaymentView from "./views/AddOfferView/PaymentView.tsx";
 import CancelledPaymentView from "./views/AddOfferView/CancelledPaymentView.tsx";
 import NotFoundView from "./views/ErrorViews/NotFoundView.tsx";
 import { ProfileSettings } from "./views/ProfileSettings/ProfileSettings.tsx";
@@ -17,11 +16,17 @@ import { UserPanel } from "./views/UserPanelView/UserPanelView.tsx";
 import FlatListView from "./views/FlatListView/FlatListView.tsx";
 import AdminView from "./views/AdminView/AdminView.tsx";
 import GuardView from "./views/ErrorViews/GuardView.tsx";
+import NotAuthorizedView from "./views/ErrorViews/NotAuthorizedView.tsx";
+import { offerReducer } from "./utils/reducers/offerReducer.ts";
 
 const browserRouter = createBrowserRouter([
 	{
 		path: "*",
 		element: <NotFoundView />,
+	},
+	{
+		path: "/unathorized",
+		element: <NotAuthorizedView />,
 	},
 	{
 		path: "/",
@@ -74,10 +79,10 @@ const browserRouter = createBrowserRouter([
 		),
 	},
 	{
-		path: "approved-payment",
+		path: "payment",
 		element: (
 			<GuardView>
-				<ApprovedPaymentView />
+				<PaymentView />
 			</GuardView>
 		),
 	},
@@ -109,7 +114,7 @@ const browserRouter = createBrowserRouter([
 
 export default function App() {
 	const appReducer = combineReducers({
-		operationReducer,
+		offerReducer,
 		userReducer,
 		calculatorReducer,
 		adminReducer,

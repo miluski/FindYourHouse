@@ -1,35 +1,26 @@
 import { useEffect, useRef, useState } from "react";
-import { Container, Col, Image } from "react-bootstrap";
+import { Container, Col, Image, Spinner } from "react-bootstrap";
 import { useLocation, useNavigate } from "react-router-dom";
 import { finalizePayment } from "./finalizePayment";
 import HeaderView from "../../components/Header/HeaderView";
 import FooterView from "../../components/Footer/FooterView";
-import { Payment } from "./Payment";
-import { registerOfflineTransaction } from "./registerOfflineTransaction";
+import { Payment } from "../../utils/types/Payment";
+import { addOffer } from "./addOffer";
+import { handleRegisterOfflineTransaction } from "./handleRegisterOfflineTransaction";
 
-export default function ApprovedPaymentView() {
+export default function PaymentView() {
 	const location = useLocation();
 	const navigate = useNavigate();
-	const offerObject = {
-		offerType: "",
-		propertyType: "",
-		title: "",
-		price: 0,
-		rent: 0,
-		caution: 0,
-		area: 0,
-		roomCount: 0,
-		photos: [],
-		city: "",
-		houseNumber: 0,
-		street: "",
-		apartmentNumber: 0,
-	};
 	const lastOrderIDRef = useRef<string | null>(null);
 	const [paymentStatus, setPaymentStatus] = useState<String | null>(null);
+	const [isEnded, setIsEnded] = useState(false);
 	useEffect(() => {
 		const params = new URLSearchParams(location.search);
 		const orderID = params.get("token");
+		const operation = localStorage.getItem("operation");
+		setTimeout(() => {
+			navigate("/flats");
+		}, 10000);
 		if (orderID && orderID !== lastOrderIDRef.current) {
 			(async () => {
 				lastOrderIDRef.current = orderID;
@@ -42,15 +33,25 @@ export default function ApprovedPaymentView() {
 					paymentObject &&
 					paymentObject.status === "DENIED"
 				) {
+					localStorage.removeItem("offerCredentials");
 					navigate("/cancelled-payment");
 				} else if (
 					!(paymentObject instanceof Number) &&
 					paymentObject &&
 					paymentObject.status === null
 				) {
-					registerOfflineTransaction(paymentObject);
+					await handleRegisterOfflineTransaction();
+				} else {
+					const offerObject = JSON.parse(
+						localStorage.getItem("offerCredentials") ?? ""
+					);
+					await addOffer(offerObject);
 				}
+				setIsEnded(true);
 			})();
+		} else if (operation === "checkoutFailed") {
+			setIsEnded(true);
+			(async () => await handleRegisterOfflineTransaction())();
 		}
 	}, [location]);
 	return (
@@ -67,12 +68,26 @@ export default function ApprovedPaymentView() {
 								</p>
 							</Container>
 						</>
-					) : paymentStatus === null ? (
-						<a className='mt-4 '>
-							Płatność została odrzucona i zarejestrowana jako płatność offline.
-						</a>
+					) : isEnded ? (
+						paymentStatus === null ? (
+							<Container className='d-flex flex-column justify-content-center align-items-center mt-5 '>
+								<Col className='text-center '>
+									<Image src='../../src/assets/delete.png' />
+								</Col>
+								<Container className='fs-1 d-flex flex-column justify-content-center align-items-center fw-bold'>
+									<p className='mt-4 '>
+										Płatność została odrzucona i zarejestrowana jako płatność
+										offline.
+									</p>
+								</Container>
+							</Container>
+						) : (
+							<></>
+						)
 					) : (
-						<></>
+						<div className='position-absolute top-0 start-0 end-0 bottom-0 d-flex justify-content-center align-items-center bg-light opacity-75'>
+							<Spinner animation='border' role='status' variant='primary' />
+						</div>
 					)}
 				</Col>
 			</Container>

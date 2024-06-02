@@ -1,6 +1,6 @@
 import "./styles/Picker.css";
 import { useDispatch } from "react-redux";
-import { PickerProps } from "./PickerProps";
+import { PickerProps } from "../../utils/types/PickerProps";
 import { Col, Container, Form, Row } from "react-bootstrap";
 import { CHANGE_CALCULATED_CREDENTIALS } from "../../utils/ActionTypes";
 

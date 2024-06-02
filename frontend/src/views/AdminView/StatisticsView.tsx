@@ -1,5 +1,5 @@
 import { Col, Container } from "react-bootstrap";
-import { Tile } from "./Tile";
+import { Tile } from "../../utils/types/Tile";
 import { useDispatch, useSelector } from "react-redux";
 import { AdminState } from "../../utils/types/State";
 import { CHANGE_SELECTED_TITLE } from "../../utils/ActionTypes";
