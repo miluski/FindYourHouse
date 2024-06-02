@@ -3,9 +3,9 @@ import { Offer } from "./Offer";
 export type Payment = {
 	id?: string;
 	category: string;
-	client_name: string;
+	clientName: string;
 	date: string;
 	topic: string;
-	offerObject: Offer;
+	offer: Offer;
 	status?: string;
 };

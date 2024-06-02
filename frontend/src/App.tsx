@@ -8,7 +8,7 @@ import { AddOfferView } from "./views/AddOfferView/AddOfferView.tsx";
 import { userReducer } from "./utils/reducers/userReducer.ts";
 import { calculatorReducer } from "./utils/reducers/calculatorReducer.ts";
 import { adminReducer } from "./utils/reducers/adminReducer.ts";
-import ApprovedPaymentView from "./views/AddOfferView/ApprovedPaymentView.tsx";
+import PaymentView from "./views/AddOfferView/PaymentView.tsx";
 import CancelledPaymentView from "./views/AddOfferView/CancelledPaymentView.tsx";
 import NotFoundView from "./views/ErrorViews/NotFoundView.tsx";
 import { ProfileSettings } from "./views/ProfileSettings/ProfileSettings.tsx";
@@ -79,10 +79,10 @@ const browserRouter = createBrowserRouter([
 		),
 	},
 	{
-		path: "approved-payment",
+		path: "payment",
 		element: (
 			<GuardView>
-				<ApprovedPaymentView />
+				<PaymentView />
 			</GuardView>
 		),
 	},

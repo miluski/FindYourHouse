@@ -60,7 +60,7 @@ public class PaymentController {
             return response.getStatusCode() == HttpStatus.OK ? ResponseEntity.ok("PayPal gateway is available")
                     : ResponseEntity.status(HttpStatus.SERVICE_UNAVAILABLE).body("PayPal gateway is not available");
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error occurred: " + e.getMessage() + " " + url);
+            return ResponseEntity.status(HttpStatus.SERVICE_UNAVAILABLE).body("Error occurred: " + e.getMessage() + " " + url);
         }
     }
 
@@ -96,7 +96,7 @@ public class PaymentController {
         purchaseUnitsList.add(purchaseUnitMap);
         Map<String, Object> payload = new HashMap<>();
         Map<String, Object> applicationContextMap = new HashMap<>();
-        applicationContextMap.put("return_url", "http://localhost:5173/approved-payment");
+        applicationContextMap.put("return_url", "http://localhost:5173/payment");
         applicationContextMap.put("cancel_url", "http://localhost:5173/cancelled-payment");
         payload.put("application_context", applicationContextMap);
         payload.put("intent", "CAPTURE");

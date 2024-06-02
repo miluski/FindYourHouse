@@ -31,6 +31,7 @@ public class Offer {
     private String exhibitorSurname;
     private String exhibitorPhoneNumber;
     private String exhibitorEmail;
+    private Boolean canShow;
 
     public Long getId() {
         return id;
@@ -190,5 +191,13 @@ public class Offer {
 
     public void setExhibitorEmail(String exhibitorEmail) {
         this.exhibitorEmail = exhibitorEmail;
+    }
+
+    public Boolean getCanShow() {
+        return this.canShow;
+    }
+
+    public void setCanShow(Boolean canShow) {
+        this.canShow = canShow;
     }
 }

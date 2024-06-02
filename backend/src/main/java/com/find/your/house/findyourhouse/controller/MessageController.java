@@ -18,9 +18,15 @@ public class MessageController {
         @Autowired
         private MessageRepository messageRepository;
 
+        @Autowired
+        private OfferRepository offerRepository;
+
         @PostMapping("/admin/create")
         public ResponseEntity<String> createMessage(@RequestBody Message message) {
                 try {
+                        if (message.getOffer() != null && message.getOffer().getId() == null) {
+                                offerRepository.save(message.getOffer());
+                        }
                         messageRepository.save(message);
                         return ResponseEntity.ok().body(null);
                 } catch (Exception e) {

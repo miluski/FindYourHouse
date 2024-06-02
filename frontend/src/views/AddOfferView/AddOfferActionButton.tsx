@@ -3,11 +3,13 @@ import { useSelector } from "react-redux";
 import { OfferState } from "../../utils/types/State";
 import { getIsDataValid } from "./getIsDataValid";
 import { startCheckout } from "./startCheckout";
+import { useNavigate } from "react-router-dom";
 export const AddOfferActionButton = (props: {
 	actualSiteNumber?: number;
 	setActualSiteNumber?: Function;
 	setIsLoading?: Function;
 }) => {
+	const navigate = useNavigate();
 	const offer = useSelector(
 		(state: OfferState) => state.offerReducer as unknown as OfferState
 	);
@@ -24,7 +26,7 @@ export const AddOfferActionButton = (props: {
 					} else {
 						const isDataValid = getIsDataValid(offer);
 						isDataValid
-							? await startCheckout(offer)
+							? await startCheckout(navigate, offer)
 							: alert(
 									"Uzupełnij poprawnie dane ogłoszenia lub dodaj chociaż jedno zdjęcie!"
 							  );

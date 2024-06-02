@@ -59,4 +59,5 @@ export type OfferState = {
 	exhibitorPhoneNumber?: string;
 	exhibitorEmail?: string;
 	isDataValid: boolean;
+	canShow?: boolean;
 };
