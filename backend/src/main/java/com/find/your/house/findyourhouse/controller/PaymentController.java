@@ -29,19 +29,39 @@ public class PaymentController {
         Boolean isTokenGenerated = generateToken();
         return isTokenGenerated ? ResponseEntity.ok("{ \"checkoutUrl\":" + "\"" + startPayment() + "\"" + "}")
                 : ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                        .body("{ \"checkoutUrl\":" + "\"" + "error" + "\"" + "}");
+                        .body(Boolean.toString(isTokenGenerated));
     }
 
     @PostMapping("/complete")
     public ResponseEntity<String> completePayment(@RequestBody Payment payment) {
-        String endpoint = "https://api-m.sandbox.paypal.com/v2/checkout/orders/" + payment.getOrderID() + "/capture";
-        HttpHeaders httpHeaders = new HttpHeaders();
-        RestTemplate restTemplate = new RestTemplate();
-        httpHeaders.add("Content-Type", "application/json");
-        httpHeaders.add("Authorization", "Bearer " + accessToken);
-        HttpEntity<String> entity = new HttpEntity<>(httpHeaders);
-        String response = restTemplate.exchange(endpoint, HttpMethod.POST, entity, String.class).getBody();
-        return ResponseEntity.ok(response);
+        try {
+            String endpoint = "https://api-m.sandbox.paypal.com/v2/checkout/orders/" + payment.getOrderID()
+                    + "/capture";
+            HttpHeaders httpHeaders = new HttpHeaders();
+            RestTemplate restTemplate = new RestTemplate();
+            httpHeaders.add("Content-Type", "application/json");
+            httpHeaders.add("Authorization", "Bearer " + accessToken);
+            HttpEntity<String> entity = new HttpEntity<>(httpHeaders);
+            ResponseEntity<String> responseEntity = restTemplate.exchange(endpoint, HttpMethod.POST, entity,
+                    String.class);
+            HttpStatusCode statusCode = responseEntity.getStatusCode();
+            return statusCode == HttpStatus.OK || statusCode == HttpStatus.CREATED ? ResponseEntity.ok(responseEntity.getBody())
+                    : ResponseEntity.status(HttpStatus.FORBIDDEN).body(statusCode.toString());
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
+        }
+    }
+
+    @PostMapping("/check-gateway")
+    public ResponseEntity<String> checkGateway(@RequestBody String url) {
+        try {
+            RestTemplate restTemplate = new RestTemplate();
+            ResponseEntity<String> response = restTemplate.getForEntity(url, String.class);
+            return response.getStatusCode() == HttpStatus.OK ? ResponseEntity.ok("PayPal gateway is available")
+                    : ResponseEntity.status(HttpStatus.SERVICE_UNAVAILABLE).body("PayPal gateway is not available");
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.SERVICE_UNAVAILABLE).body("Error occurred: " + e.getMessage() + " " + url);
+        }
     }
 
     private Boolean generateToken() throws JsonMappingException, JsonProcessingException {
@@ -76,8 +96,8 @@ public class PaymentController {
         purchaseUnitsList.add(purchaseUnitMap);
         Map<String, Object> payload = new HashMap<>();
         Map<String, Object> applicationContextMap = new HashMap<>();
-        applicationContextMap.put("return_url", "http://localhost:5173/add-offer/approvedPayment");
-        applicationContextMap.put("cancel_url", "http://localhost:5173/add-offer/cancelledPayment");
+        applicationContextMap.put("return_url", "http://localhost:5173/payment");
+        applicationContextMap.put("cancel_url", "http://localhost:5173/cancelled-payment");
         payload.put("application_context", applicationContextMap);
         payload.put("intent", "CAPTURE");
         payload.put("purchase_units", purchaseUnitsList);

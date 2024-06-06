@@ -8,9 +8,6 @@ import AccordionLink from "./AccordionLink.tsx";
 import HelpAndContactList from "./HelpAndContactList.tsx";
 import AccordionPopularCities from "./AccordionPopularCities.tsx";
 import AccordionPropertyType from "./AccordionPropertyType.tsx";
-import { useDispatch, useSelector } from "react-redux";
-import { OperationState } from "../../utils/types/State";
-import { CHANGE_TOKEN } from "../../utils/ActionTypes.ts";
 import { useNavigate } from "react-router-dom";
 
 interface MobileNavbarProps {
@@ -24,13 +21,8 @@ function MobileNavbar({
 	handleCloseOffcanvas,
 	handleShowModal,
 }: MobileNavbarProps) {
-	const dispatch = useDispatch();
 	const navigate = useNavigate();
-	let { token } = useSelector(
-		(state: OperationState) => state.operationReducer
-	);
-	token = token ? token : localStorage.getItem("token");
-	console.log("JWT token ", token);
+	const token = localStorage.getItem("token");
 	return (
 		<Navbar.Offcanvas
 			show={showOffcanvas}
@@ -86,7 +78,7 @@ function MobileNavbar({
 							type='button'
 							onClick={() => {
 								token !== "" && token !== null
-									? (window.location.href = "/calculator")
+									? navigate("/user-panel")
 									: handleShowModal();
 							}}>
 							<i className='bi bi-person fs-2 me-2' />
@@ -107,23 +99,10 @@ function MobileNavbar({
 				</Accordion>
 				<Button
 					variant='outline-dark'
-					className='mt-5 align-self-center fw-bold px-3 py-2 w-100 border-2'>
+					className='mt-5 align-self-center fw-bold px-3 py-2 w-100 border-2'
+					onClick={() => navigate("/add-offer")}>
 					Dodaj Ogłoszenie
 				</Button>
-				{token !== null && token !== "" && token !== undefined ? (
-					<Button
-						variant='outline-dark'
-						className='align-self-center fw-bold px-3 py-2 border-2'
-						onClick={() => {
-							dispatch({ type: CHANGE_TOKEN, newToken: "" });
-							localStorage.removeItem("token");
-							navigate("/");
-						}}>
-						Wyloguj się
-					</Button>
-				) : (
-					<></>
-				)}
 			</Offcanvas.Body>
 		</Navbar.Offcanvas>
 	);

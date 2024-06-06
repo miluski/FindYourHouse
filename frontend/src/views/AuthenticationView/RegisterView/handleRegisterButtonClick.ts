@@ -1,6 +1,6 @@
-import { User } from "../../../utils/User/User";
+import { UserState } from "../../../utils/types/State";
 import { registerUser } from "./registerUser";
 
-export const handleRegisterButtonClick = async (user: User) => {
+export const handleRegisterButtonClick = async (user: UserState) => {
   await registerUser({ ...user });
 };

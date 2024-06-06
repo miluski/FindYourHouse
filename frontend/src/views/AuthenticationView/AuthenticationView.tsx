@@ -2,14 +2,11 @@ import Modal from "react-bootstrap/Modal";
 import { CloseButton } from "react-bootstrap";
 import Nav from "react-bootstrap/Nav";
 import Tab from "react-bootstrap/Tab";
-import { useDispatch, useSelector } from "react-redux";
 import { MouseEventHandler } from "react";
 import "./AuthenticationView.css";
 import LoginView from "./LoginView/LoginView.tsx";
 import RegisterView from "./RegisterView/RegisterView.tsx";
 import ForgotPasswordView from "./ForgotPasswordView/ForgotPasswordView.tsx";
-import { OperationState } from "../../utils/types/State";
-import { CHANGE_OPERATION } from "../../utils/ActionTypes.ts";
 
 export default function AuthenticationView({
   show,
@@ -18,22 +15,15 @@ export default function AuthenticationView({
   show: boolean;
   handleClose: () => void | MouseEventHandler;
 }) {
-  const dispatch = useDispatch();
-  const { operation } = useSelector((state: OperationState) => state.operationReducer);
+  const operation = localStorage.getItem("operation");
   const handleTabChange = (tabName: string | null) => {
     localStorage.setItem("operation", tabName ?? "login");
-    tabName
-      ? dispatch({ type: CHANGE_OPERATION, newOperation: tabName })
-      : null;
   };
-
   const headerText =
     operation === "forgotPassword"
       ? "Zapomniałeś hasła?"
       : "Witaj w Znajdź Swój Dach";
-
   const displayNav = operation === "forgotPassword" ? "d-none" : "d-flex";
-
   return (
     <Modal
       fullscreen={"lg-down"}
@@ -57,7 +47,7 @@ export default function AuthenticationView({
         <h4 className="align-self-center fw-bold">{headerText}</h4>
         <Tab.Container
           defaultActiveKey="login"
-          activeKey={operation}
+          activeKey={operation ?? "login"}
           onSelect={handleTabChange}
         >
           <Nav

@@ -1,14 +1,9 @@
-import { Payment } from "./Payment";
+import { axiosInstance } from "../../utils/axiosInstance";
+import { Payment } from "../../utils/types/Payment";
 
-export async function registerOfflineTransaction(payment: Payment) {
-	const token = localStorage.getItem("token");
-	const endpoint = "http://localhost:8080/api/messages/admin/create";
-	await fetch(endpoint, {
-		method: "POST",
-		headers: {
-			"Content-Type": "application/json",
-			Authorization: `Bearer ${token}`,
-		},
-		body: JSON.stringify(payment),
-	});
+export async function registerOfflineTransaction(
+    payment: Payment
+): Promise<number> {
+    const response = await axiosInstance.post("/api/messages/admin/create", payment);
+    return response.status;
 }
