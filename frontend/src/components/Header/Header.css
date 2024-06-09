@@ -1,0 +1,9 @@
+.headerDropdownContentLeft{
+    gap: 80px !important;
+    padding-right: 40px !important;
+}
+
+.headerDropdownContentRight{
+    padding-left: 80px !important;
+    max-width: 380px !important;
+}

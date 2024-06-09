@@ -18,111 +18,112 @@ import AdminView from "./views/AdminView/AdminView.tsx";
 import GuardView from "./views/ErrorViews/GuardView.tsx";
 import NotAuthorizedView from "./views/ErrorViews/NotAuthorizedView.tsx";
 import { offerReducer } from "./utils/reducers/offerReducer.ts";
+import "./App.css";
 
 const browserRouter = createBrowserRouter([
-	{
-		path: "*",
-		element: <NotFoundView />,
-	},
-	{
-		path: "/unathorized",
-		element: <NotAuthorizedView />,
-	},
-	{
-		path: "/",
-		element: <HomeView />,
-	},
-	{
-		path: "calculator",
-		element: <MortrageCalculatorView />,
-	},
-	{
-		path: "user-panel",
-		element: (
-			<GuardView>
-				<UserPanel />
-			</GuardView>
-		),
-	},
-	{
-		path: "messages",
-		element: (
-			<GuardView>
-				<>
-					<text>Not implemented yet</text>
-				</>
-			</GuardView>
-		),
-	},
-	{
-		path: "settings",
-		element: (
-			<GuardView>
-				<ProfileSettings />
-			</GuardView>
-		),
-	},
-	{
-		path: "admin-panel",
-		element: (
-			<GuardView>
-				<AdminView />
-			</GuardView>
-		),
-	},
-	{
-		path: "add-offer",
-		element: (
-			<GuardView>
-				<AddOfferView />
-			</GuardView>
-		),
-	},
-	{
-		path: "payment",
-		element: (
-			<GuardView>
-				<PaymentView />
-			</GuardView>
-		),
-	},
-	{
-		path: "cancelled-payment",
-		element: (
-			<GuardView>
-				<CancelledPaymentView />
-			</GuardView>
-		),
-	},
-	{
-		path: "report",
-		element: (
-			<GuardView>
-				<ReportOfferView />
-			</GuardView>
-		),
-	},
-	{
-		path: "flats",
-		element: (
-			<GuardView>
-				<FlatListView />
-			</GuardView>
-		),
-	},
+  {
+    path: "*",
+    element: <NotFoundView />,
+  },
+  {
+    path: "/unathorized",
+    element: <NotAuthorizedView />,
+  },
+  {
+    path: "/",
+    element: <HomeView />,
+  },
+  {
+    path: "calculator",
+    element: <MortrageCalculatorView />,
+  },
+  {
+    path: "user-panel",
+    element: (
+      <GuardView>
+        <UserPanel />
+      </GuardView>
+    ),
+  },
+  {
+    path: "messages",
+    element: (
+      <GuardView>
+        <>
+          <text>Not implemented yet</text>
+        </>
+      </GuardView>
+    ),
+  },
+  {
+    path: "settings",
+    element: (
+      <GuardView>
+        <ProfileSettings />
+      </GuardView>
+    ),
+  },
+  {
+    path: "admin-panel",
+    element: (
+      <GuardView>
+        <AdminView />
+      </GuardView>
+    ),
+  },
+  {
+    path: "add-offer",
+    element: (
+      <GuardView>
+        <AddOfferView />
+      </GuardView>
+    ),
+  },
+  {
+    path: "payment",
+    element: (
+      <GuardView>
+        <PaymentView />
+      </GuardView>
+    ),
+  },
+  {
+    path: "cancelled-payment",
+    element: (
+      <GuardView>
+        <CancelledPaymentView />
+      </GuardView>
+    ),
+  },
+  {
+    path: "report",
+    element: (
+      <GuardView>
+        <ReportOfferView />
+      </GuardView>
+    ),
+  },
+  {
+    path: "flats",
+    element: (
+      <GuardView>
+        <FlatListView />
+      </GuardView>
+    ),
+  },
 ]);
 
 export default function App() {
-	const appReducer = combineReducers({
-		offerReducer,
-		userReducer,
-		calculatorReducer,
-		adminReducer,
-	});
-	const store = legacy_createStore(appReducer);
-	return (
-		<Provider store={store}>
-			<RouterProvider router={browserRouter} />
-		</Provider>
-	);
+  const appReducer = combineReducers({
+    offerReducer,
+    userReducer,
+    calculatorReducer,
+    adminReducer,
+  });
+  const store = legacy_createStore(appReducer);
+  return (
+    <Provider store={store}>
+      <RouterProvider router={browserRouter} />
+    </Provider>
+  );
 }

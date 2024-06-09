@@ -1,13 +1,11 @@
-import { MouseEventHandler } from "react";
+import { MouseEventHandler, ReactNode } from "react";
 
 export default function LinkButton({
-  text,
-
+  children,
   onClick,
   className,
 }: {
-  text: string;
-
+  children: ReactNode;
   onClick?: MouseEventHandler;
   className?: string;
 }) {
@@ -16,10 +14,10 @@ export default function LinkButton({
       onClick={onClick}
       className={
         className +
-        "  text-black link-offset-2 link-underline-warning link-underline-opacity-0 link-underline-opacity-100-hover cursor-pointer"
+        "  text-black link-offset-3 link-underline-warning link-underline-opacity-0 link-underline-opacity-100-hover cursor-pointer"
       }
     >
-      {text}
+      {children}
     </a>
   );
 }
