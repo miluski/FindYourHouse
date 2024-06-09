@@ -8,6 +8,7 @@ import LinkButton from "../../../components/CustomButtons/LinkButton/LinkButton.
 import { googleUrlParams } from "../../../google.ts";
 import { useState } from "react";
 import { getIsUserExists } from "./getIsUserExists.ts";
+import { UserState } from "../../../utils/types/State";
 
 export default function RegisterView() {
   const { Formik } = formik;
@@ -31,7 +32,7 @@ export default function RegisterView() {
       .string()
       .required("Pole jest wymagane")
       .matches(
-        /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/,
+        /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])(?=.{8,})/,
         "Hasło musi zawierać:\n" +
           "- Co najmniej 8 znaków\n" +
           "- Przynajmniej jedną dużą literę\n" +
@@ -50,7 +51,10 @@ export default function RegisterView() {
       <div className="border-bottom border-secondary-subtle p-3 d-flex flex-column">
         <Formik
           validationSchema={schema}
-          onSubmit={async (values) => await handleRegisterButtonClick(values)}
+          onSubmit={async (values) =>
+            await handleRegisterButtonClick(values as unknown as UserState)
+          }
+          validateOnMount={true}
           validateOnChange={false}
           validateOnBlur={true}
           initialValues={{
@@ -148,7 +152,7 @@ export default function RegisterView() {
         </Formik>
         <p className={"my-2 align-self-center fs-7"}>
           Rejestrując się akceptujesz{" "}
-          <LinkButton text={"warunki użytkowania"} className={"fw-bold"} />
+          <LinkButton className={"fw-bold"}>warunki użytkowania </LinkButton>
         </p>
         {userExists && (
           <p className="text-danger text-center">

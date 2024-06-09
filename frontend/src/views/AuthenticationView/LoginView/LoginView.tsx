@@ -7,6 +7,7 @@ import Button from "react-bootstrap/Button";
 import LinkButton from "../../../components/CustomButtons/LinkButton/LinkButton.tsx";
 import { googleUrlParams } from "../../../google.ts";
 import { useState } from "react";
+import { UserState } from "../../../utils/types/State";
 
 export default function LoginView({ changeTab }: { changeTab: Function }) {
   const { Formik } = formik;
@@ -25,7 +26,7 @@ export default function LoginView({ changeTab }: { changeTab: Function }) {
         <Formik
           validationSchema={schema}
           onSubmit={async (values) =>
-            await handleLoginButtonClick(values, setIsUserInvalid)
+            await handleLoginButtonClick(values as UserState, setIsUserInvalid)
           }
           validateOnChange={false}
           validateOnBlur={true}
@@ -78,10 +79,11 @@ export default function LoginView({ changeTab }: { changeTab: Function }) {
           )}
         </Formik>
         <LinkButton
-          text={"Nie pamiętasz hasła?"}
           className={"my-2 align-self-center"}
           onClick={() => changeTab("forgotPassword")}
-        />
+        >
+          Nie pamiętasz hasła?
+        </LinkButton>
         {isUserInvalid && (
           <p className="text-danger text-center my-2">
             Nieprawidłowy email lub hasło. Proszę spróbować jeszcze raz lub

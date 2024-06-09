@@ -1,10 +1,32 @@
-:root{
-    .fs-7 {
-        font-size: 0.75rem !important;
-    }
-    .fs-8 {
-        font-size: 0.50rem !important;
-    }
+.fs-7 {
+    font-size: 0.875rem !important;
+}
+.fs-8 {
+    font-size: 0.75rem !important;
+}
+
+.border-transparent{
+    border-color: transparent !important;
+}
+
+.hover-opacity-100:hover{
+    opacity: 100% !important;
+}
+
+.hover-opacity-75:hover{
+    opacity: 75% !important;
+}
+
+.hover-opacity-50:hover{
+    opacity: 50% !important;
+}
+
+.hover-opacity-25:hover{
+    opacity: 25% !important;
+}
+
+.hover-opacity-0:hover{
+    opacity: 0 !important;
 }
 
 
