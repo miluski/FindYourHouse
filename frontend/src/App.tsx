@@ -114,9 +114,9 @@ const browserRouter = createBrowserRouter([
 	{
 		path: "flat-view",
 		element: (
-				// <GuardView> 
+			 <GuardView> 
 				<FlatView/>
-				// </GuardView>
+			</GuardView>
 			
 		)
 	}
