@@ -18,6 +18,7 @@ import AdminView from "./views/AdminView/AdminView.tsx";
 import GuardView from "./views/ErrorViews/GuardView.tsx";
 import NotAuthorizedView from "./views/ErrorViews/NotAuthorizedView.tsx";
 import { offerReducer } from "./utils/reducers/offerReducer.ts";
+import MessengerView from "./views/MessengerView/MessengerView.tsx";
 import { FlatView } from "./views/FlatView/FlatView.tsx";
 
 const browserRouter = createBrowserRouter([
@@ -49,9 +50,7 @@ const browserRouter = createBrowserRouter([
 		path: "messages",
 		element: (
 			<GuardView>
-				<>
-					<text>Not implemented yet</text>
-				</>
+					<MessengerView/>
 			</GuardView>
 		),
 	},
