@@ -49,6 +49,7 @@ export default function ForgotPasswordView({
                 type="email"
                 placeholder="Twój adres email"
                 name="email"
+                id={"email"}
                 value={values.email}
                 onChange={handleChange}
                 onBlur={handleBlur}

@@ -52,20 +52,26 @@ export default function LoginView({ changeTab }: { changeTab: Function }) {
                 value={values.email}
                 onChange={handleChange}
                 onBlur={handleBlur}
-                isInvalid={touched.email! && !!errors.email}
-                isValid={touched.email! && !errors.email}
+                isInvalid={(touched.email! && !!errors.email) || isUserInvalid}
+                isValid={touched.email! && !errors.email && !isUserInvalid}
                 errorMessage={errors.email!}
+                id={"email"}
               />
               <CustomFormInput
                 label="Hasło:"
                 type="password"
                 placeholder="Twoje hasło"
                 name="password"
+                id={"password"}
                 value={values.password}
                 onChange={handleChange}
                 onBlur={handleBlur}
-                isInvalid={touched.password! && !!errors.password}
-                isValid={touched.password! && !errors.password}
+                isInvalid={
+                  (touched.password! && !!errors.password) || isUserInvalid
+                }
+                isValid={
+                  touched.password! && !errors.password && !isUserInvalid
+                }
                 errorMessage={errors.password!}
               />
               <Button

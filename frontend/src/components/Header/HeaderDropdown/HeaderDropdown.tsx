@@ -21,7 +21,7 @@ export default function HeaderDropdown({
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
       className={
-        "d-none d-xl-block position-absolute rounded-bottom-4 start-0 top-100 min-vw-100 bg-white border py-4"
+        "d-none d-xl-block position-absolute rounded-bottom-4 start-0 top-100 w-100 bg-white border-bottom border-top py-4 z-3"
       }
     >
       <Container fluid={"xl"} className={"d-flex py-2"}>
