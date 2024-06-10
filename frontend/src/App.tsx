@@ -114,16 +114,16 @@ const browserRouter = createBrowserRouter([
 ]);
 
 export default function App() {
-	const appReducer = combineReducers({
-		offerReducer,
-		userReducer,
-		calculatorReducer,
-		adminReducer,
-	});
-	const store = legacy_createStore(appReducer);
-	return (
-		<Provider store={store}>
-			<RouterProvider router={browserRouter} />
-		</Provider>
-	);
+  const appReducer = combineReducers({
+    offerReducer,
+    userReducer,
+    calculatorReducer,
+    adminReducer,
+  });
+  const store = legacy_createStore(appReducer);
+  return (
+    <Provider store={store}>
+      <RouterProvider router={browserRouter} />
+    </Provider>
+  );
 }

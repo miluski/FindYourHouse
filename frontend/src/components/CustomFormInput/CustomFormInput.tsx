@@ -13,6 +13,7 @@ export default function CustomFormInput({
   isInvalid,
   isValid,
   errorMessage,
+  id,
 }: {
   label: string;
   type: string;
@@ -24,6 +25,7 @@ export default function CustomFormInput({
   isInvalid: boolean;
   isValid: boolean;
   errorMessage: string;
+  id: string;
 }) {
   const [showPassword, setShowPassword] = useState(false);
   const togglePasswordVisibility = () => {
@@ -32,7 +34,9 @@ export default function CustomFormInput({
 
   return (
     <Form.Group className="mb-4">
-      <Form.Label className=" fw-bold ">{label}</Form.Label>
+      <Form.Label htmlFor={id} className=" fw-bold ">
+        {label}
+      </Form.Label>
       <div className="d-flex align-items-center position-relative ">
         <Form.Control
           className={
@@ -48,6 +52,7 @@ export default function CustomFormInput({
           onBlur={onBlur}
           isInvalid={isInvalid}
           isValid={isValid}
+          id={id}
         />
 
         {type === "password" && (
