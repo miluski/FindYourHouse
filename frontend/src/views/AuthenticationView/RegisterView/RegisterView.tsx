@@ -81,6 +81,7 @@ export default function RegisterView() {
                 type="text"
                 placeholder="Wprowadź swoję imię"
                 name="firstName"
+                id={"name"}
                 value={values.firstName}
                 onChange={handleChange}
                 onBlur={handleBlur}
@@ -93,6 +94,7 @@ export default function RegisterView() {
                 type="text"
                 placeholder="Wprowadź swoje nazwisko"
                 name="lastName"
+                id={"lastName"}
                 value={values.lastName}
                 onChange={handleChange}
                 onBlur={handleBlur}
@@ -105,6 +107,7 @@ export default function RegisterView() {
                 type="email"
                 placeholder="Twój adres email"
                 name="email"
+                id={"email"}
                 value={values.email}
                 onChange={handleChange}
                 onBlur={async (e) => {
@@ -120,6 +123,7 @@ export default function RegisterView() {
                 type="password"
                 placeholder="Twoje hasło"
                 name="password"
+                id={"password"}
                 value={values.password}
                 onChange={handleChange}
                 onBlur={handleBlur}
@@ -132,6 +136,7 @@ export default function RegisterView() {
                 type="number"
                 placeholder="Wprowadź numer telefonu"
                 name="phoneNumber"
+                id={"phoneNumber"}
                 value={values.phoneNumber}
                 onChange={handleChange}
                 onBlur={handleBlur}
@@ -155,7 +160,7 @@ export default function RegisterView() {
           <LinkButton className={"fw-bold"}>warunki użytkowania </LinkButton>
         </p>
         {userExists && (
-          <p className="text-danger text-center">
+          <p className="text-danger text-center my-2">
             Użytkownik o podanym adresie email już istnieje.
           </p>
         )}

@@ -41,15 +41,12 @@ export default function Header() {
           onHide={handleCloseOffcanvas}
           className={"d-xl-none"}
           show={showOffcanvas}
-          id={`offcanvasNavbar-expand-xxl`}
-          aria-labelledby={`offcanvasNavbarLabel-expand-xxl`}
+          id={`mobileNavOffcanvas`}
+          aria-labelledby={`mobileNavOffcanvas`}
           placement="end"
         >
           <Offcanvas.Header>
-            <Offcanvas.Title
-              className={"fs-6"}
-              id={`offcanvasNavbarLabel-expand-xxl`}
-            >
+            <Offcanvas.Title className={"fs-6"} id={`mobileNavOffcanvas-title`}>
               Menu
             </Offcanvas.Title>
             <CloseButton

@@ -29,4 +29,39 @@
     opacity: 0 !important;
 }
 
+@font-face {
+    font-family: Adjusted Trebuchet MS Fallback;
+    src: local("Trebuchet MS");
+    size-adjust:107%;ascent-override:96%;descent-override:31%;line-gap-override:0
+}
+
+@font-face {
+    font-family: Galano Grotesque Alt;
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url(https://static.rdc.moveaws.com/fonts/galano-grotesque-alt-regular.woff2) format("woff2"),url(https://static.rdc.moveaws.com/fonts/galano-grotesque-alt-regular.woff) format("woff")
+}
+
+@font-face {
+    font-family: Galano Grotesque Alt;
+    font-style: normal;
+    font-weight: 600;
+    font-display: swap;
+    src: url(https://static.rdc.moveaws.com/fonts/galano-grotesque-alt-medium.woff2) format("woff2"),url(https://static.rdc.moveaws.com/fonts/galano-grotesque-alt-medium.woff) format("woff")
+}
+
+@font-face {
+    font-family: Galano Grotesque Alt;
+    font-style: normal;
+    font-weight: 700;
+    font-display: swap;
+    src: url(https://static.rdc.moveaws.com/fonts/galano-grotesque-alt-bold.woff2) format("woff2"),url(https://static.rdc.moveaws.com/fonts/galano-grotesque-alt-bold.woff) format("woff")
+}
+
+body {
+    font-family: Galano Grotesque Alt,Adjusted Trebuchet MS Fallback,Trebuchet MS,sans-serif;
+    line-height: 1.42857143 !important;
+}
+
 
