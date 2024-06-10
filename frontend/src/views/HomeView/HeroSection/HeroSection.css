@@ -1,0 +1,110 @@
+.heroSection{
+    background:
+            url("../../../assets/hero/hero-mobile.webp");
+    background-position: bottom;
+    background-size: cover;
+    height: 450px;
+    width: 100%;
+    margin-bottom: 60px ;
+}
+
+.heroSection__title{
+    margin-bottom: 32px;
+    text-shadow: rgba(0, 0, 0, 0.25) 0px 1px 3px;
+    font-size: 24px;
+}
+
+.heroSection__subTitle{
+    font-size: 18px;
+}
+
+.heroSection__formContainer{
+    width: 575px;
+}
+
+.heroSection__navButton{
+    text-shadow: rgba(0, 0, 0, 0.25) 0px 1px 2px;
+}
+
+.heroSection__navButton:hover{
+    color: #c7c7c7 !important;
+    transition: 200ms color  ;
+}
+
+@media screen and (min-width: 385px){
+    .heroSection__title {
+        font-size: 26px;
+    }
+
+    .heroSection__subTitle{
+        font-size: 20px;
+    }
+}
+
+@media screen and (min-width: 471px){
+    .heroSection__title {
+        font-size: 34px;
+    }
+
+    .heroSection__subTitle{
+        font-size: 26px;
+    }
+}
+
+@media screen and (min-width: 536px){
+    .heroSection__title {
+        font-size: 42px;
+    }
+
+    .heroSection__subTitle{
+        font-size: 32px;
+    }
+}
+
+@media screen and (min-width: 768px){
+    .heroSection__title {
+        font-size: 48px;
+    }
+}
+
+@media screen and (min-width: 996px){
+    .heroSection__title {
+        font-size: 56px;
+    }
+}
+
+
+
+@media screen and (min-width: 768px) and (max-width: 992px){
+    .heroSection{
+        background:
+                url("../../../assets/hero/hero-tablet.webp");
+        background-position: bottom;
+        background-size: cover;
+        height: 450px;
+        width: 100%;
+    }
+}
+
+@media screen and (min-width: 992px) and (max-width: 1200px){
+    .heroSection{
+        background:
+                url("../../../assets/hero/hero-desktop.webp");
+        background-position: center;
+        background-size: cover;
+        height: 450px;
+        width: 100%;
+
+    }
+}
+
+@media screen and (min-width: 1200px) {
+    .heroSection{
+        background:
+                url("../../../assets/hero/hero-desktop-xl.webp");
+        background-position: center;
+        background-size: cover;
+        height: 450px;
+        width: 100%;
+    }
+}

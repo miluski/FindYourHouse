@@ -9,21 +9,27 @@ import RegisterView from "./RegisterView/RegisterView.tsx";
 import ForgotPasswordView from "./ForgotPasswordView/ForgotPasswordView.tsx";
 
 export default function AuthenticationView({
+  tabName,
+  setTabName,
   show,
   handleClose,
 }: {
+  tabName: string;
+  setTabName: Function;
   show: boolean;
   handleClose: () => void | MouseEventHandler;
 }) {
-  const operation = localStorage.getItem("operation");
-  const handleTabChange = (tabName: string | null) => {
-    localStorage.setItem("operation", tabName ?? "login");
+  const changeTab = (eventKey: string | null) => {
+    if (eventKey) {
+      setTabName(eventKey);
+    }
   };
+
   const headerText =
-    operation === "forgotPassword"
+    tabName === "forgotPassword"
       ? "Zapomniałeś hasła?"
       : "Witaj w Znajdź Swój Dach";
-  const displayNav = operation === "forgotPassword" ? "d-none" : "d-flex";
+  const displayNav = tabName === "forgotPassword" ? "d-none" : "d-flex";
   return (
     <Modal
       fullscreen={"lg-down"}
@@ -46,9 +52,9 @@ export default function AuthenticationView({
       <Modal.Body className="d-flex flex-column px-2  align-self-center  px-lg-4 w-100 tabContainer">
         <h4 className="align-self-center fw-bold">{headerText}</h4>
         <Tab.Container
-          defaultActiveKey="login"
-          activeKey={operation ?? "login"}
-          onSelect={handleTabChange}
+          defaultActiveKey={tabName}
+          activeKey={tabName}
+          onSelect={changeTab}
         >
           <Nav
             className={
@@ -59,7 +65,7 @@ export default function AuthenticationView({
             <Nav.Item
               className={
                 "shadow-none border-0 border-bottom rounded-0 border-4  " +
-                (operation === "login"
+                (tabName === "login"
                   ? "text-black border-warning  "
                   : " border-white")
               }
@@ -71,7 +77,7 @@ export default function AuthenticationView({
             <Nav.Item
               className={
                 " shadow-none border-0 border-bottom  rounded-0  border-4 " +
-                (operation === "register"
+                (tabName === "register"
                   ? " text-black border-warning  "
                   : " border-white")
               }
@@ -86,13 +92,13 @@ export default function AuthenticationView({
           </Nav>
           <Tab.Content>
             <Tab.Pane eventKey="login">
-              <LoginView changeTab={handleTabChange} />
+              <LoginView changeTab={changeTab} />
             </Tab.Pane>
             <Tab.Pane eventKey="register">
               <RegisterView />
             </Tab.Pane>
             <Tab.Pane eventKey="forgotPassword">
-              <ForgotPasswordView changeTab={handleTabChange} />
+              <ForgotPasswordView changeTab={changeTab} />
             </Tab.Pane>
           </Tab.Content>
         </Tab.Container>

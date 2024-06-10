@@ -49,6 +49,7 @@ export default function ForgotPasswordView({
                 type="email"
                 placeholder="Twój adres email"
                 name="email"
+                id={"email"}
                 value={values.email}
                 onChange={handleChange}
                 onBlur={handleBlur}
@@ -68,11 +69,9 @@ export default function ForgotPasswordView({
         </Formik>
         <p className={"my-2 align-self-center"}>
           Pamiętasz hasło{" "}
-          <LinkButton
-            text={"Zaloguj się?"}
-            className={"fw-bold"}
-            onClick={() => changeTab("login")}
-          />
+          <LinkButton className={"fw-bold"} onClick={() => changeTab("login")}>
+            Zaloguj się!
+          </LinkButton>
         </p>
       </div>
     </div>
