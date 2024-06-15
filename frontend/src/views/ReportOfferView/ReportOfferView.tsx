@@ -83,7 +83,7 @@ function ReportOfferView() {
   return (
     <>
       <Header />
-      <div className="mainReportView">
+      <div className="mainReportView" data-testid="mainReportView">
         <div>
           <h5>Znalazłeś fałszywą ofertę?</h5>
         </div>
@@ -117,7 +117,7 @@ function ReportOfferView() {
           </div>
         </div>
         <div>
-          <button className="reportButton" onClick={handleSubmit}>
+          <button className="reportButton" onClick={handleSubmit} data-testid="zglos-button">
             Zgłoś
           </button>
         </div>
