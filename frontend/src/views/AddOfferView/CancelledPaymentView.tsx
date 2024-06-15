@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { Col, Container, Image } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import FooterView from "../../components/Footer/FooterView";
-import Header from "../../components/Header/Header";
+import HeaderView from "../../components/Header/Header";
 
 export default function CancelledPaymentView() {
   const navigate = useNavigate();
@@ -14,7 +14,7 @@ export default function CancelledPaymentView() {
   }, []);
   return (
     <>
-      <Header />
+      <HeaderView />
       <Container className="d-flex flex-column justify-content-center align-items-center mt-5 ">
         <Col className="text-center ">
           <Image src="../../src/assets/delete.png" />

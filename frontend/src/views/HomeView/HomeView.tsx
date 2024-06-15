@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { authGoogleUser } from "./authGoogleUser.ts";
-import Header from "../../components/Header/Header.tsx";
+import HeaderView from "../../components/Header/Header.tsx";
 import HeroSection from "./HeroSection/HeroSection.tsx";
 import "./HomeView.css";
 import FlatListSection from "./FlatListSection/FlatListSection.tsx";
@@ -29,7 +29,7 @@ export default function HomeView() {
   return (
     <div className="vh-100 vw-100 overflow-x-auto" id={"indexWrapper"}>
       <div style={{ minWidth: "280px" }}>
-        <Header />
+        <HeaderView />
         <main>
           <HeroSection />
           <FlatListSection />

@@ -1,5 +1,5 @@
 import { Col, Container, Row } from "react-bootstrap";
-import Header from "../../components/Header/Header";
+import HeaderView from "../../components/Header/Header";
 import FooterView from "../../components/Footer/FooterView";
 import { AccountOptionsView } from "./AccountOptionsView";
 import { MessageTile } from "./MessageTile";
@@ -10,7 +10,7 @@ import { AddAnnouncementTile } from "./AddAnnouncementTile";
 export const UserPanel = () => {
   return (
     <>
-      <Header />
+      <HeaderView />
       <Container
         fluid
         className="d-flex align-items-center flex-column mt-2 mb-4"

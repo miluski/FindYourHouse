@@ -1,6 +1,6 @@
 import { ChooseOfferTypeView } from "./ChooseOfferTypeView";
 import FooterView from "../../components/Footer/FooterView";
-import Header from "../../components/Header/Header";
+import HeaderView from "../../components/Header/Header";
 import { Col, Container, Spinner } from "react-bootstrap";
 import ChooseApartmentType from "./ChooseApartmentType";
 import { useEffect, useState } from "react";
@@ -52,7 +52,7 @@ export const AddOfferView = () => {
   }, []);
   return (
     <>
-      <Header />
+      <HeaderView />
       {actualSiteNumber === 1 ? (
         <Container fluid className="d-flex align-items-center flex-column">
           <text className="fw-bold fs-6">Wybierz typ oferty </text>

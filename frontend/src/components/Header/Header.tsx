@@ -8,7 +8,7 @@ import AuthenticationView from "../../views/AuthenticationView/AuthenticationVie
 import HeaderMobile from "./HeaderMobile.tsx";
 import HeaderDesktop from "./HeaderDesktop.tsx";
 
-export default function Header() {
+export default function HeaderView() {
   const [showOffcanvas, setShowOffcanvas] = useState(false);
   const [tabName, setTabName] = useState("login");
   const [showModal, setShowModal] = useState(false);
