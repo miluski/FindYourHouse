@@ -1,6 +1,10 @@
 .search-section-background {
-  background:
-    url("../../../assets/hero-img.webp");
+  background: linear-gradient(
+      180deg,
+      rgba(30, 30, 30, 0.99) 0%,
+      rgba(30, 30, 30, 0) 100%
+    ),
+    url("../../../assets/hero/hero-desktop.webp");
   background-position: center;
   background-size: cover;
   height: 75vh;

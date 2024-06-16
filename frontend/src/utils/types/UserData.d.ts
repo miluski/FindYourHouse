@@ -3,11 +3,11 @@ export type UserData = {
 	phoneNumber: string;
 	surname: string;
 	email: string;
-	role: string;
-	accessToken: {
+	role?: string;
+	accessToken?: {
 		token: string;
 	};
-	refreshToken: {
+	refreshToken?: {
 		token: symboltring;
 	};
 };

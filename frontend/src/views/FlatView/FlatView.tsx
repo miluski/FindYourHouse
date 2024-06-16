@@ -1,10 +1,10 @@
 import { Container, Row } from "react-bootstrap";
 import FooterView from "../../components/Footer/FooterView";
-import HeaderView from "../../components/Header/HeaderView";
 import { RedirectButtonsView } from "./RedirectButtonsView";
 import { FlatPhotos } from "./FlatPhotos";
 import { SendMessageView } from "./ SendMessageView";
 import { BottomAdvertismentCredentials } from "./BottomAdvertismentCredentials";
+import HeaderView from "../../components/Header/Header";
 
 export const FlatView = () => {
     return (
@@ -15,7 +15,7 @@ export const FlatView = () => {
                     <RedirectButtonsView />
                 </Row>
                 <Row className="w-100 mb-3">
-                    <FlatPhotos/> 
+                    <FlatPhotos photos={[]}/> 
                 </Row>
                 <Row className="w-100 mb-3 ms-3"> 
                         <SendMessageView/> 
