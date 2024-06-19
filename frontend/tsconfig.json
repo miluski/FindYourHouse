@@ -20,6 +20,6 @@
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true
   },
-  "include": ["src"],
+  "include": ["src", "tests/ReportOfferView.test.tsx", "jest.config.cjs"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }
