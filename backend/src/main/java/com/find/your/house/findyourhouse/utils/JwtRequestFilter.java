@@ -9,23 +9,26 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 import org.springframework.web.filter.OncePerRequestFilter;
 
+import com.find.your.house.findyourhouse.utils.services.JwtTokenUtilService;
+import com.find.your.house.findyourhouse.utils.services.UserDetailsServiceImpl;
+
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 
 public class JwtRequestFilter extends OncePerRequestFilter {
 
-    private final JwtTokenUtil jwtTokenUtil;
+    private final JwtTokenUtilService jwtTokenUtil;
     private final UserDetailsServiceImpl userDetailsServiceImpl;
 
     @Autowired
-    public JwtRequestFilter(JwtTokenUtil jwtTokenUtil, UserDetailsServiceImpl userDetailsServiceImpl) {
+    public JwtRequestFilter(JwtTokenUtilService jwtTokenUtil, UserDetailsServiceImpl userDetailsServiceImpl) {
         this.jwtTokenUtil = jwtTokenUtil;
         this.userDetailsServiceImpl = userDetailsServiceImpl;
     }
 
     @SuppressWarnings("null")
     @Override
-    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
+    public void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
             throws ServletException, IOException {
         String authHeader = request.getHeader("Authorization");
         String token = null;

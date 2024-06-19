@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import Header from "../../components/Header/Header";
+import HeaderView from "../../components/Header/Header";
 import Footer from "../../components/Footer/FooterView";
 import { Container } from "react-bootstrap";
 import { OfferState } from "../../utils/types/State";
@@ -18,7 +18,7 @@ const FlatListView: React.FC = () => {
 
   return (
     <>
-      <Header />
+      <HeaderView />
       <Container
         fluid
         className="d-flex flex-column justify-content-center align-items-center"
