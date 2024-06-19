@@ -125,22 +125,20 @@ class UserServiceTest {
 
     @Test
     void editUser_ExistingUser_ShouldReturnTrue() {
-        Long id = 1L;
         User user = new User();
         user.setFirstName("John");
-        when(userRepository.findById(id)).thenReturn(Optional.of(new User()));
+        when(userRepository.findByEmail(any())).thenReturn(new User());
         when(userRepository.save(any(User.class))).thenReturn(new User());
-        boolean result = userService.editUser(id, user);
+        boolean result = userService.editUser(user);
         Assertions.assertTrue(result);
     }
 
     @Test
     void editUser_NonExistingUser_ShouldReturnFalse() {
-        Long id = 1L;
         User user = new User();
         user.setFirstName("John");
-        when(userRepository.findById(id)).thenReturn(Optional.empty());
-        boolean result = userService.editUser(id, user);
+        when(userRepository.findByEmail(any())).thenReturn(null);
+        boolean result = userService.editUser(user);
         Assertions.assertFalse(result);
     }
 

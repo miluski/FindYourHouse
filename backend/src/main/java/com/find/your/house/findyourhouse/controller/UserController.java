@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("api/users")
 @CrossOrigin(origins = "*", methods = { RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT,
-        RequestMethod.DELETE })
+        RequestMethod.DELETE, RequestMethod.PATCH })
 public class UserController {
 
     private final UserService userService;
@@ -79,9 +79,10 @@ public class UserController {
                 : ResponseEntity.status(HttpStatus.NOT_FOUND).build();
     }
 
-    @PatchMapping("/edit/{id}")
-    public ResponseEntity<?> editUser(@PathVariable Long id, @RequestBody UserDto userDto) {
-        Boolean isEditedProperly = userService.editUser(id, userMapper.convertToUser(userDto));
+    @PatchMapping("/edit")
+    public ResponseEntity<?> editUser(@RequestBody UserDto userDto) {
+        System.out.println(userDto.getFirstName());
+        Boolean isEditedProperly = userService.editUser(userMapper.convertToUser(userDto));
         return isEditedProperly ? ResponseEntity.status(HttpStatus.OK).build()
                 : ResponseEntity.status(HttpStatus.NOT_FOUND).build();
     }
