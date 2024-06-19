@@ -7,6 +7,7 @@ import {
 } from "./Action";
 import { offerReducer } from "../reducers/offerReducer";
 import { Photo } from "./Photo";
+import { Offer } from "./Offer";
 
 export type UserState = {
 	userReducer: Reducer<UserState, UserAction>;
@@ -60,4 +61,5 @@ export type OfferState = {
 	exhibitorEmail?: string;
 	isDataValid: boolean;
 	canShow?: boolean;
+	actualSelectedOffer: Offer;
 };
