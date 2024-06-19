@@ -11,9 +11,12 @@ import { CalculatorState } from "../../utils/types/State";
 
 export const CredentialsPickerView = () => {
 	const { propertyPrice, ownContribution, loanPeriod, loanInterestRate } =
-		useSelector((state: CalculatorState) => state.calculatorReducer);
+		useSelector(
+			(state: CalculatorState) =>
+				state.calculatorReducer as unknown as CalculatorState
+		);
 	return (
-		<Container fluid className='my-5 p-0 text-overflow'>
+		<Container fluid='true' className='my-5 p-0 text-overflow'>
 			<Picker
 				formLabel={"Cena nieruchomości"}
 				minRange={100000}
@@ -24,6 +27,7 @@ export const CredentialsPickerView = () => {
 				selectedValue={propertyPrice}
 				minValue={"100 000 PLN"}
 				maxValue={"5 000 000 PLN"}
+				data-testid='propertyPrice'
 			/>
 			<Picker
 				formLabel={"Wkład własny"}
@@ -35,6 +39,7 @@ export const CredentialsPickerView = () => {
 				selectedValue={ownContribution}
 				minValue={"5 %"}
 				maxValue={"90 %"}
+				data-testid='ownContribution'
 			/>
 			<Picker
 				formLabel={"Okres kredytowania"}
@@ -46,6 +51,7 @@ export const CredentialsPickerView = () => {
 				selectedValue={loanPeriod}
 				minValue={"5 lat"}
 				maxValue={"35 lat"}
+				data-testid='loanPeriod'
 			/>
 			<Picker
 				formLabel={"Oprocentowanie kredytu"}
@@ -57,6 +63,7 @@ export const CredentialsPickerView = () => {
 				selectedValue={loanInterestRate}
 				minValue={"5 %"}
 				maxValue={"40 %"}
+				data-testid='loanInterestRate'
 			/>
 		</Container>
 	);

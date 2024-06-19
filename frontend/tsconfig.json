@@ -13,13 +13,15 @@
     "isolatedModules": true,
     "noEmit": true,
     "jsx": "react-jsx",
+    "esModuleInterop": true,
 
     /* Linting */
     "strict": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
-    "noFallthroughCasesInSwitch": true
+    "noFallthroughCasesInSwitch": true,
+    "types": ["jest", "node"]
   },
-  "include": ["src", "tests/ReportOfferView.test.tsx", "jest.config.cjs"],
+  "include": ["src", "tests/ReportOfferView.test.tsx", "jest.config.cjs", "tests/calculatorReducer.test.ts", "tests/CalculatedCredentialsView.test.tsx", "tests/CredentialsPickerView.test.tsx", "tests/MortrageCalculatorView.test.tsx", "tests/Picker.test.tsx"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }
