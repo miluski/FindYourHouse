@@ -3,7 +3,7 @@ import LeftSideBar from "./LeftSideBar";
 import ChatView from "./ChatView";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Container from "react-bootstrap/Container";
-import HeaderView from "../../components/Header/HeaderView";
+import HeaderView from "../../components/Header/Header";
 
 interface Message {
   id: number;

@@ -1,5 +1,5 @@
 import { Container } from "react-bootstrap";
-import Header from "../../components/Header/Header";
+import HeaderView from "../../components/Header/Header";
 import FooterView from "../../components/Footer/FooterView";
 import { AccountOptionsView } from "./AccountOptionsView";
 import { EditingAccountFormView } from "./EditingAccountFormView";
@@ -9,7 +9,7 @@ export const ProfileSettings = () => {
   return (
     <>
       <Container>
-        <Header />
+        <HeaderView />
         <SettingsView />
         <Container className="d-flex flex-row align-items-stretch">
           <AccountOptionsView />

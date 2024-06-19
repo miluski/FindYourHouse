@@ -1,4 +1,4 @@
-import Header from "../../components/Header/Header";
+import HeaderView from "../../components/Header/Header";
 import FooterView from "../../components/Footer/FooterView";
 import { CredentialsPickerView } from "./CredentialsPickerView";
 import { CalculatedCredentialsView } from "./CalculatedCredentialsView";
@@ -7,7 +7,7 @@ import { Col, Container, Row } from "react-bootstrap";
 export const MortrageCalculatorView = () => {
   return (
     <>
-      <Header />
+      <HeaderView />
       <>
         <Container
           fluid

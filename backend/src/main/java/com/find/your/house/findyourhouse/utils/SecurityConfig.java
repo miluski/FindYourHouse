@@ -6,10 +6,13 @@ import org.springframework.security.authentication.*;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.argon2.Argon2PasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+
+import com.find.your.house.findyourhouse.utils.services.JwtTokenUtilService;
+import com.find.your.house.findyourhouse.utils.services.UserDetailsServiceImpl;
 
 import jakarta.servlet.http.HttpServletResponse;
 
@@ -18,7 +21,7 @@ import jakarta.servlet.http.HttpServletResponse;
 public class SecurityConfig {
 
     @Autowired
-    private JwtTokenUtil jwtTokenUtil;
+    private JwtTokenUtilService jwtTokenUtil;
 
     @Autowired
     private UserDetailsServiceImpl userDetailsServiceImpl;
@@ -38,7 +41,7 @@ public class SecurityConfig {
                         .requestMatchers("/api/users/auth/google/login").permitAll()
                         .requestMatchers("/api/users/auth/google/register").permitAll()
                         .requestMatchers("/api/tokens/auth/refresh").permitAll()
-                        .requestMatchers("/api/offers/download/**").permitAll()
+                        .requestMatchers("/api/photos/download/**").permitAll()
                         .anyRequest().authenticated())
                 .exceptionHandling((exceptionHandling) -> exceptionHandling
                         .authenticationEntryPoint((request, response, authException) -> response
@@ -52,13 +55,13 @@ public class SecurityConfig {
     public AuthenticationManager authenticationManager() {
         DaoAuthenticationProvider authenticationProvider = new DaoAuthenticationProvider();
         authenticationProvider.setUserDetailsService(userDetailsServiceImpl);
-        authenticationProvider.setPasswordEncoder(new BCryptPasswordEncoder());
+        authenticationProvider.setPasswordEncoder(new Argon2PasswordEncoder(16, 32, 1, 4096, 3));
         return new ProviderManager(authenticationProvider);
     }
 
     @Bean
     public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
+        return new Argon2PasswordEncoder(16, 32, 1, 4096, 3);
     }
 
 }
