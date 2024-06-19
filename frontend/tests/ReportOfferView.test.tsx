@@ -3,6 +3,7 @@ import '@testing-library/jest-dom';
 import ReportOfferView from "../src/views/ReportOfferView/ReportOfferView";
 import { MemoryRouter } from "react-router-dom";
 
+
 jest.mock("react-bootstrap/Offcanvas", () => ({
     __esModule: true,
     default: () => <div />,
