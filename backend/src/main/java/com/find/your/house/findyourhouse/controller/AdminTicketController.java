@@ -1,5 +1,8 @@
 package com.find.your.house.findyourhouse.controller;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.*;
 import org.springframework.web.bind.annotation.*;
@@ -45,5 +48,13 @@ public class AdminTicketController {
                         e.printStackTrace();
                         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
                 }
+        }
+
+        @GetMapping("/")
+        public ResponseEntity<?> getAllAdminMessages() {
+                List<TicketDto> tickets = adminTicketsService.getAllTickets().stream()
+                                .map(ticketMapper::convertToTicketDto).collect(Collectors.toList());
+                return tickets != null ? ResponseEntity.status(HttpStatus.OK).body(tickets)
+                                : ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }
 }
