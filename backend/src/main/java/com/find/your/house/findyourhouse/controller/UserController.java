@@ -72,9 +72,9 @@ public class UserController {
 
     }
 
-    @DeleteMapping("/delete/{id}")
-    public ResponseEntity<?> deleteUser(@PathVariable Long id) {
-        Boolean isDeletedProperly = userService.deleteUser(id);
+    @DeleteMapping("/delete/{email}")
+    public ResponseEntity<?> deleteUser(@PathVariable String email) {
+        Boolean isDeletedProperly = userService.deleteUser(email);
         return isDeletedProperly ? ResponseEntity.status(HttpStatus.OK).build()
                 : ResponseEntity.status(HttpStatus.NOT_FOUND).build();
     }

@@ -114,6 +114,14 @@ public class PaymentService {
         }
     }
 
+    public void deletePaymentsByUser(User user) {
+        List<Payment> payments = paymentRepository.findByUser(user);
+        if (payments.isEmpty()) {
+            return;
+        }
+        paymentRepository.deleteAll(payments);
+    }
+
     private HttpEntity<String> getCompletePurchaseEntity() {
         return new HttpEntity<>(this.getPaymentHeaders());
     }
