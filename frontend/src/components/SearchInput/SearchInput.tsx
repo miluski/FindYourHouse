@@ -48,12 +48,13 @@ export default function SearchInput({
         <input
           id={id}
           aria-label={"Wprowadź dane wyszukiwania"}
+          autoComplete={"off"}
           ref={inputRef}
           value={inputValue}
           onFocus={() => setInputFocused(true)}
           onBlur={() => setInputFocused(false)}
           onInput={handleInputChange}
-          className="bg-transparent border-0 ps-4 w-100 searchInput__input"
+          className="bg-transparent border-0 ps-4 w-100 searchInput__input my-auto"
           type="text"
           placeholder="Adres, Ulica, Miasto, Kod Poczotwy"
         />
@@ -72,7 +73,7 @@ export default function SearchInput({
         )}
         <button
           type="submit"
-          className="bg-transparent rounded-circle p-0 border-0 me-1 hover-opacity-75"
+          className="bg-transparent rounded-circle p-1 border-0    hover-opacity-75 "
           onClick={handleSubmit}
           onMouseDown={(e) => {
             e.preventDefault();

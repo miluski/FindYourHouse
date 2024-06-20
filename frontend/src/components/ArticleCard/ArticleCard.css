@@ -1,0 +1,36 @@
+.articleCard{
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+    min-width: 312px;
+}
+
+.articleCard:hover{
+    box-shadow: rgba(0, 0, 0, 0.2) 0px 2px 8px;
+}
+
+
+.cardImg{
+    max-height: 208px;
+    min-height: 208px;
+    object-fit: cover;
+    object-position: center;
+}
+
+.circleBadge{
+    width: 12px;
+    height: 12px;
+}
+
+.articleCardBody{
+    padding: 12px 16px;
+}
+
+.articleCardText{
+    display: -webkit-box;
+    max-width: 100%;
+    -webkit-line-clamp: 2;
+    height: 48px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    -webkit-box-orient: vertical;
+}
+

@@ -1,0 +1,23 @@
+.moreInfoHeroContainer{
+    height: 500px;
+    background-position: center;
+    background-size: cover;
+}
+
+.moreInfoHero1{
+    background-image:
+            url("../../../assets/moreInfo/moreInfoThumbNail1.avif");
+}
+
+.moreInfoHero2{
+    background-image:
+            url("../../../assets/moreInfo/moreInfoThumbNail2.avif");
+}
+
+@media screen and (max-width: 995px){
+    .moreInfoHeroContainer{
+        height: 400px;
+        background-position: center;
+        background-size: cover;
+    }
+}

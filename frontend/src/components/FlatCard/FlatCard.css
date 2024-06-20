@@ -1,0 +1,71 @@
+.flatCard{
+ box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+    min-width: 312px;
+}
+
+.flatCard:hover{
+    box-shadow: rgba(0, 0, 0, 0.2) 0px 2px 8px;
+}
+
+.myListButton:hover{
+    background-color: #e2e2e2 !important;
+}
+
+.cardImg{
+    max-height: 208px;
+    min-height: 208px;
+    object-fit: cover;
+    object-position: center;
+}
+
+.circleBadge{
+    width: 12px;
+    height: 12px;
+}
+
+.flatCardBody{
+    padding: 12px 16px;
+    gap: 4px;
+}
+
+.price{
+    max-width: 17ch;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.roomsNumber{
+    max-width: 2ch;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.flatSize{
+    max-width: 4ch;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.street{
+    max-width: 100%;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.city{
+    max-width: 70%;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.postCode{
+    max-width: 6ch;
+    text-overflow: clip;
+    overflow: hidden;
+    white-space: nowrap;
+}

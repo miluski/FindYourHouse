@@ -4,6 +4,10 @@ import Header from "../../components/Header/Header.tsx";
 import HeroSection from "./HeroSection/HeroSection.tsx";
 import "./HomeView.css";
 import FlatListSection from "./FlatListSection/FlatListSection.tsx";
+import ReadArticleSection from "./ReadArticleSection/ReadArticleSection.tsx";
+import LocalInfoSection from "./LocalInfoSection/LocalInfoSection.tsx";
+import MoreInfoSection from "./MoreInfoSection/MoreInfoSection.tsx";
+import Footer from "./Footer/Footer.tsx";
 
 export default function HomeView() {
   useEffect(() => {
@@ -30,10 +34,14 @@ export default function HomeView() {
     <div className="vh-100 vw-100 overflow-x-auto" id={"indexWrapper"}>
       <div style={{ minWidth: "280px" }}>
         <Header />
+        <HeroSection />
         <main>
-          <HeroSection />
           <FlatListSection />
+          <ReadArticleSection />
+          <LocalInfoSection />
+          <MoreInfoSection />
         </main>
+        <Footer />
       </div>
     </div>
   );

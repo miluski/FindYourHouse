@@ -1,0 +1,51 @@
+.readArticle{
+    background-image:
+            url("../../../assets/hero/articleHero.jpg");
+    background-position: center;
+    background-size: cover;
+    width: 100%;
+
+}
+
+.readArticle:after{
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    opacity: 0.4;
+    width: 100%;
+    height: 100%;
+    background-color: rgb(26,24, 22);
+}
+
+.articleDescription{
+    max-width: 100%;
+    margin: 40px 0;
+    text-shadow: rgb(0,0,0) 1px 1px 1px;
+}
+
+.articleDescription__button{
+    text-shadow: rgb(0,0,0) 1px 1px 1px;
+    color: white;
+    border: 1px solid white;
+    background-color: var(--bs-dark);
+    padding: 10px 24px;
+    border-radius: 40px;
+    transition: background-color ease-in-out 200ms;
+}
+
+.articleDescription__button:hover{
+    background-color: transparent;
+}
+
+@media screen and (max-width: 768px){
+    .articleDescription{
+       font-size: 32px !important;
+    }
+}
+
+@media screen and (min-width: 768px){
+    .articleDescription{
+        max-width: 60%;
+    }
+}

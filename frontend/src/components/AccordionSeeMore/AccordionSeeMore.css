@@ -1,0 +1,15 @@
+.accordionMoreInfo .accordion-button::after{
+    margin-left: 0.75rem;
+}
+
+@media screen and (min-width: 768px) and (max-width: 992px){
+    .accordionMoreInfo{
+        width: 50%;
+    }
+}
+
+@media screen and (min-width: 992px){
+    .accordionMoreInfo{
+        width: 25%;
+    }
+}

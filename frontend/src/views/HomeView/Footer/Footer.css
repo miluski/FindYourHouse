@@ -1,0 +1,54 @@
+.socialIconSize{
+    font-size: 24px !important;
+}
+
+.footerLink{
+    width: 50%;
+    padding-right: 40px !important;
+}
+
+.footerLink:hover{
+    text-decoration: underline;
+    text-underline-offset: 5px;
+    text-underline: white;
+    opacity: 85%;
+}
+
+.personalDataLink{
+    color: rgb(244, 182, 48);
+}
+
+.personalDataLink:hover{
+    text-decoration: underline;
+    text-underline-offset: 5px;
+    text-underline: rgb(244, 182, 48);
+    opacity: 85%;
+}
+
+
+@media screen and (max-width: 998px){
+    .socialIconSize{
+        font-size: 16px !important;
+    }
+
+}
+
+@media screen and (min-width: 655px) and (max-width: 992px ){
+    .footerLink{
+        width: 33%;
+    }
+}
+
+
+@media screen and (min-width: 992px) and (max-width: 1280px){
+    .footerLink{
+        width: 25%;
+    }
+}
+
+
+@media screen and (min-width: 1280px){
+    .footerLink{
+        width: auto;
+    }
+}
