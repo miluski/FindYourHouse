@@ -24,7 +24,7 @@ const ChatView: React.FC<ChatViewProps> = ({
 	};
 
 	return (
-		<div className='d-flex flex-column h-100'>
+		<div className='d-flex flex-column h-100' data-testid="chatView">
 			<div className='flex-grow-1 overflow-auto'>
 				<MessageList messages={user.messages} />
 			</div>

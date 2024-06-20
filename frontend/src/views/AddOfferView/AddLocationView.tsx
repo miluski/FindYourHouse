@@ -23,10 +23,10 @@ export const AddLocationView = () => {
 		apartment: false,
 	});
 	return (
-		<Container fluid>
+		<Container fluid="true" data-testid="addLocationView">
 			<text className='fs-5 fw-bold'>Lokalizacja </text>
 			<SeparateLine />
-			<Container fluid className='d-flex flex-row'>
+			<Container fluid="true" className='d-flex flex-row'>
 				<Container className='d-flex flex-column mx-5'>
 					<Form.Label className='d-flex justify-content-center align-items-center fs-5 mt-6 mb-1 w-100'>
 						<text>Wprowadź miasto</text>

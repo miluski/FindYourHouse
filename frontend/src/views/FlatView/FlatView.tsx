@@ -10,7 +10,7 @@ export const FlatView = () => {
 	return (
 		<>
 			<HeaderView />
-			<Container className='d-flex justify-content-betweeen align-items-center align-self-center'>
+			<Container className='d-flex justify-content-betweeen align-items-center align-self-center' >
 				<Row className='w-100 mb-3'>
 					<RedirectButtonsView />
 				</Row>

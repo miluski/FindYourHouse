@@ -12,9 +12,9 @@ export const AddOfferTitleView = () => {
 		(state: OfferState) => state.offerReducer as unknown as OfferState
 	);
 	return (
-		<Container fluid>
+		<Container fluid="true" data-testid="addOfferTitleView">
 			<SeparateLine />
-			<Container fluid className='w-25 mb-5 mt-3'>
+			<Container fluid="true" className='w-25 mb-5 mt-3'>
 				<Form.Label className='d-flex justify-content-center align-items-center fs-5 mt-6 mb-1 w-100'>
 					<text>Wprowadź tytuł ogłoszenia</text>
 					<span className='text-danger px-1'>*</span>
