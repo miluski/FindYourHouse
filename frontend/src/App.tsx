@@ -3,7 +3,6 @@ import HomeView from "./views/HomeView/HomeView.tsx";
 import { MortrageCalculatorView } from "./views/MortrageCalculatorView/MortrageCalculatorView.tsx";
 import { combineReducers, legacy_createStore } from "redux";
 import { Provider } from "react-redux";
-import ReportOfferView from "./views/ReportOfferView/ReportOfferView.tsx";
 import { AddOfferView } from "./views/AddOfferView/AddOfferView.tsx";
 import { userReducer } from "./utils/reducers/userReducer.ts";
 import { calculatorReducer } from "./utils/reducers/calculatorReducer.ts";
@@ -91,14 +90,6 @@ const browserRouter = createBrowserRouter([
 		element: (
 			<GuardView>
 				<CancelledPaymentView />
-			</GuardView>
-		),
-	},
-	{
-		path: "report",
-		element: (
-			<GuardView>
-				<ReportOfferView />
 			</GuardView>
 		),
 	},

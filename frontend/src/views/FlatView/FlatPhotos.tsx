@@ -17,7 +17,7 @@ export const FlatPhotos = () => {
 
 			<Container className='border border-black d-flex justify-content-center mb-3'>
 				<img
-					src={actualSelectedOffer.photos[0].filePath}
+					src={actualSelectedOffer?.photos[0]?.filePath}
 					alt='obraz'
 					className='rounded'
 					style={{ width: 500, height: 300 }}

@@ -21,14 +21,16 @@ public class UserService {
     private final AuthenticationManager authenticationManager;
     private final TokenService tokenService;
     private final PaymentService paymentService;
+    private final MessagesService messagesService;
 
     @Autowired
     public UserService(UserRepository userRepository, AuthenticationManager authenticationManager,
-            TokenService tokenService, PaymentService paymentService) {
+            TokenService tokenService, PaymentService paymentService, MessagesService messagesService) {
         this.userRepository = userRepository;
         this.authenticationManager = authenticationManager;
         this.tokenService = tokenService;
         this.paymentService = paymentService;
+        this.messagesService = messagesService;
     }
 
     public List<User> getUsers() {
@@ -137,6 +139,7 @@ public class UserService {
         try {
             User user = userRepository.findByEmail(email);
             paymentService.deletePaymentsByUser(user);
+            messagesService.deleteMessagesByUser(user);
             if (user != null) {
                 userRepository.deleteById(user.getId());
                 return true;

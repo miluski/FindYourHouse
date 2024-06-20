@@ -28,13 +28,17 @@ class UserServiceTest {
     private TokenService tokenService;
     @MockBean
     private PaymentService paymentService;
+    @MockBean
+    private MessagesService messagesService;
 
     @BeforeEach
     void setUp() {
         MockitoAnnotations.openMocks(this);
         paymentService = Mockito.mock(PaymentService.class);
         tokenService = Mockito.mock(TokenService.class);
-        userService = new UserService(userRepository, authenticationManager, tokenService, paymentService);  
+        messagesService = Mockito.mock(MessagesService.class);
+        userService = new UserService(userRepository, authenticationManager, tokenService, paymentService,
+                messagesService);
     }
 
     @Test

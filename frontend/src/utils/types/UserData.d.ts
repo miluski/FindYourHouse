@@ -2,6 +2,8 @@ export type UserData = {
 	name: string;
 	phoneNumber: string;
 	surname: string;
+	firstName?: string;
+	lastName?: string;
 	email: string;
 	role?: string;
 	accessToken?: {
@@ -10,4 +12,5 @@ export type UserData = {
 	refreshToken?: {
 		token: symboltring;
 	};
+	messages?: any;
 };

@@ -1,5 +1,5 @@
 import { Badge, Col, Container, Pagination, Row, Table } from "react-bootstrap";
-import { Message } from "../../utils/types/Message";
+import { Ticket } from "../../utils/types/Ticket";
 import { useDispatch, useSelector } from "react-redux";
 import { AdminState } from "../../utils/types/State";
 import { CHANGE_CURRENT_PAGE } from "../../utils/ActionTypes";
@@ -47,7 +47,7 @@ export default function MessagesView() {
 						</tr>
 					</thead>
 					<tbody>
-						{currentMessagesArray.map((message: Message, index: number) => (
+						{currentMessagesArray.map((message: Ticket, index: number) => (
 							<tr key={index}>
 								<td>{message.topic}</td>
 								<td>{message.clientName}</td>

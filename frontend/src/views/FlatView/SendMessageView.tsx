@@ -1,11 +1,23 @@
-import { Button, Container, Form } from "react-bootstrap";
+import { Button, Container } from "react-bootstrap";
 import { useSelector } from "react-redux";
 import { OfferState } from "../../utils/types/State";
+import {  useState } from "react";
+import { sendMessage } from "../../utils/sendMessage";
+import { useNavigate } from "react-router-dom";
 
 export const SendMessageView = () => {
+	const navigate = useNavigate();
 	const { actualSelectedOffer } = useSelector(
 		(state: OfferState) => state.offerReducer as unknown as OfferState
 	);
+	const [messageContent, setMessageContent] = useState("");
+	const user = {
+		email: localStorage.getItem("email") ?? "",
+		name: localStorage.getItem("name") ?? "",
+		surname: localStorage.getItem("surname") ?? "",
+		phoneNumber: localStorage.getItem("phoneNumber") ?? "",
+	};
+
 	return (
 		<>
 			<Container className=''>
@@ -27,33 +39,54 @@ export const SendMessageView = () => {
 								{actualSelectedOffer.exhibitorSurname}
 							</h5>
 							<small className='text-muted'>ogłoszenie dewelopera</small>
-							<p className='mb-0'>+48 {actualSelectedOffer.exhibitorPhoneNumber}</p>
+							<p className='mb-0'>
+								+48 {actualSelectedOffer.exhibitorPhoneNumber}
+							</p>
 						</div>
-						<Form>
-							<Form.Group controlId='formName' className='mb-3'>
-								<Form.Label>Imię*</Form.Label>
-								<Form.Control type='text' placeholder='Imię' />
-							</Form.Group>
-							<Form.Group controlId='formEmail' className='mb-3'>
-								<Form.Label>Email*</Form.Label>
-								<Form.Control type='email' placeholder='Email' />
-							</Form.Group>
-							<Form.Group controlId='formPhone' className='mb-3'>
-								<Form.Label>Numer telefonu*</Form.Label>
-								<Form.Control type='tel' placeholder='Numer telefonu' />
-							</Form.Group>
-							<Form.Group controlId='formMessage' className='mb-3'>
-								<Form.Label>podaj treść wiadomości*</Form.Label>
-								<Form.Control
-									as='textarea'
-									rows={3}
-									placeholder='podaj treść wiadomości'
+						{actualSelectedOffer.exhibitorEmail !== user.email ? (
+							<>
+								<textarea
+									placeholder='Podaj treść wiadomości'
+									className='mb-3'
+									onChange={(e) => setMessageContent(e.target.value)}
+									style={{ width: 300, height: 150 }}
 								/>
-							</Form.Group>
-							<Button variant='warning' type='submit' className='w-100'>
-								Wyślij wiadomość
-							</Button>
-						</Form>
+								<Button
+									variant='warning'
+									type='submit'
+									className='w-100'
+									onClick={async () => {
+										const isSended =
+											(await sendMessage({
+												content: messageContent,
+												type: "income",
+												user: user,
+												fromEmail: actualSelectedOffer.exhibitorEmail ?? "",
+												fromNameAndSurname:
+													actualSelectedOffer.exhibitorName ??
+													"" + " " + actualSelectedOffer.exhibitorSurname ?? "",
+											})) &&
+											(await sendMessage({
+												content: messageContent,
+												type: "outcome",
+												user: {
+													email: actualSelectedOffer.exhibitorEmail ?? "",
+													name: actualSelectedOffer.exhibitorName ?? "",
+													surname: actualSelectedOffer.exhibitorSurname ?? "",
+													phoneNumber:
+														actualSelectedOffer.exhibitorPhoneNumber ?? "",
+												},
+												fromEmail: user.email,
+												fromNameAndSurname: user.name + " " + user.surname,
+											}));
+										isSended ? navigate("/messages") : null;
+									}}>
+									Wyślij wiadomość
+								</Button>{" "}
+							</>
+						) : (
+							<></>
+						)}
 					</div>
 				</Container>
 			</Container>
