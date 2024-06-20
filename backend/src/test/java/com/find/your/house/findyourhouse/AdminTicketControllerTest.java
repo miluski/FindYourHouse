@@ -1,8 +1,11 @@
 package com.find.your.house.findyourhouse;
 
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+
+import java.util.Collections;
 
 import org.junit.jupiter.api.*;
 import org.mockito.*;
@@ -40,7 +43,7 @@ public class AdminTicketControllerTest {
 
     @MockBean
     private AdminTicketsService adminTicketsService;
-    
+
     @InjectMocks
     private AdminTicketController adminTicketController;
 
@@ -108,4 +111,12 @@ public class AdminTicketControllerTest {
         mockMvc.perform(delete("/api/tickets/delete/1"))
                 .andExpect(status().isInternalServerError());
     }
+
+    @Test
+    public void testGetAllAdminMessagesWithNoTickets() throws Exception {
+        when(adminTicketsService.getAllTickets()).thenReturn(Collections.emptyList());
+        mockMvc.perform(get("/api/tickets/"))
+                .andExpect(status().isOk());
+    }
+
 }
