@@ -134,11 +134,10 @@ class UserControllerTest {
 
     @Test
     void testEditUser() throws Exception {
-        Long id = 1L;
         UserDto userDto = new UserDto();
         when(userMapper.convertToUser(userDto)).thenReturn(new User());
-        when(userService.editUser(any(), any())).thenReturn(true);
-        mockMvc.perform(patch("/api/users/edit/{id}", id)
+        when(userService.editUser(any())).thenReturn(true);
+        mockMvc.perform(patch("/api/users/edit")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(asJsonString(userDto)))
                 .andExpect(status().isOk());
