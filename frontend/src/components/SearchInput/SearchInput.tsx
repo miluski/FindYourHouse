@@ -1,18 +1,24 @@
 import RoundedIcon from "../RoundedIcon/RoundedIcon.tsx";
 import React, { useRef, useState } from "react";
 import "./SearchInput.css";
+import { axiosInstance } from "../../utils/axiosInstance";
+import { useNavigate } from "react-router-dom";
 
 export default function SearchInput({
   outline,
   id,
+  offerType,
 }: {
   outline?: boolean;
   id: string;
+  offerType?: string;
 }) {
   const [inputFocused, setInputFocused] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
   const [inputValue, setInputValue] = useState("");
   const [visible, setVisible] = useState(false);
+
+  const route = useNavigate();
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const value = event.target.value;
@@ -35,6 +41,35 @@ export default function SearchInput({
     setInputFocused(true);
     if (inputRef.current) {
       inputRef.current.focus();
+    }
+
+    handleSearch();
+  };
+
+  const handleSearch = async () => {
+    try {
+      const response = await axiosInstance.get("/api/offers/search", {
+        params: {
+          query: inputValue,
+          offerType: offerType,
+        },
+      });
+
+      let page;
+
+      if (offerType === "Sprzedaż") {
+        page = "buyPage";
+      }
+
+      if (offerType === "Wynajem") {
+        page = "rentPage";
+      }
+
+      localStorage.setItem("currentPageHeader", page as string);
+
+      route("/filteredFlats", { state: { offers: response.data } });
+    } catch (error) {
+      console.error("Error fetching offers", error);
     }
   };
 

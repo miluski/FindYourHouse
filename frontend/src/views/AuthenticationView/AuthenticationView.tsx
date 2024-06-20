@@ -70,7 +70,10 @@ export default function AuthenticationView({
                   : " border-white")
               }
             >
-              <Nav.Link className={"px-3 pb-3 no-transition"} eventKey="login">
+              <Nav.Link
+                className={"text-black px-3 pb-3 no-transition"}
+                eventKey="login"
+              >
                 Zaloguj się
               </Nav.Link>
             </Nav.Item>
@@ -83,7 +86,7 @@ export default function AuthenticationView({
               }
             >
               <Nav.Link
-                className={"px-3  pb-3 no-transition"}
+                className={"text-black px-3  pb-3 no-transition"}
                 eventKey="register"
               >
                 Zarejestruj się

@@ -11,7 +11,7 @@ export default function FlatListSubSection({
   children: ReactNode;
 }) {
   return (
-    <section className={"d-flex flex-column text-nowrap"}>
+    <section className={"d-flex flex-column "}>
       <div className={"mb-3 px-2 p-xxl-0"}>
         <h2 className={"m-0 fw-bold fs-4"}>{title}</h2>
         <a className={"d-inline text-black"} href="#">

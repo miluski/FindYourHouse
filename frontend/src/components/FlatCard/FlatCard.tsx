@@ -1,10 +1,10 @@
 import { Badge, Card } from "react-bootstrap";
 import RoundedIcon from "../RoundedIcon/RoundedIcon.tsx";
-import { useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./FlatCard.css";
 import loadingPhoto from "../../assets/loadingPhoto.svg";
 import PlaceHolder from "../PlaceHolder/PlaceHolder.tsx";
+import { axiosInstance } from "../../utils/axiosInstance";
 
 export default function FlatCard({
   isNew,
@@ -15,8 +15,11 @@ export default function FlatCard({
   street,
   city,
   thumbNail,
-  link,
+  navigate,
   loading,
+  handleShowModal,
+  email,
+  offerId,
 }: {
   isNew: boolean;
   propertyType: string;
@@ -26,21 +29,63 @@ export default function FlatCard({
   street: string;
   city: string;
   thumbNail: string;
-  link: string;
+  navigate: Function;
   loading: boolean;
+  handleShowModal: Function;
+  email: string;
+  offerId: number;
 }) {
-  const route = useNavigate();
   const [like, setLike] = useState(false);
   const token = localStorage.getItem("token");
+
+  useEffect(() => {
+    if (email && !loading && thumbNail !== undefined) {
+      axiosInstance
+        .get(`/api/favorites/${email}`)
+        .then((response) => {
+          const favorites = response.data;
+          console.log(favorites);
+          const isFavorite = favorites.some((fav: any) => fav.id === offerId);
+          setLike(isFavorite);
+        })
+        .catch((error) => {
+          console.error("Error fetching favorites:", error);
+        });
+    }
+  }, [email, loading, thumbNail, offerId]);
+
+  const handleFavoriteToggle = async (e: any) => {
+    e.stopPropagation();
+    if (token !== "" && token !== null) {
+      try {
+        if (like) {
+          await axiosInstance.delete(`/api/favorites/${email}/${offerId}`);
+        } else {
+          await axiosInstance.post(`/api/favorites/${email}/${offerId}`);
+        }
+        setLike(!like);
+      } catch (error) {
+        console.error("Error updating favorite status:", error);
+      }
+    } else {
+      handleShowModal("login");
+    }
+  };
 
   return (
     <Card
       tabIndex={0}
       className={"w-25 rounded-4 border-0 cursor-pointer flatCard"}
-      onClick={() => route(link)}
+      onClick={() => {
+        if (!loading && thumbNail !== undefined) {
+          {
+            navigate();
+          }
+        }
+      }}
     >
       <div className={"position-relative"}>
-        {isNew && !loading && (
+        {isNew && !loading && thumbNail !== undefined && (
           <Badge
             pill
             className={"position-absolute top-0 start-0 mt-2 ms-2 fw-semibold"}
@@ -52,16 +97,14 @@ export default function FlatCard({
         <Card.Img
           className={"rounded-top-4 cardImg"}
           variant="top"
-          src={loading ? loadingPhoto : thumbNail}
+          src={loading || thumbNail === undefined ? loadingPhoto : thumbNail}
         />
-        {loading ? (
+        {loading || thumbNail === undefined ? (
           <></>
         ) : (
           <button
-            onClick={(e) => {
-              e.stopPropagation();
-              setLike((prevState) => !prevState);
-            }}
+            type={"button"}
+            onClick={handleFavoriteToggle}
             className={
               "position-absolute z-1  border-0 rounded-circle bottom-0 end-0 me-2 mb-2 p-0 "
             }
@@ -76,7 +119,7 @@ export default function FlatCard({
       </div>
       <Card.Body className={"d-flex flex-column flatCardBody"}>
         <div className={"d-flex align-items-center "}>
-          {loading ? (
+          {loading || propertyType === undefined ? (
             <PlaceHolder width={"col-7"} />
           ) : (
             <>
@@ -89,7 +132,10 @@ export default function FlatCard({
             </>
           )}
         </div>
-        {loading ? (
+        {loading ||
+        price === undefined ||
+        roomsNumber === undefined ||
+        sqft === undefined ? (
           <PlaceHolder className={"flex-grow-1"} width={"col-10"} />
         ) : (
           <>
@@ -108,7 +154,7 @@ export default function FlatCard({
             </div>
           </>
         )}
-        {loading ? (
+        {loading || street === undefined || city === undefined ? (
           <PlaceHolder className={"h-25"} width={"col-6"} />
         ) : (
           <div className={"fs-7"}>

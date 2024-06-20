@@ -14,7 +14,7 @@ export default function Footer() {
       <Container fluid={"md"} className={"d-flex flex-column gap-5"}>
         <div
           className={
-            "d-flex gap-3 justify-content-center justify-content-md-start"
+            "d-flex gap-2 gap-sm-3 justify-content-center justify-content-md-start"
           }
         >
           <button

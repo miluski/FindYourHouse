@@ -5,7 +5,7 @@ import NavButton from "../../../components/CustomButtons/NavButton/NavButton.tsx
 import SearchInput from "../../../components/SearchInput/SearchInput.tsx";
 
 export default function HeroSection() {
-  const [checkBoxValue, setCheckBoxValue] = useState("buy");
+  const [checkBoxValue, setCheckBoxValue] = useState("Sprzedaż");
   const [hoveredButton, setHoveredButton] = useState("");
 
   const handleMouseLeave = () => {
@@ -56,9 +56,9 @@ export default function HeroSection() {
               <NavButton
                 onMouseEnter={handleMouseEnter("buyButton")}
                 onMouseLeave={handleMouseLeave}
-                currentPage={checkBoxValue === "buy"}
+                currentPage={checkBoxValue === "Sprzedaż"}
                 hovered={hoveredButton === "buyButton"}
-                onClick={() => setCheckBoxValue("buy")}
+                onClick={() => setCheckBoxValue("Sprzedaż")}
                 borderWidth={"border-4"}
                 fontSize={"fs-6"}
               >
@@ -68,8 +68,8 @@ export default function HeroSection() {
                 onMouseEnter={handleMouseEnter("rentButton")}
                 onMouseLeave={handleMouseLeave}
                 hovered={hoveredButton === "rentButton"}
-                currentPage={checkBoxValue === "rent"}
-                onClick={() => setCheckBoxValue("rent")}
+                currentPage={checkBoxValue === "Wynajem"}
+                onClick={() => setCheckBoxValue("Wynajem")}
                 borderWidth={"border-4"}
                 fontSize={"fs-6"}
               >
@@ -99,7 +99,13 @@ export default function HeroSection() {
               </NavButton>
             </nav>
             <nav className="py-2 mx-auto" style={{ maxWidth: "575px" }}>
-              <SearchInput id={"stickySearchInput"} outline />
+              <form autoComplete="off">
+                <SearchInput
+                  offerType={checkBoxValue}
+                  id={"stickySearchInput"}
+                  outline
+                />
+              </form>
             </nav>
           </Container>
         </header>
@@ -118,9 +124,9 @@ export default function HeroSection() {
               className={"text-white heroSection__navButton"}
               onMouseEnter={handleMouseEnter("buyButton")}
               onMouseLeave={handleMouseLeave}
-              currentPage={checkBoxValue === "buy"}
+              currentPage={checkBoxValue === "Sprzedaż"}
               hovered={hoveredButton === "buyButton"}
-              onClick={() => setCheckBoxValue("buy")}
+              onClick={() => setCheckBoxValue("Sprzedaż")}
               borderWidth={"border-4"}
               fontSize={"fs-6"}
             >
@@ -132,8 +138,8 @@ export default function HeroSection() {
               hovered={hoveredButton === "rentButton"}
               borderColor={"border-white "}
               className={"text-white heroSection__navButton"}
-              currentPage={checkBoxValue === "rent"}
-              onClick={() => setCheckBoxValue("rent")}
+              currentPage={checkBoxValue === "Wynajem"}
+              onClick={() => setCheckBoxValue("Wynajem")}
               borderWidth={"border-4"}
               fontSize={"fs-6"}
             >
@@ -175,7 +181,7 @@ export default function HeroSection() {
                 aria-label={"actionType"}
                 className={"visually-hidden"}
               />
-              <SearchInput id={"heroSearchInput"} />
+              <SearchInput offerType={checkBoxValue} id={"heroSearchInput"} />
             </form>
           </div>
         </Container>

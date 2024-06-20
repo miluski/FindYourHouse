@@ -127,6 +127,14 @@ export default function HeaderDesktop({
             <RoundedIcon
               onClick={() => {
                 setCurrentPage("accountPage");
+                navigate("/favoriteFlatList");
+              }}
+              className={"cursor-pointer me-3"}
+              icon={"bi-heart-fill fs-7"}
+            />
+            <RoundedIcon
+              onClick={() => {
+                setCurrentPage("accountPage");
                 navigate("/user-panel");
               }}
               className={"cursor-pointer"}

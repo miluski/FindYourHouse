@@ -13,12 +13,15 @@ import CancelledPaymentView from "./views/AddOfferView/CancelledPaymentView.tsx"
 import NotFoundView from "./views/ErrorViews/NotFoundView.tsx";
 import { ProfileSettings } from "./views/ProfileSettings/ProfileSettings.tsx";
 import { UserPanel } from "./views/UserPanelView/UserPanelView.tsx";
+import { FlatView } from "./views/FlatView/FlatView";
 import FlatListView from "./views/FlatListView/FlatListView.tsx";
 import AdminView from "./views/AdminView/AdminView.tsx";
 import GuardView from "./views/ErrorViews/GuardView.tsx";
 import NotAuthorizedView from "./views/ErrorViews/NotAuthorizedView.tsx";
 import { offerReducer } from "./utils/reducers/offerReducer.ts";
 import "./App.css";
+import FilteredFlatListView from "./views/FilteredFlatListView/FilteredFlatListView";
+import FavoriteFlatListView from "./views/FavoriteListView/FavoriteFlatListView.tsx";
 
 const browserRouter = createBrowserRouter([
   {
@@ -108,6 +111,30 @@ const browserRouter = createBrowserRouter([
     element: (
       <GuardView>
         <FlatListView />
+      </GuardView>
+    ),
+  },
+  {
+    path: "flat-view",
+    element: (
+      <GuardView>
+        <FlatView />
+      </GuardView>
+    ),
+  },
+  {
+    path: "filteredFlats",
+    element: (
+      <GuardView>
+        <FilteredFlatListView />
+      </GuardView>
+    ),
+  },
+  {
+    path: "favoriteFlatList",
+    element: (
+      <GuardView>
+        <FavoriteFlatListView />
       </GuardView>
     ),
   },

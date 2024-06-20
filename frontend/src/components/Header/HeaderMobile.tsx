@@ -14,6 +14,7 @@ import RoundedIcon from "../RoundedIcon/RoundedIcon.tsx";
 
 export default function ({ handleShowModal }: { handleShowModal: Function }) {
   const navigate = useNavigate();
+  const token = localStorage.getItem("token");
 
   return (
     <>
@@ -155,7 +156,22 @@ export default function ({ handleShowModal }: { handleShowModal: Function }) {
         Kredyty
       </AccordionNavButton>
       <AccordionNavButton
-        onClick={handleShowModal("login")}
+        onClick={
+          token !== "" && token !== null
+            ? () => navigate("/favoriteFlatList")
+            : handleShowModal("login")
+        }
+        buttonClassName={"border-bottom"}
+      >
+        <RoundedIcon icon={"bi-heart-fill fs-7"} />
+        Moja Lista
+      </AccordionNavButton>
+      <AccordionNavButton
+        onClick={
+          token !== "" && token !== null
+            ? () => navigate("/user-panel")
+            : handleShowModal("login")
+        }
         buttonClassName={"border-bottom"}
       >
         <RoundedIcon icon={"bi-person-fill"} />
