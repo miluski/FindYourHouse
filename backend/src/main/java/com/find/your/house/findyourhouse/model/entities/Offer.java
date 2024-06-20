@@ -51,6 +51,17 @@ public class Offer {
     @Column(name="can_show", nullable = false)
     private Boolean canShow;
 
+    public Set<Favorites> getFavorites() {
+        return favorites;
+    }
+
+    public void setFavorites(Set<Favorites> favorites) {
+        this.favorites = favorites;
+    }
+
+    @OneToMany(mappedBy = "offer")
+    private Set<Favorites> favorites;
+
     public Long getId() {
         return id;
     }

@@ -9,6 +9,7 @@ import com.find.your.house.findyourhouse.model.entities.Offer;
 public class OfferMapper {
     public Offer convertToOffer(OfferDto offerDto) {
         Offer offer = new Offer();
+        offerDto.setId(offer.getId());
         offer.setOfferType(offerDto.getOfferType());
         offer.setPropertyType(offerDto.getPropertyType());
         offer.setTitle(offerDto.getTitle());
@@ -33,6 +34,7 @@ public class OfferMapper {
 
     public OfferDto convertToOfferDto(Offer offer) {
         OfferDto offerDto = new OfferDto();
+        offerDto.setId(offer.getId());
         offerDto.setOfferType(offer.getOfferType());
         offerDto.setPropertyType(offer.getPropertyType());
         offerDto.setTitle(offer.getTitle());

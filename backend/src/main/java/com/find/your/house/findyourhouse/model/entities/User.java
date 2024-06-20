@@ -1,6 +1,9 @@
 package com.find.your.house.findyourhouse.model.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+
+import java.util.Set;
 
 @Entity
 @Table(name = "users")
@@ -30,6 +33,18 @@ public class User {
 
     @Column(name = "refresh_token")
     private String refreshToken;
+
+    public Set<Favorites> getFavorites() {
+        return favorites;
+    }
+
+    public void setFavorites(Set<Favorites> favorites) {
+        this.favorites = favorites;
+    }
+
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
+    @JsonIgnore
+    private Set<Favorites> favorites;
 
     public Long getId() {
         return id;

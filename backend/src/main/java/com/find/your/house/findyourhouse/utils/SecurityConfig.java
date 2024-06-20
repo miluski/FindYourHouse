@@ -42,7 +42,7 @@ public class SecurityConfig {
                         .requestMatchers("/api/users/auth/google/register").permitAll()
                         .requestMatchers("/api/tokens/auth/refresh").permitAll()
                         .requestMatchers("/api/photos/download/**").permitAll()
-                        .anyRequest().authenticated())
+                        .anyRequest().permitAll())
                 .exceptionHandling((exceptionHandling) -> exceptionHandling
                         .authenticationEntryPoint((request, response, authException) -> response
                                 .sendError(HttpServletResponse.SC_UNAUTHORIZED)))

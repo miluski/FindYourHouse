@@ -37,6 +37,18 @@ public class OfferController {
         return Optional.ofNullable(offers);
     }
 
+    @GetMapping("/search")
+    private ResponseEntity<List<OfferDto>> searchOffers(
+            @RequestParam String query,
+            @RequestParam String offerType) {
+        List<OfferDto> filteredOffers = offerService.searchOffers(query, offerType)
+                .stream()
+                .map(offerMapper::convertToOfferDto)
+                .collect(Collectors.toList());
+        return ResponseEntity.status(HttpStatus.OK).body(filteredOffers);
+    }
+
+
     @GetMapping("/id/{id}")
     private ResponseEntity<?> getOfferById(@PathVariable Long id) {
         Offer offer = offerService.getOfferById(id).orElse(null);
@@ -57,5 +69,4 @@ public class OfferController {
         return isEditedProperly ? ResponseEntity.status(HttpStatus.OK).build()
                 : ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
     }
-
 }

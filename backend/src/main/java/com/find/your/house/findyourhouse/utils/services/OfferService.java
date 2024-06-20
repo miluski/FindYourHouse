@@ -1,6 +1,7 @@
 package com.find.your.house.findyourhouse.utils.services;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -39,6 +40,15 @@ public class OfferService {
             return false;
         }
     }
+
+    public List<Offer> searchOffers(String query, String offerType) {
+        List<Offer> allOffers = offerRepository.findAll();
+        return allOffers.stream()
+                .filter(offer -> (offer.getTitle().contains(query) || offer.getDescription().contains(query) || offer.getCity().contains(query) || offer.getStreet().contains(query))
+                        && offer.getOfferType().equalsIgnoreCase(offerType))
+                .collect(Collectors.toList());
+    }
+
 
     public Boolean editOffer(Long id, Offer offer) {
         try {
