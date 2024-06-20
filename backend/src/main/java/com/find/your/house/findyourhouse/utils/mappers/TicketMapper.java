@@ -24,6 +24,7 @@ public class TicketMapper {
         ticketDto.setDate(ticket.getDate());
         ticketDto.setOffer(ticket.getOffer());
         ticketDto.setTopic(ticket.getTopic());
+        ticketDto.setId(ticket.getId());
         return ticketDto;
     }
 

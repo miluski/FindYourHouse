@@ -7,6 +7,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.find.your.house.findyourhouse.model.entities.*;
 
 public class TicketDto implements Serializable {
+    private Long id;
     private String topic;
     private String clientName;
     private String category;
@@ -61,5 +62,13 @@ public class TicketDto implements Serializable {
 
     public Offer getOffer() {
         return this.offer;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Long getId() {
+        return this.id;
     }
 }

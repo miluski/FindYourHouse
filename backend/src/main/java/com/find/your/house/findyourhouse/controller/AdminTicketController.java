@@ -26,8 +26,16 @@ public class AdminTicketController {
                 this.ticketMapper = ticketMapper;
         }
 
+        @GetMapping("/")
+        public ResponseEntity<?> getAllTickets() {
+                List<TicketDto> tickets = adminTicketsService.getAllTickets().stream()
+                                .map(ticketMapper::convertToTicketDto).collect(Collectors.toList());
+                return tickets != null ? ResponseEntity.status(HttpStatus.OK).body(tickets)
+                                : ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        }
+
         @PostMapping("/create")
-        public ResponseEntity<?> createAdminMessage(@RequestBody TicketDto ticketDto) {
+        public ResponseEntity<?> createTicket(@RequestBody TicketDto ticketDto) {
                 try {
                         Boolean isCreated = adminTicketsService.createTicket(ticketMapper.convertToTicket(ticketDto));
                         return isCreated ? ResponseEntity.status(HttpStatus.CREATED).build()
@@ -38,8 +46,15 @@ public class AdminTicketController {
                 }
         }
 
+        @PostMapping("/accept/{id}")
+        public ResponseEntity<?> acceptTicket(@PathVariable Long id) {
+                Boolean isAccepted = adminTicketsService.acceptTicket(id);
+                return isAccepted ? ResponseEntity.status(HttpStatus.OK).build()
+                                : ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        }
+
         @DeleteMapping("/delete/{id}")
-        public ResponseEntity<?> deleteAdminMessage(@PathVariable Long id) {
+        public ResponseEntity<?> deleteTicket(@PathVariable Long id) {
                 try {
                         Boolean isDeleted = adminTicketsService.deleteTicket(id);
                         return isDeleted ? ResponseEntity.status(HttpStatus.OK).build()
@@ -48,13 +63,5 @@ public class AdminTicketController {
                         e.printStackTrace();
                         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
                 }
-        }
-
-        @GetMapping("/")
-        public ResponseEntity<?> getAllAdminMessages() {
-                List<TicketDto> tickets = adminTicketsService.getAllTickets().stream()
-                                .map(ticketMapper::convertToTicketDto).collect(Collectors.toList());
-                return tickets != null ? ResponseEntity.status(HttpStatus.OK).body(tickets)
-                                : ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }
 }
