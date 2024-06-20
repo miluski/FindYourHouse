@@ -20,7 +20,7 @@ export default function FooterView({ fixedBottom }: { fixedBottom?: boolean }) {
 						<p className='ff-kreon fs-3 fw-regular'>Znajdź swój dach!</p>
 					</Col>
 					<Col>
-						<p className='ff-kreon fs-5 fw-regular'>Dołącz do nas</p>
+						<span className='ff-kreon fs-5 fw-regular'>Dołącz do nas</span>
 						<Instagram
 							className='cursor-pointer mx-2'
 							size={32}

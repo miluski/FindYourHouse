@@ -59,4 +59,8 @@ public class Ticket {
     public Offer getOffer() {
         return this.offer;
     }
+
+    public Long getId() {
+        return this.id;
+    }
 }
