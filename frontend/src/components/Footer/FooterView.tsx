@@ -17,10 +17,10 @@ export default function FooterView({ fixedBottom }: { fixedBottom?: boolean }) {
 			<Container fluid className='d-flex flex-row'>
 				<Container className='d-flex flex-column justify-content-center align-content-center w-sm-60 w-md-65 flex-xs-wrap'>
 					<Col>
-						<text className='ff-kreon fs-3 fw-regular'>Znajdź swój dach!</text>
+						<p className='ff-kreon fs-3 fw-regular'>Znajdź swój dach!</p>
 					</Col>
 					<Col>
-						<text className='ff-kreon fs-5 fw-regular'>Dołącz do nas</text>
+						<p className='ff-kreon fs-5 fw-regular'>Dołącz do nas</p>
 						<Instagram
 							className='cursor-pointer mx-2'
 							size={32}
