@@ -2,6 +2,7 @@ package com.find.your.house.findyourhouse;
 
 import org.junit.jupiter.api.*;
 import org.mockito.*;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.security.authentication.AuthenticationManager;
 
 import com.find.your.house.findyourhouse.model.entities.User;
@@ -21,14 +22,19 @@ class UserServiceTest {
     @Mock
     private AuthenticationManager authenticationManager;
 
-    @InjectMocks
+    @MockBean
     private UserService userService;
-    @InjectMocks
+    @MockBean
     private TokenService tokenService;
+    @MockBean
+    private PaymentService paymentService;
 
     @BeforeEach
     void setUp() {
         MockitoAnnotations.openMocks(this);
+        paymentService = Mockito.mock(PaymentService.class);
+        tokenService = Mockito.mock(TokenService.class);
+        userService = new UserService(userRepository, authenticationManager, tokenService, paymentService);  
     }
 
     @Test
@@ -144,17 +150,17 @@ class UserServiceTest {
 
     @Test
     void deleteUser_ExistingUser_ShouldReturnTrue() {
-        Long id = 1L;
-        when(userRepository.findById(id)).thenReturn(Optional.of(new User()));
-        boolean result = userService.deleteUser(id);
+        String email = "test@test.com";
+        when(userRepository.findByEmail(email)).thenReturn(new User());
+        boolean result = userService.deleteUser(email);
         Assertions.assertTrue(result);
     }
 
     @Test
     void deleteUser_NonExistingUser_ShouldReturnFalse() {
-        Long id = 1L;
-        when(userRepository.findById(id)).thenReturn(Optional.empty());
-        boolean result = userService.deleteUser(id);
+        String email = "test@test.com";
+        when(userRepository.findByEmail(email)).thenReturn(null);
+        boolean result = userService.deleteUser(email);
         Assertions.assertFalse(result);
     }
 

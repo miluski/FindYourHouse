@@ -126,9 +126,9 @@ class UserControllerTest {
 
     @Test
     void testDeleteUser() throws Exception {
-        Long id = 1L;
-        when(userService.deleteUser(id)).thenReturn(true);
-        mockMvc.perform(delete("/api/users/delete/{id}", id))
+        String email = "test@test.com";
+        when(userService.deleteUser(email)).thenReturn(true);
+        mockMvc.perform(delete("/api/users/delete/{email}", email))
                 .andExpect(status().isOk());
     }
 
