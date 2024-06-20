@@ -1,3 +1,6 @@
+import { Offer } from "./Offer";
+import { OfferState } from "./State";
+
 export type UserAction = {
 	type: string;
 	newName: string;
@@ -42,4 +45,5 @@ export type OfferAction = {
 	newExhibitorSurname: string;
 	newExhibitorPhoneNumber: string;
 	newExhibitorEmail: string;
+	newActualSelectedOffer: Offer;
 };
