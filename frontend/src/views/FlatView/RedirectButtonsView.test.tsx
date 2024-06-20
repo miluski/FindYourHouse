@@ -22,7 +22,7 @@ describe("RedirectButtonsView", () => {
 
   test("calls navigate when button is clicked", () => {
     render(<RedirectButtonsView />);
-    const buttonElement = screen.getByText("Kalkulator-kredytu");
+    const buttonElement = screen.getByTestId("Kalkulator-kredytu");
     fireEvent.click(buttonElement);
     expect(navigate).toHaveBeenCalledWith("/calculator");
   });

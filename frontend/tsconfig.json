@@ -22,6 +22,6 @@
     "noFallthroughCasesInSwitch": true,
     "types": ["jest", "node"]
   },
-  "include": ["src", "tests/ReportOfferView.test.tsx", "jest.config.cjs", "tests/calculatorReducer.test.ts", "tests/CalculatedCredentialsView.test.tsx", "tests/CredentialsPickerView.test.tsx", "tests/MortrageCalculatorView.test.tsx", "tests/Picker.test.tsx", "tests/AdminView.test.tsx"],
+  "include": ["src", "tests/ReportOfferView.test.tsx", "jest.config.cjs", "tests/calculatorReducer.test.ts", "tests/CalculatedCredentialsView.test.tsx", "tests/CredentialsPickerView.test.tsx", "tests/MortrageCalculatorView.test.tsx", "tests/Picker.test.tsx", "tests/AdminView.test.tsx", "tests/ChatView.test.tsx"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }
