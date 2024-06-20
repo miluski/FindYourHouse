@@ -62,6 +62,7 @@ export const AddOfferView = () => {
           <AddOfferActionButton
             actualSiteNumber={actualSiteNumber}
             setActualSiteNumber={setActualSiteNumber}
+            
           />
         </Container>
       ) : (

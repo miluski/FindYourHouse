@@ -12,9 +12,9 @@ export default function AddDescriptionView() {
 		(state: OfferState) => state.offerReducer as unknown as OfferState
 	);
 	return (
-		<Container fluid>
+		<Container fluid="true" data-testid="addDescriptionView">
 			<text className='fs-5 fw-bold'>Opis </text>{" "}
-			<Container fluid className='d-flex flex-column align-items-center'>
+			<Container fluid="true" className='d-flex flex-column align-items-center'>
 				<SeparateLine />
 				<Container className='d-flex flex-column mx-5 w-75'>
 					<Form.Label className='d-flex justify-content-center align-items-center fs-5 mt-6 mb-1'>

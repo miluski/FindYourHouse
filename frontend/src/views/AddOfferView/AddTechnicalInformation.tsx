@@ -16,11 +16,11 @@ export const AddTechnicalInformation = () => {
 		(state: OfferState) => state.offerReducer as unknown as OfferState
 	);
 	return (
-		<Container fluid>
+		<Container fluid="true" data-testid="addTechnicalInformation">
 			<text className='fs-5 fw-bold'> Informacje techniczne </text>
 			<SeparateLine />
-			<Container fluid className='d-flex flex-column'>
-				<Container fluid className='d-flex flex-row'>
+			<Container fluid="true" className='d-flex flex-column'>
+				<Container fluid="true" className='d-flex flex-row'>
 					<Container className='d-flex flex-column mx-5'>
 						<Form.Label className='d-flex justify-content-center align-items-center fs-5 mt-6 mb-1 w-100'>
 							<text>Wprowadź cenę w zł</text>
@@ -91,7 +91,7 @@ export const AddTechnicalInformation = () => {
 						)}
 					</Container>
 				</Container>
-				<Container fluid className='d-flex flex-row mx-3'>
+				<Container fluid="true" className='d-flex flex-row mx-3'>
 					<Col md={4} className='mx-5 w-27'>
 						<Form.Label className='d-flex justify-content-center align-items-center fs-5 mt-6 mb-1'>
 							<text>Wprowadź powierzchnię w m2</text>
