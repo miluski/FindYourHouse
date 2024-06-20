@@ -4,8 +4,17 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 function SearchSection() {
+  const navigate = useNavigate();
+  const [propertyType, setPropertyType] = useState("Mieszkanie");
+  const [offerType, setOfferType] = useState("Sprzedaż");
+  const [fromPrice, setFromPrice] = useState(0);
+  const [toPrice, setToPrice] = useState(0);
+  const [fromArea, setFromArea] = useState(0);
+  const [toArea, setToArea] = useState(0);
   return (
     <section>
       <Container
@@ -25,72 +34,52 @@ function SearchSection() {
             </span>
             <Form className="container bg-white mb-md-5 p-3" action="">
               <Row className="m-0 row-gap-3 pb-lg-3">
-                <Col xs={12} lg={4} className="container p-0 pe-lg-1">
+                <Col xs={12} lg={10} className="container p-0 pe-lg-1">
                   <Row className="m-0">
-                    <Col xs={6} className="p-0 pe-1">
+                    <Col className="p-0 pe-1">
                       <Form.Select
                         className={
                           "rounded-0 shadow-none border border-dark-subtle"
                         }
                         aria-label="Wybierz typ nieruchomości"
                         name="Typ nieruchomosci"
+                        onChange={(e) => {
+                          setPropertyType(e.target.value);
+                        }}
                       >
-                        <option value="Kawalerki">Kawalerki</option>
-                        <option value="Domy">Domy</option>
-                        <option value="Pokoje">Pokoje</option>
-                        <option value="Działki">Działki</option>
-                        <option value="Lokale użytkowe">Lokale użytkowe</option>
-                        <option value="Hale i magazyny">Hale i magazyny</option>
-                        <option value="Garaże">Garaże</option>
+                        <option value="Mieszkanie">Mieszkanie</option>
+                        <option value="Dom">Dom</option>
+                        <option value="Garaż">Garaż</option>
                       </Form.Select>
                     </Col>
-                    <div className="p-0 col-6 ps-1">
+                    <Col className="p-0 ps-1">
                       <Form.Select
                         className="rounded-0 shadow-none border-dark-subtle"
                         aria-label="Default select example"
                         name="Typ oferty"
-                        defaultValue="Na sprzedaż"
+                        defaultValue="Sprzedaż"
+                        onChange={(e) => {
+                          setOfferType(e.target.value);
+                        }}
                       >
-                        <option value="Na sprzedaż">Na sprzedaż</option>
-                        <option value="Na wynajem">Na wynajem</option>
+                        <option value="Sprzedaż">Sprzedaż</option>
+                        <option value="Wynajem">Wynajem</option>
                       </Form.Select>
-                    </div>
+                    </Col>
                   </Row>
                 </Col>
-                <Col xs={12} lg={8} className="container p-0 ps-lg-1">
+                <Col xs={12} lg={2} className="container p-0 ps-lg-1">
                   <Row className="m-0 row-gap-3">
-                    <Col xs={8} lg={5} className="p-0">
-                      <Form.Select
-                        className=" rounded-0 border-end-0 shadow-none border-dark-subtle"
-                        aria-label="Popularne lokalizacje"
-                      >
-                        <option value="1">Wybierz Lokalizację</option>
-                        <option value="2">Warszawa</option>
-                        <option value="3">Gdańsk</option>
-                        <option value="3">Poznań</option>
-                        <option value="3">Kielce</option>
-                      </Form.Select>
-                    </Col>
-                    <Col xs={4} lg={3} className="p-0 pe-lg-2">
-                      <Form.Select
-                        className="rounded-0 shadow-none border-dark-subtle"
-                        aria-label="Obszar"
-                        defaultValue="1"
-                      >
-                        <option value="1">0 km</option>
-                        <option value="2">5 km</option>
-                        <option value="2">10 km</option>
-                        <option value="2">15 km</option>
-                        <option value="2">25 km</option>
-                        <option value="2">50 km</option>
-                        <option value="2">75 km</option>
-                      </Form.Select>
-                    </Col>
-                    <Col xs={12} lg={4} className="p-0 ps-lg-1">
+                    <Col className="p-0 ps-lg-1">
                       <Button
                         variant="warning"
                         type="submit"
                         className="rounded-1 fw-bold w-100"
+                        onClick={() => {
+                          navigate(
+                            `/flats?propertyType=${propertyType}&offerType=${offerType}&fromPrice=${fromPrice}&toPrice=${toPrice}&fromArea=${fromArea}&toArea=${toArea}&visibility=all`
+                          );
+                        }}
                       >
                         Wyszukaj
                       </Button>
@@ -110,6 +99,9 @@ function SearchSection() {
                           type="number"
                           inputMode="decimal"
                           autoComplete="off"
+                          onChange={(e) => {
+                            setFromPrice(Number(e));
+                          }}
                         />
                         <label htmlFor="priceFrom">zł</label>
                       </div>
@@ -126,6 +118,9 @@ function SearchSection() {
                           type="number"
                           inputMode="decimal"
                           autoComplete="off"
+                          onChange={(e) => {
+                            setToPrice(Number(e));
+                          }}
                         />
                         <label htmlFor="priceTo">zł</label>
                       </div>
@@ -143,6 +138,9 @@ function SearchSection() {
                           type="number"
                           inputMode="decimal"
                           autoComplete="off"
+                          onChange={(e) => {
+                            setFromArea(Number(e));
+                          }}
                         />
                         <label htmlFor="surfaceFrom">m²</label>
                       </div>
@@ -159,6 +157,9 @@ function SearchSection() {
                           type="number"
                           inputMode="decimal"
                           autoComplete="off"
+                          onChange={(e) => {
+                            setToArea(Number(e));
+                          }}
                         />
                         <label htmlFor="surfaceTo">m²</label>
                       </div>

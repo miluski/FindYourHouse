@@ -3,6 +3,7 @@ import "./styles/ReportOfferViewStyles.css";
 import HeaderView from "../../components/Header/Header";
 import FooterView from "../../components/Footer/FooterView";
 import { axiosInstance } from "../../utils/axiosInstance";
+import { Button } from "react-bootstrap";
 
 function ReportOfferView() {
   const [email, setEmail] = useState("");
@@ -82,8 +83,8 @@ function ReportOfferView() {
 
   return (
     <>
-      <div className="mainReportView" data-testid="mainReportView">
       <HeaderView />
+      <div className="mainReportView" data-testid="mainReportView">
         <div>
           <h5>Znalazłeś fałszywą ofertę?</h5>
         </div>
@@ -117,12 +118,16 @@ function ReportOfferView() {
           </div>
         </div>
         <div>
-          <button className="reportButton" onClick={handleSubmit} data-testid="zglos-button">
+          <Button
+            variant={"danger"}
+            onClick={handleSubmit}
+            data-testid="zglos-button"
+          >
             Zgłoś
-          </button>
+          </Button>
         </div>
       </div>
-      <FooterView />
+      <FooterView fixedBottom />
     </>
   );
 }
