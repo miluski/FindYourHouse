@@ -20,13 +20,15 @@ public class UserService {
     private final UserRepository userRepository;
     private final AuthenticationManager authenticationManager;
     private final TokenService tokenService;
+    private final PaymentService paymentService;
 
     @Autowired
     public UserService(UserRepository userRepository, AuthenticationManager authenticationManager,
-            TokenService tokenService) {
+            TokenService tokenService, PaymentService paymentService) {
         this.userRepository = userRepository;
         this.authenticationManager = authenticationManager;
         this.tokenService = tokenService;
+        this.paymentService = paymentService;
     }
 
     public List<User> getUsers() {
@@ -101,27 +103,26 @@ public class UserService {
         }
     }
 
-    public Boolean editUser(Long id, User user) {
+    public Boolean editUser(User user) {
         try {
-            Optional<User> userToEdit = userRepository.findById(id);
-            if (userToEdit.isPresent()) {
-                User finalUserToEdit = userToEdit.get();
+            User userToEdit = userRepository.findByEmail(user.getEmail());
+            if (userToEdit != null) {
                 if (user.getFirstName() != null) {
-                    finalUserToEdit.setFirstName(user.getFirstName());
+                    userToEdit.setFirstName(user.getFirstName());
                 }
                 if (user.getLastName() != null) {
-                    finalUserToEdit.setLastName(user.getLastName());
+                    userToEdit.setLastName(user.getLastName());
                 }
                 if (user.getEmail() != null) {
-                    finalUserToEdit.setEmail(user.getEmail());
+                    userToEdit.setEmail(user.getEmail());
                 }
                 if (user.getPhoneNumber() != null) {
-                    finalUserToEdit.setPhoneNumber(user.getPhoneNumber());
+                    userToEdit.setPhoneNumber(user.getPhoneNumber());
                 }
                 if (user.getPassword() != null) {
-                    finalUserToEdit.setPassword(user.getPassword());
+                    userToEdit.setPassword(user.getPassword());
                 }
-                userRepository.save(finalUserToEdit);
+                userRepository.save(userToEdit);
                 return true;
             } else {
                 return false;
@@ -132,11 +133,12 @@ public class UserService {
         }
     }
 
-    public Boolean deleteUser(Long id) {
+    public Boolean deleteUser(String email) {
         try {
-            Optional<User> user = userRepository.findById(id);
-            if (user.isPresent()) {
-                userRepository.deleteById(id);
+            User user = userRepository.findByEmail(email);
+            paymentService.deletePaymentsByUser(user);
+            if (user != null) {
+                userRepository.deleteById(user.getId());
                 return true;
             } else {
                 return false;
