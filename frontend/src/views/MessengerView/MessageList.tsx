@@ -4,7 +4,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 
 interface Message {
   id: number;
-  text: string;
+  content: string;
   type: "income" | "outcome";
 }
 
@@ -15,8 +15,8 @@ interface MessageListProps {
 const MessageList: React.FC<MessageListProps> = ({ messages }) => {
   return (
     <div className="d-flex flex-column p-3">
-      {messages.map((message) => (
-        <Message key={message.id} text={message.text} type={message.type} />
+      {messages && messages.map((message) => (
+        <Message key={message.id} text={message.content} type={message.type} />
       ))}
     </div>
   );

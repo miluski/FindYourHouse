@@ -1,12 +1,5 @@
-import {
-	Badge,
-	Button,
-	Col,
-	Container,
-	Pagination,
-	Row,
-	Table,
-} from "react-bootstrap";
+import { Badge, Col, Container, Pagination, Row, Table } from "react-bootstrap";
+import { Ticket } from "../../utils/types/Ticket";
 import { Message } from "../../utils/types/Message";
 import { useDispatch, useSelector } from "react-redux";
 import { AdminState } from "../../utils/types/State";

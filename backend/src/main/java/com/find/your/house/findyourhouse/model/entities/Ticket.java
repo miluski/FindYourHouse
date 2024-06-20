@@ -3,7 +3,7 @@ package com.find.your.house.findyourhouse.model.entities;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "messages")
+@Table(name = "tickets")
 public class Ticket {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

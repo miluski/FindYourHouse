@@ -1,8 +1,10 @@
+import { UserData } from "./UserData";
+
 export type Message = {
-	id: number;
-	topic: string;
-	clientName: string;
-	category: string;
-	offer: { id: number };
-	date: string;
-};
+    id?: number;
+    content: string;
+    type: "income" | "outcome";
+    user: UserData;
+    fromEmail: string;
+    fromNameAndSurname: string;
+}

@@ -9,7 +9,7 @@ interface User {
 
 interface LeftSideBarProps {
   users: User[];
-  onSelectUser: (user: User) => void;
+  onSelectUser: Function;
 }
 
 const LeftSideBar: React.FC<LeftSideBarProps> = ({ users, onSelectUser }) => {

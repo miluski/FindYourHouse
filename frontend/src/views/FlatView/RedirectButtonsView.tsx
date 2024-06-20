@@ -9,7 +9,6 @@ export const RedirectButtonsView = () => {
 				<Button variant='success' onClick={() => navigate("/calculator")}>
 					Kalkulator kredytu
 				</Button>
-				<Button variant='danger'>Zgłoś ofertę</Button>
 			</Container>
 		</>
 	);
