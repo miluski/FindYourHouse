@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("api/users")
 @CrossOrigin(origins = "*", methods = { RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT,
-        RequestMethod.DELETE })
+        RequestMethod.DELETE, RequestMethod.PATCH })
 public class UserController {
 
     private final UserService userService;
@@ -72,16 +72,17 @@ public class UserController {
 
     }
 
-    @DeleteMapping("/delete/{id}")
-    public ResponseEntity<?> deleteUser(@PathVariable Long id) {
-        Boolean isDeletedProperly = userService.deleteUser(id);
+    @DeleteMapping("/delete/{email}")
+    public ResponseEntity<?> deleteUser(@PathVariable String email) {
+        Boolean isDeletedProperly = userService.deleteUser(email);
         return isDeletedProperly ? ResponseEntity.status(HttpStatus.OK).build()
                 : ResponseEntity.status(HttpStatus.NOT_FOUND).build();
     }
 
-    @PatchMapping("/edit/{id}")
-    public ResponseEntity<?> editUser(@PathVariable Long id, @RequestBody UserDto userDto) {
-        Boolean isEditedProperly = userService.editUser(id, userMapper.convertToUser(userDto));
+    @PatchMapping("/edit")
+    public ResponseEntity<?> editUser(@RequestBody UserDto userDto) {
+        System.out.println(userDto.getFirstName());
+        Boolean isEditedProperly = userService.editUser(userMapper.convertToUser(userDto));
         return isEditedProperly ? ResponseEntity.status(HttpStatus.OK).build()
                 : ResponseEntity.status(HttpStatus.NOT_FOUND).build();
     }
