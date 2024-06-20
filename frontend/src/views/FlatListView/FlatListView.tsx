@@ -57,19 +57,20 @@ const FlatListView: React.FC = () => {
       >
         {offers
           .filter((offer: Offer) => {
+            console.log(filters, offer)
             return (
               (filters.offerType === "" ||
                 offer.offerType === filters.offerType) &&
               (filters.propertyType === "" ||
                 offer.propertyType === filters.propertyType) &&
-              (filters.fromPrice === "" ||
+              ((filters.fromPrice === "" || filters.fromPrice === "0") ||
                 Number(offer.price) >= Number(filters.fromPrice)) &&
-              (filters.toPrice === "" ||
+              ((filters.toPrice === "" || filters.toPrice === "0") ||
                 Number(offer.price) <= Number(filters.toPrice)) &&
-              (filters.fromArea === "" ||
-                Number(offer.area) >= Number(filters.fromArea)) &&
-              (filters.toArea === "" ||
-                Number(offer.area) <= Number(filters.toArea)) &&
+                ((filters.fromArea === "" || filters.fromArea === "0") ||
+                  Number(offer.area) >= Number(filters.fromArea)) &&
+                ((filters.toArea === "" || filters.toArea === "0") ||
+                  Number(offer.area) <= Number(filters.toArea)) &&
               (filters.visibility === "" ||
                 filters.visibility === "all" ||
                 offer.exhibitorEmail === email)
