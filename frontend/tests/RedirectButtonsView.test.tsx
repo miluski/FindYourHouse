@@ -1,5 +1,5 @@
 import { render, screen, fireEvent } from "@testing-library/react";
-import { RedirectButtonsView } from "./RedirectButtonsView";
+import { RedirectButtonsView } from "../src/views/FlatView/RedirectButtonsView";
 import { useNavigate } from "react-router-dom";
 import '@testing-library/jest-dom';
 
