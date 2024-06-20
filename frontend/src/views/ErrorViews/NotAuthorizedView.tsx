@@ -15,7 +15,7 @@ export default function NotAuthorizedView() {
   return (
     <>
       <HeaderView />
-      <Container fluid>
+      <Container fluid='true' data-testid="notAuthorizedView">
         <Col
           fluid
           className="d-flex flex-column align-items-center justify-content-center vh-75"

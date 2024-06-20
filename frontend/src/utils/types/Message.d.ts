@@ -1,7 +1,8 @@
 export type Message = {
+	id: number;
 	topic: string;
 	clientName: string;
 	category: string;
-	jobId: number;
+	offer: { id: number };
 	date: string;
 };
