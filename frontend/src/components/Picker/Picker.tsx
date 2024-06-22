@@ -8,9 +8,9 @@ export const Picker = (props: PickerProps) => {
 	const dispatch = useDispatch();
 	return (
 		<Container>
-			<text className='fw-bold fs-5 ff-inter text-wrap'>{props.formLabel}</text>
-			<Container fluid>
-				<Row fluid>
+			<p className='fw-bold fs-5 ff-inter text-wrap'>{props.formLabel}</p>
+			<Container fluid='true'>
+				<Row fluid='true'>
 					<Col xs={12} md={8}>
 						<Form.Range
 							className='pickerRange d-flex'
@@ -28,21 +28,21 @@ export const Picker = (props: PickerProps) => {
 						/>
 					</Col>
 					<Col xs={12} md={4} className='text-right'>
-						<text className='text-nowrap ff-inter fs-6 fw-bold'>
+						<p className='text-nowrap ff-inter fs-6 fw-bold'>
 							{props.value}
-						</text>
+						</p>
 					</Col>
 				</Row>
 				<Row className='d-flex justify-content-between'>
 					<Col xs={6}>
-						<text className='text-nowrap d-none d-md-block fs-7 ff-inter'>
+						<p className='text-nowrap d-none d-md-block fs-7 ff-inter'>
 							{props.minValue}
-						</text>
+						</p>
 					</Col>
 					<Col xs={6} className='text-right'>
-						<text className='text-nowrap d-none d-md-block fs-7 ff-inter mx-3'>
+						<p className='text-nowrap d-none d-md-block fs-7 ff-inter mx-3'>
 							{props.maxValue}
-						</text>
+						</p>
 					</Col>
 				</Row>
 			</Container>

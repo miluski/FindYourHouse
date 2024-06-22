@@ -8,6 +8,7 @@ import LinkButton from "../../../components/CustomButtons/LinkButton/LinkButton.
 import { googleUrlParams } from "../../../google.ts";
 import { useState } from "react";
 import { getIsUserExists } from "./getIsUserExists.ts";
+import { UserState } from "../../../utils/types/State";
 
 export default function RegisterView() {
   const { Formik } = formik;
@@ -31,7 +32,7 @@ export default function RegisterView() {
       .string()
       .required("Pole jest wymagane")
       .matches(
-        /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/,
+        /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])(?=.{8,})/,
         "Hasło musi zawierać:\n" +
           "- Co najmniej 8 znaków\n" +
           "- Przynajmniej jedną dużą literę\n" +
@@ -50,7 +51,10 @@ export default function RegisterView() {
       <div className="border-bottom border-secondary-subtle p-3 d-flex flex-column">
         <Formik
           validationSchema={schema}
-          onSubmit={async (values) => await handleRegisterButtonClick(values)}
+          onSubmit={async (values) =>
+            await handleRegisterButtonClick(values as unknown as UserState)
+          }
+          validateOnMount={true}
           validateOnChange={false}
           validateOnBlur={true}
           initialValues={{
@@ -77,6 +81,7 @@ export default function RegisterView() {
                 type="text"
                 placeholder="Wprowadź swoję imię"
                 name="firstName"
+                id={"name"}
                 value={values.firstName}
                 onChange={handleChange}
                 onBlur={handleBlur}
@@ -89,6 +94,7 @@ export default function RegisterView() {
                 type="text"
                 placeholder="Wprowadź swoje nazwisko"
                 name="lastName"
+                id={"lastName"}
                 value={values.lastName}
                 onChange={handleChange}
                 onBlur={handleBlur}
@@ -101,6 +107,7 @@ export default function RegisterView() {
                 type="email"
                 placeholder="Twój adres email"
                 name="email"
+                id={"email"}
                 value={values.email}
                 onChange={handleChange}
                 onBlur={async (e) => {
@@ -116,6 +123,7 @@ export default function RegisterView() {
                 type="password"
                 placeholder="Twoje hasło"
                 name="password"
+                id={"password"}
                 value={values.password}
                 onChange={handleChange}
                 onBlur={handleBlur}
@@ -128,6 +136,7 @@ export default function RegisterView() {
                 type="number"
                 placeholder="Wprowadź numer telefonu"
                 name="phoneNumber"
+                id={"phoneNumber"}
                 value={values.phoneNumber}
                 onChange={handleChange}
                 onBlur={handleBlur}
@@ -148,10 +157,10 @@ export default function RegisterView() {
         </Formik>
         <p className={"my-2 align-self-center fs-7"}>
           Rejestrując się akceptujesz{" "}
-          <LinkButton text={"warunki użytkowania"} className={"fw-bold"} />
+          <LinkButton className={"fw-bold"}>warunki użytkowania </LinkButton>
         </p>
         {userExists && (
-          <p className="text-danger text-center">
+          <p className="text-danger text-center my-2">
             Użytkownik o podanym adresie email już istnieje.
           </p>
         )}

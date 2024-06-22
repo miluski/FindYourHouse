@@ -42,7 +42,7 @@ export const AddPicturesView = () => {
 	};
 	const cameraArray = Array.from({ length: 10 }, (_, index) => index + 1);
 	return (
-		<Container fluid>
+		<Container fluid="true" data-testid="addPicturesView">
 			<text className='fs-5 fw-bold'> Zdjęcia </text>
 			<SeparateLine />
 			<Row className='d-flex justify-content-between cursor-pointer mb-5'>

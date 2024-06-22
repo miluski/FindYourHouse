@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { Container, Col, Image, Spinner } from "react-bootstrap";
 import { useLocation, useNavigate } from "react-router-dom";
 import { finalizePayment } from "./finalizePayment";
-import HeaderView from "../../components/Header/HeaderView";
+import HeaderView from "../../components/Header/Header";
 import FooterView from "../../components/Footer/FooterView";
 import { Payment } from "../../utils/types/Payment";
 import { addOffer } from "./addOffer";
@@ -24,7 +24,12 @@ export default function PaymentView() {
 		if (orderID && orderID !== lastOrderIDRef.current) {
 			(async () => {
 				lastOrderIDRef.current = orderID;
-				const paymentObject: Number | Payment = await finalizePayment(orderID);
+				const paymentObject: Number | Payment = await finalizePayment(orderID, {
+					name: localStorage.getItem("name") ?? "",
+					phoneNumber: localStorage.getItem("phoneNumber") ?? "",
+					surname: localStorage.getItem("surname") ?? "",
+					email: localStorage.getItem("email") ?? "",
+				});
 				!(paymentObject instanceof Number) && paymentObject
 					? setPaymentStatus(paymentObject.status || null)
 					: null;

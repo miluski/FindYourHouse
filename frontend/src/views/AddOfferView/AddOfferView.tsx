@@ -1,6 +1,6 @@
 import { ChooseOfferTypeView } from "./ChooseOfferTypeView";
 import FooterView from "../../components/Footer/FooterView";
-import HeaderView from "../../components/Header/HeaderView";
+import HeaderView from "../../components/Header/Header";
 import { Col, Container, Spinner } from "react-bootstrap";
 import ChooseApartmentType from "./ChooseApartmentType";
 import { useEffect, useState } from "react";
@@ -22,14 +22,14 @@ import {
 export const AddOfferView = () => {
   const dispatch = useDispatch();
   const { offerType, propertyType } = useSelector(
-    (state: OfferState) => state.offerReducer as unknown as OfferState
+    (state: OfferState) => state.offerReducer as unknown as OfferState,
   );
   const finalPropertyType =
     propertyType === "Mieszkanie"
       ? "mieszkania"
       : propertyType === "Dom"
-      ? "domu"
-      : "garażu";
+        ? "domu"
+        : "garażu";
   const [actualSiteNumber, setActualSiteNumber] = useState(1);
   const [isLoading, setIsLoading] = useState(false);
   useEffect(() => {
@@ -62,6 +62,7 @@ export const AddOfferView = () => {
           <AddOfferActionButton
             actualSiteNumber={actualSiteNumber}
             setActualSiteNumber={setActualSiteNumber}
+            
           />
         </Container>
       ) : (

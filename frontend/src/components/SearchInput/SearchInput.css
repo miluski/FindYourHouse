@@ -1,0 +1,14 @@
+.searchInput__outline{
+    outline: 2px solid #212529;
+}
+
+.searchInput__outlineSmaller{
+    outline: 1px solid #212529;
+}
+
+
+.searchInput__input{
+    font-size: 18px;
+    height: 56px;
+    outline: none;
+}

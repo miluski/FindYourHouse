@@ -3,7 +3,6 @@ import HomeView from "./views/HomeView/HomeView.tsx";
 import { MortrageCalculatorView } from "./views/MortrageCalculatorView/MortrageCalculatorView.tsx";
 import { combineReducers, legacy_createStore } from "redux";
 import { Provider } from "react-redux";
-import ReportOfferView from "./views/ReportOfferView/ReportOfferView.tsx";
 import { AddOfferView } from "./views/AddOfferView/AddOfferView.tsx";
 import { userReducer } from "./utils/reducers/userReducer.ts";
 import { calculatorReducer } from "./utils/reducers/calculatorReducer.ts";
@@ -18,6 +17,8 @@ import AdminView from "./views/AdminView/AdminView.tsx";
 import GuardView from "./views/ErrorViews/GuardView.tsx";
 import NotAuthorizedView from "./views/ErrorViews/NotAuthorizedView.tsx";
 import { offerReducer } from "./utils/reducers/offerReducer.ts";
+import MessengerView from "./views/MessengerView/MessengerView.tsx";
+import { FlatView } from "./views/FlatView/FlatView.tsx";
 
 const browserRouter = createBrowserRouter([
 	{
@@ -48,9 +49,7 @@ const browserRouter = createBrowserRouter([
 		path: "messages",
 		element: (
 			<GuardView>
-				<>
-					<text>Not implemented yet</text>
-				</>
+					<MessengerView/>
 			</GuardView>
 		),
 	},
@@ -95,14 +94,6 @@ const browserRouter = createBrowserRouter([
 		),
 	},
 	{
-		path: "report",
-		element: (
-			<GuardView>
-				<ReportOfferView />
-			</GuardView>
-		),
-	},
-	{
 		path: "flats",
 		element: (
 			<GuardView>
@@ -110,19 +101,28 @@ const browserRouter = createBrowserRouter([
 			</GuardView>
 		),
 	},
+	{
+		path: "flat-view",
+		element: (
+			 <GuardView> 
+				<FlatView/>
+			</GuardView>
+			
+		)
+	}
 ]);
 
 export default function App() {
-	const appReducer = combineReducers({
-		offerReducer,
-		userReducer,
-		calculatorReducer,
-		adminReducer,
-	});
-	const store = legacy_createStore(appReducer);
-	return (
-		<Provider store={store}>
-			<RouterProvider router={browserRouter} />
-		</Provider>
-	);
+  const appReducer = combineReducers({
+    offerReducer,
+    userReducer,
+    calculatorReducer,
+    adminReducer,
+  });
+  const store = legacy_createStore(appReducer);
+  return (
+    <Provider store={store}>
+      <RouterProvider router={browserRouter} />
+    </Provider>
+  );
 }

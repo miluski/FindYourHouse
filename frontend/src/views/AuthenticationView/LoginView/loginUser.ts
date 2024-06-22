@@ -13,8 +13,9 @@ export async function loginUser(
 		});
 		if (response.status === 200) {
 			return response.data;
-		} else setIsUserInvalid(true);
+		}
 	} catch (error) {
+		setIsUserInvalid(true);
 		console.log(error);
 	}
 	return null;

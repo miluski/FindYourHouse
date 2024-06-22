@@ -18,6 +18,7 @@ import {
 	CHANGE_EXHIBITOR_PHONE_NUMBER,
 	CHANGE_EXHIBITOR_SURNAME,
 	CHANGE_PRICE_PER_QUADRA_METER,
+	CHANGE_ACTUAL_SELECTED_OFFER,
 } from "../ActionTypes";
 import { OfferAction } from "../types/Action";
 
@@ -41,7 +42,30 @@ const initialState = {
 	exhibitorSurname: "",
 	exhibitorPhoneNumber: "",
 	exhibitorEmail: "",
-	isDataValid: false
+	isDataValid: false,
+	actualSelectedOffer: {
+		offerType: "",
+		propertyType: "",
+		title: "",
+		price: 0,
+		rent: 0,
+		caution: 0,
+		area: 0,
+		roomCount: 0,
+		photos: [],
+		city: "",
+		houseNumber: 0,
+		street: "",
+		apartmentNumber: 0,
+		pricePerQuadraMeter: 0,
+		description: "",
+		exhibitorName: "",
+		exhibitorSurname: "",
+		exhibitorPhoneNumber: "",
+		exhibitorEmail: "",
+		isDataValid: false,
+		canShow: false,
+	},
 };
 
 export function offerReducer(state = initialState, action: OfferAction) {
@@ -140,6 +164,11 @@ export function offerReducer(state = initialState, action: OfferAction) {
 			return {
 				...state,
 				exhibitorEmail: action.newExhibitorEmail,
+			};
+		case CHANGE_ACTUAL_SELECTED_OFFER:
+			return {
+				...state,
+				actualSelectedOffer: action.newActualSelectedOffer,
 			};
 		default:
 			return state;

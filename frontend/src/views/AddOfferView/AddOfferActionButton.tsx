@@ -14,7 +14,7 @@ export const AddOfferActionButton = (props: {
 		(state: OfferState) => state.offerReducer as unknown as OfferState
 	);
 	return (
-		<div className='addOfferActionButton'>
+		<div className='addOfferActionButton' data-testid="addOfferActionButton">
 			<Button
 				variant='warning'
 				onClick={async () => {
